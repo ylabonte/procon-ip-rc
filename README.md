@@ -1,6 +1,10 @@
-# ProconIpRemote
+# ProCon.IP Remote Control
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.10.
+
+## Test server
+
+Run `npm run start:pwa` for a dev server. Navigate to `http://localhost:8080/`.
 
 ## Development server
 

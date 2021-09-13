@@ -631,7 +631,7 @@ to attach them to the start of each source file to most effectively
 state the exclusion of warranty; and each file should have at least
 the "copyright" line and a pointer to where the full notice is found.
 
-    ProCon.IP Remote aka. `procon-ip-remote` is a simple Mobile First
+    ProCon.IP Remote Control aka. `procon-ip-rc` is a simple Mobile First
     web application to control the relays of the ProCon.IP pool controller
     and get the most relevant sensor/status information at a glance.
     Copyright (C) 2020 Yannic Labonte <yannic.labonte@gmail.com>

@@ -12,11 +12,11 @@ before_script:
   - npm install -g @angular/cli
 script:
 - ng lint
-- ng build --prod --base-href https://github.com/ylabonte/procon-ip-remote/
+- ng build --prod --base-href https://github.com/ylabonte/procon-ip-rc/
 deploy:
   provider: pages
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
-  local_dir: dist/procon-ip-remote
+  local_dir: dist/procon-ip-rc
   on:
     branch: master

@@ -1,0 +1,23 @@
+<mat-toolbar color="primary">
+  <div class="spacer"></div>
+  <div>
+    <button mat-icon-button *ngIf="!isPinnable()" aria-label="close navigation" (click)="appmenu.close()">
+      <mat-icon>close</mat-icon>
+    </button>
+    <button mat-icon-button *ngIf="isPinnable()" aria-label="{{isPinned ? 'auto-close navigation' : 'keep navigation open'}}"
+                            #disableCloseToggle (click)="toggleDisableClose()" [@toggleDisableClose]="isPinned ? 'unpin' : 'pin'">
+      <mat-icon [@toggleDisableClose]="isPinned ? 'unpin-icon' : 'pin-icon'">push_pin</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>
+<mat-nav-list fxLayout="column" fxLayoutAlign="start">
+  <div mat-subheader>Navigation</div>
+  <mat-list-item *ngFor="let navItem of navigationItems"
+                 (click)="navItemClick()"
+                 [routerLink]="[navItem.link]"
+                 [routerLinkActive]="['link-active']"
+                 [routerLinkActiveOptions]="{ exact: true }">
+    <mat-icon mat-list-icon>{{navItem.icon}}</mat-icon>
+    <span mat-line>{{navItem.displayName}}</span>
+  </mat-list-item>
+</mat-nav-list>

@@ -1,0 +1,60 @@
+{
+  "short_name": "ProCon.IP RC",
+  "name": "ProCon.IP Remote Control",
+  "description": "An easy-to-use Mobile First app for the ProCon.IP pool controller, for controlling the relays and view all relevant information at a glance.",
+  "start_url": "/dashboard",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#303030",
+  "theme_color": "#3f51b5",
+  "icons": [
+    {
+      "src": "/assets/icons/icon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "/assets/icons/icon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/assets/icons/icon-144x144.png",
+      "type": "image/png",
+      "sizes": "144x144"
+    },
+    {
+      "src": "/assets/icons/icon-96x96.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "/assets/icons/icon-48x48.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Overview Dashboard",
+      "short_name": "Dashboard",
+      "description": "View actual states and measurements.",
+      "url": "/dashboard",
+      "icons": [{ "src": "/assets/icons/dashboard-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Relay Switches",
+      "short_name": "Relays",
+      "description": "Open relay switches.",
+      "url": "/relays",
+      "icons": [{ "src": "/assets/icons/relays-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Settings",
+      "short_name": "Settings",
+      "description": "Open settings.",
+      "url": "/settings",
+      "icons": [{ "src": "/assets/icons/settings-192x192.png", "sizes": "192x192" }]
+    }
+  ]
+}

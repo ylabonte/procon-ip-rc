@@ -1,0 +1,27 @@
+<button mat-button aria-label="user options" [matMenuTriggerFor]="loginMenu">
+  <mat-icon>account_circle</mat-icon>
+  &nbsp;
+  <span>Profile</span>
+</button>
+<mat-menu #loginMenu="matMenu">
+  <div *ngIf="isAuthenticated | async">
+    <button mat-menu-item [routerLink]='["/"]' title="Manage">
+      <mat-icon>person</mat-icon>
+      <span>Hello {{ userName | async }}</span>
+    </button>
+    <button mat-menu-item [routerLink]='["/"]' [state]='{ local: true }' title="Logout">
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+  </div>
+  <div *ngIf="!(isAuthenticated | async)">
+    <button mat-menu-item [routerLink]='["/"]'>
+      <mat-icon>follow_the_signs</mat-icon>
+      <span>Register</span>
+    </button>
+    <button mat-menu-item [routerLink]='["/"]'>
+      <mat-icon>login</mat-icon>
+      <span>Login</span>
+    </button>
+  </div>
+</mat-menu>
