@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { map, tap } from 'rxjs/operators';
-import { Observable } from "rxjs";
 
 @Component({
   selector: 'app-user-menu',
