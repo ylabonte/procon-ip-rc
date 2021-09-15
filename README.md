@@ -12,6 +12,11 @@
 An easy-to-use Mobile First app for the ProCon.IP pool controller, for controlling the relays 
 and view all relevant information at a glance.
 
+Part of this project is a workflow implemented via Github Actions that builds the current master 
+state of this repo and pushes the result to a separate repo, from where the app is then published 
+via Github Pages.  
+See: https://procon-ip.labonte.cloud/
+
 As soon as the project reaches a usable state, this documentation will be updated as well.
 
 _This project was generated with [Angular CLI](https://github.com/angular/angular-cli)_  

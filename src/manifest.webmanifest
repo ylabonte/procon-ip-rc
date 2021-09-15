@@ -24,12 +24,12 @@
       "sizes": "144x144"
     },
     {
-      "src": "/assets/icons/icon-96x96.png",
+      "src": "/assets/icons/iconc-96x96.png",
       "type": "image/png",
       "sizes": "96x96"
     },
     {
-      "src": "/assets/icons/icon-48x48.png",
+      "src": "/assets/icons/iconc-48x48.png",
       "type": "image/png",
       "sizes": "48x48"
     }
