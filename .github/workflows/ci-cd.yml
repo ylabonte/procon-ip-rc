@@ -51,6 +51,7 @@ jobs:
         run: |
           cd ./dist/procon-ip-rc
           touch .nojekyll
+          echo "procon-ip.labonte.cloud" > CNAME
           git config --global init.defaultBranch deployment
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
