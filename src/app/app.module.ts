@@ -16,7 +16,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { UserMenuComponent } from './user-menu/user-menu.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RelaysComponent } from './relays/relays.component';
 import { SettingsComponent } from './settings/settings.component';
@@ -29,7 +28,6 @@ import { environment } from '../environments/environment';
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    UserMenuComponent,
     RelaysComponent,
     SettingsComponent,
     SwitchComponent,

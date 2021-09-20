@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { BreakpointObserver, Breakpoints, MediaMatcher } from '@angular/cdk/layout';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import {SwUpdate} from "@angular/service-worker";
 
 @Component({
   selector: 'app-root',
@@ -41,7 +42,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
     ]),
   ],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'ProCon.IP RC';
 
   appMenuMode: 'side'|'over' = 'over';
@@ -51,6 +52,7 @@ export class AppComponent {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private mediaMatcher: MediaMatcher,
+    private swUpdate: SwUpdate,
   ) {
     const self = this;
 
@@ -66,6 +68,16 @@ export class AppComponent {
   }
 
   ngOnInit() {
+    if (this.swUpdate.isEnabled) {
+      this.swUpdate.available.subscribe((e) => {
+        const doUpdate = window.confirm(
+          `Update available (${e.current.appData['version']} => ${e.available.appData['version']})`
+        );
+        if (doUpdate) {
+          window.location.reload();
+        }
+      })
+    }
   }
 
   updateDarkMode() {

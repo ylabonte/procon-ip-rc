@@ -8,11 +8,10 @@ const routes: Routes = [
   { path: 'dashboard', component: HomeComponent },
   { path: 'relays', component: RelaysComponent },
   { path: 'settings', component: SettingsComponent },
-  { path: 'manifest.json',  }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
