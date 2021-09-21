@@ -1,1 +1,40 @@
-<p>settings works!</p>
+<form fxLayout="row wrap" fxLayoutAlign="start start">
+  <div fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-lg="33">
+    <mat-form-field fxFlex="100">
+      <mat-label>Controller URL</mat-label>
+      <input matInput type="url" [formControl]="controllerUrl">
+    </mat-form-field>
+  </div>
+  <div fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-lg="33"
+       fxLayout="row wrap" fxLayoutAlign="start start">
+    <mat-form-field fxFlex.gt-sm="60" fxFlex="100">
+      <mat-label>Username</mat-label>
+      <input matInput type="text" [formControl]="username">
+    </mat-form-field>
+    <mat-form-field fxFlex.gt-sm="60" fxFlex="100">
+      <mat-label>Password</mat-label>
+      <input matInput [type]="hidePassword ? 'password' : 'text'" [formControl]="password">
+      <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-slide-toggle fxFlex="100" fxFlex.gt-sm="40" fxFlexAlign.gt-sm="center" color="primary" [formControl]="useBasicAuth">Use Authentication</mat-slide-toggle>
+  </div>
+  <div fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-lg="33"
+       fxLayout="row wrap" fxLayoutAlign="start start" fxFlexAlign="">
+    <mat-form-field fxFlex="60" fxFlex.gt-sm="40" fxFlex.gt-md="30">
+      <mat-label>Polling Interval</mat-label>
+      <input matInput type="number" min="0.5" max="3600" step="0.1" [formControl]="updateInterval">
+      <span matSuffix>sec</span>
+    </mat-form-field>
+    <mat-form-field fxFlex="60" fxFlex.gt-sm="40" fxFlex.gt-md="30">
+      <mat-label>Request Timeout</mat-label>
+      <input matInput type="number" min="0.1" max="60" step="0.1" [formControl]="requestTimeout">
+      <span matSuffix>sec</span>
+    </mat-form-field>
+    <mat-form-field fxFlex="60" fxFlex.gt-sm="40" fxFlex.gt-md="30">
+      <mat-label>Request Error Tolerance</mat-label>
+      <input matInput type="number" min="0" max="100" step="1" [formControl]="requestErrorTolerance">
+    </mat-form-field>
+  </div>
+</form>
