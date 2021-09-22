@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints, MediaMatcher } from '@angular/cdk/layout';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import {SwUpdate} from "@angular/service-worker";
+import { SwUpdate } from '@angular/service-worker';
+import {SettingsService} from "./settings/settings.service";
 
 @Component({
   selector: 'app-root',
@@ -31,40 +32,23 @@ import {SwUpdate} from "@angular/service-worker";
         animate('0.5s'),
       ]),
     ]),
-    trigger('darkModeIndicator', [
-      state('active', style({})),
-      state('inactive', style({
-        opacity: 0.2,
-      })),
-      transition('* => *', [
-        animate('0.3s'),
-      ]),
-    ]),
   ],
 })
 export class AppComponent implements OnInit {
   title = 'ProCon.IP RC';
 
   appMenuMode: 'side'|'over' = 'over';
-  darkMode: boolean;
-  darkModeMediaQuery: MediaQueryList;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private mediaMatcher: MediaMatcher,
     private swUpdate: SwUpdate,
+    public settingsService: SettingsService,
   ) {
     const self = this;
 
     this.breakpointObserver.observe([Breakpoints.WebLandscape]).subscribe(result => {
       self.appMenuMode = result.matches ? 'side' : 'over';
     });
-
-    this.darkModeMediaQuery = this.mediaMatcher.matchMedia('all and (prefers-color-scheme: dark)');
-    this.darkModeMediaQuery.addEventListener('change', ev => {
-      self.updateDarkMode();
-    });
-    this.updateDarkMode();
   }
 
   ngOnInit() {
@@ -78,9 +62,5 @@ export class AppComponent implements OnInit {
         }
       })
     }
-  }
-
-  updateDarkMode() {
-    this.darkMode = this.darkModeMediaQuery.matches;
   }
 }

@@ -1,4 +1,4 @@
-<div class="mat-app-background" [class.dark-mode]="darkMode">
+<div class="mat-app-background" [class.dark-mode]="settingsService.darkMode">
   <mat-sidenav-container>
     <mat-sidenav #appMenu [mode]="appMenuMode">
       <app-nav-menu [appmenu]="appMenu"></app-nav-menu>
@@ -13,19 +13,11 @@
           </a>
           <span class="spacer"></span>
           <span>{{title}}</span>
+          <span class="spacer"></span>
         </mat-toolbar>
       </header>
       <router-outlet></router-outlet>
       <footer>
-        <mat-card>
-          <mat-card-content>
-          <span class="darkModeToggleContainer">
-            <mat-icon inline [@darkModeIndicator]="!darkMode ? 'active' : 'inactive'">light_mode</mat-icon>
-            <mat-slide-toggle [(ngModel)]="darkMode" color="primary"></mat-slide-toggle>
-            <mat-icon inline [@darkModeIndicator]="darkMode ? 'active' : 'inactive'">dark_mode</mat-icon>
-          </span>
-          </mat-card-content>
-        </mat-card>
       </footer>
     </mat-sidenav-content>
   </mat-sidenav-container>

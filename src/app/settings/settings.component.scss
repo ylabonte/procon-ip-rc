@@ -4,3 +4,21 @@ form {
 //mat-form-field {
 //  margin: 8px;
 //}
+mat-divider {
+  margin: 24px 8px;
+}
+
+.category-icon {
+  text-align: right;
+  font-size: xxx-large;
+  opacity: 50%;
+}
+
+.iconToggleContainer {
+  font-size: large;
+  margin-right: 8px;
+
+  mat-slide-toggle, mat-icon {
+    margin: 4px;
+  }
+}
