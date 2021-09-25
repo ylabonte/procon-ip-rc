@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import {MediaMatcher} from "@angular/cdk/layout";
-import {animate, state, style, transition, trigger} from "@angular/animations";
-import {SettingsService} from "./settings.service";
+import { MediaMatcher } from '@angular/cdk/layout';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { SettingsService } from './settings.service';
+import { IGetStateServiceConfig } from 'procon-ip/lib/get-state.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-settings',
@@ -19,6 +21,7 @@ import {SettingsService} from "./settings.service";
       ]),
     ]),
   ],
+  providers: [SettingsService]
 })
 export class SettingsComponent implements OnInit {
 
@@ -38,9 +41,37 @@ export class SettingsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.darkMode.setValue(this.settingsService.darkMode);
+    this.loadApiServiceConfig(this.settingsService.getApiServiceConfig());
+    this.settingsService.getDarkMode().subscribe(v => {
+      if (v !== undefined) this.darkMode.setValue(v as boolean);
+    });
+    // this.settingsService.watchDarkMode().subscribe(v => {
+    //   console.log('Got value for darkMode from service: ' + (v?'true':'false'));
+    //   if (this.darkMode.value !== v) {
+    //   }
+    // });
+
+    this.controllerUrl.valueChanges.subscribe(v => { this.settingsService.setControllerUrl(v); });
+    this.username.valueChanges.subscribe(v => { this.settingsService.setUsername(v); });
+    this.password.valueChanges.subscribe(v => { this.settingsService.setPassword(v); });
+    this.useBasicAuth.valueChanges.subscribe(v => { this.settingsService.setBasicAuth(v); });
+    this.updateInterval.valueChanges.subscribe(v => { this.settingsService.setUpdateInterval(v); });
+    this.requestTimeout.valueChanges.subscribe(v => { this.settingsService.setTimeout(v); });
+    this.requestErrorTolerance.valueChanges.subscribe(v => { this.settingsService.setErrorTolerance(v); });
     this.darkMode.valueChanges.subscribe(v => {
-      this.settingsService.darkMode = v;
+      this.settingsService.setDarkMode(v);
+    });
+  }
+
+  loadApiServiceConfig(configSettings: Observable<IGetStateServiceConfig>) {
+    configSettings.subscribe(config => {
+      this.controllerUrl.setValue(config.controllerUrl);
+      this.username.setValue(config.username);
+      this.password.setValue(config.password);
+      this.useBasicAuth.setValue(config.basicAuth);
+      this.updateInterval.setValue(config.updateInterval)
+      this.requestTimeout.setValue(config.timeout);
+      this.requestErrorTolerance.setValue(config.errorTolerance);
     });
   }
 }

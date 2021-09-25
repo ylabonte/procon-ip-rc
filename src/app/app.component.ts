@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints, MediaMatcher } from '@angular/cdk/layout';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { SwUpdate } from '@angular/service-worker';
-import {SettingsService} from "./settings/settings.service";
+import { SettingsService } from './settings/settings.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -33,25 +34,28 @@ import {SettingsService} from "./settings/settings.service";
       ]),
     ]),
   ],
+  providers: [SettingsService],
 })
 export class AppComponent implements OnInit {
   title = 'ProCon.IP RC';
-
   appMenuMode: 'side'|'over' = 'over';
+  darkMode: Observable<boolean>;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
+    private mediaMatcher: MediaMatcher,
     private swUpdate: SwUpdate,
     public settingsService: SettingsService,
-  ) {
-    const self = this;
+  ) {}
 
+  ngOnInit() {
+    const self = this;
     this.breakpointObserver.observe([Breakpoints.WebLandscape]).subscribe(result => {
       self.appMenuMode = result.matches ? 'side' : 'over';
     });
-  }
 
-  ngOnInit() {
+    this.darkMode = this.settingsService.watchDarkMode();
+
     if (this.swUpdate.isEnabled) {
       this.swUpdate.available.subscribe((e) => {
         const doUpdate = window.confirm(

@@ -1,31 +1,107 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { IGetStateServiceConfig } from 'procon-ip/lib/get-state.service';
-import {MediaMatcher} from "@angular/cdk/layout";
+import { MediaMatcher } from '@angular/cdk/layout';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SettingsService {
 
-  private apiServicesConfig: IGetStateServiceConfig;
+  private _apiServicesConfig: IGetStateServiceConfig = {
+    controllerUrl: '',
+    username: 'admin',
+    password: 'admin',
+    basicAuth: true,
+    updateInterval: 3000,
+    timeout: 3000,
+    errorTolerance: 3,
+  };
 
-  public darkMode: boolean;
-  private darkModeMediaQuery: MediaQueryList;
+  private _darkMode: boolean;
+  private _darkModeMediaQuery: MediaQueryList;
 
   constructor(
-    private mediaMatcher: MediaMatcher,
-    private storage: StorageMap,
+    private _mediaMatcher: MediaMatcher,
+    private _storage: StorageMap,
   ) {
     const self = this;
-    this.darkModeMediaQuery = this.mediaMatcher.matchMedia('all and (prefers-color-scheme: dark)');
-    this.darkModeMediaQuery.addEventListener('change', ev => {
-      self.updateDarkMode();
+    this._darkModeMediaQuery = this._mediaMatcher.matchMedia('all and (prefers-color-scheme: dark)');
+    this._darkMode = this._darkModeMediaQuery.matches;
+
+    this._storage.get('darkMode').subscribe(darkMode => {
+      if (darkMode === undefined) this.setDarkModeBySystemPreference();
+      else this.setDarkMode(darkMode as boolean);
     });
-    this.updateDarkMode();
+
+    this._darkModeMediaQuery.addEventListener('change', ev => {
+      if (confirm('Your system color scheme has changed. Shall we adapt?')) {
+        self.setDarkModeBySystemPreference();
+      }
+    });
   }
 
-  updateDarkMode() {
-    this.darkMode = this.darkModeMediaQuery.matches;
+  private setDarkModeBySystemPreference() {
+    this._storage.set('darkMode', this._darkModeMediaQuery.matches).subscribe(() => {});
+  }
+
+  setDarkMode(on: boolean) {
+    this._storage.set('darkMode', on).subscribe(() => {});
+  }
+
+  getDarkMode(): Observable<boolean> {
+    return this._storage.get('darkMode') as Observable<boolean>;
+  }
+
+  watchDarkMode(): Observable<boolean> {
+    return this._storage.watch('darkMode') as Observable<boolean>;
+  }
+
+  getCachedDarkMode(): boolean {
+    return this._darkMode;
+  }
+
+  private saveApiServiceConfig() {
+    this._storage.set('apiServiceConfig', this._apiServicesConfig).subscribe(() => {});
+  }
+
+  getApiServiceConfig(): Observable<IGetStateServiceConfig> {
+    return this._storage.get('apiServiceConfig') as Observable<IGetStateServiceConfig>;
+  }
+
+  setControllerUrl(controllerUrl: URL) {
+    this._apiServicesConfig.controllerUrl = controllerUrl.toString();
+    this.saveApiServiceConfig();
+  }
+
+  setUsername(username: string) {
+    this._apiServicesConfig.username = username;
+    this.saveApiServiceConfig();
+  }
+
+  setPassword(password: string) {
+    this._apiServicesConfig.password = password;
+    this.saveApiServiceConfig();
+  }
+
+  setBasicAuth(useAuthentication: boolean) {
+    this._apiServicesConfig.basicAuth = useAuthentication;
+    this.saveApiServiceConfig();
+  }
+
+  setUpdateInterval(interval: number) {
+    this._apiServicesConfig.updateInterval = interval;
+    this.saveApiServiceConfig();
+  }
+
+  setTimeout(timeout: number) {
+    this._apiServicesConfig.timeout = timeout;
+    this.saveApiServiceConfig();
+  }
+
+  setErrorTolerance(maxErrors: number) {
+    this._apiServicesConfig.errorTolerance = maxErrors;
+    this.saveApiServiceConfig();
   }
 }

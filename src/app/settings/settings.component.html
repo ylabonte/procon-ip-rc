@@ -35,24 +35,26 @@
   <mat-icon class="category-icon" fxFlex="100">tune</mat-icon>
   <div fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-lg="33"
        fxLayout="row wrap" fxLayoutAlign="start start" fxFlexAlign="">
-    <div fxFlex="100" fxFlex.gt-sm="33" fxFlex.gt-lg="20">
-      <mat-form-field fxFlex="50" fxFlex.gt-sm="66">
+    <div fxFlex="100" fxFlex.gt-sm="33">
+      <mat-form-field fxFlex="75" fxFlex.gt-sm="66">
         <mat-label>Polling Interval</mat-label>
-        <input matInput type="number" min="0.5" max="3600" step="0.1" [formControl]="updateInterval">
-        <span matSuffix>sec</span>
+        <input matInput type="number" min="500" max="3600000" step="500" [formControl]="updateInterval">
+        <span matSuffix>milliseconds</span>
+        <mat-hint>Use 500 ms steps.</mat-hint>
       </mat-form-field>
     </div>
-    <div fxFlex="100" fxFlex.gt-sm="33" fxFlex.gt-lg="20">
-      <mat-form-field fxFlex="50" fxFlex.gt-sm="66">
+    <div fxFlex="100" fxFlex.gt-sm="33">
+      <mat-form-field fxFlex="75" fxFlex.gt-sm="66">
         <mat-label>Request Timeout</mat-label>
-        <input matInput type="number" min="0.1" max="60" step="0.1" [formControl]="requestTimeout">
-        <span matSuffix>sec</span>
+        <input matInput type="number" min="200" max="60000" step="1" [formControl]="requestTimeout">
+        <span matSuffix>milliseconds</span>
       </mat-form-field>
     </div>
-    <div fxFlex="100" fxFlex.gt-sm="33" fxFlex.gt-lg="20">
-      <mat-form-field fxFlex="50" fxFlex.gt-sm="66">
+    <div fxFlex="100" fxFlex.gt-sm="33">
+      <mat-form-field fxFlex="75" fxFlex.gt-sm="66">
         <mat-label>Request Error Tolerance</mat-label>
         <input matInput type="number" min="0" max="100" step="1" [formControl]="requestErrorTolerance">
+        <span matSuffix>consecutive errors</span>
       </mat-form-field>
     </div>
   </div>

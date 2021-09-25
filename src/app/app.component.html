@@ -1,4 +1,4 @@
-<div class="mat-app-background" [class.dark-mode]="settingsService.darkMode">
+<div class="mat-app-background" [class.dark-mode]="darkMode | async">
   <mat-sidenav-container>
     <mat-sidenav #appMenu [mode]="appMenuMode">
       <app-nav-menu [appmenu]="appMenu"></app-nav-menu>
