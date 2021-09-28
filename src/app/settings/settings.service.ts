@@ -70,6 +70,10 @@ export class SettingsService {
     return this._storage.get('apiServiceConfig') as Observable<IGetStateServiceConfig>;
   }
 
+  watchApiServiceConfig(): Observable<IGetStateServiceConfig> {
+    return this._storage.watch('apiServiceConfig') as Observable<IGetStateServiceConfig>;
+  }
+
   setControllerUrl(controllerUrl: URL) {
     this._apiServicesConfig.controllerUrl = controllerUrl.toString();
     this.saveApiServiceConfig();
