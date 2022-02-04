@@ -1,4 +1,3 @@
-
 # ProCon.IP Remote Control
 
 ![GitHub](https://img.shields.io/github/license/ylabonte/procon-ip-rc)
@@ -12,12 +11,22 @@
 An easy-to-use Mobile First app for the ProCon.IP pool controller, for controlling the relays 
 and view all relevant information at a glance.
 
+This app is designed as PWA (Progressive Web App), which means you can install it from your 
+favorite browser on desktop or mobile as local app including an auto-updates mechanism. As 
+part of the PWA design, network access of such an app is restricted to HTTPS traffic. Hence
+you cannot use this app with your ProCon.IP without using a properly configured reverse proxy 
+for ssl/tls offloading. Later on, the app will be available for download so that it can easily
+be installed/copied to the ProCon.IP microSD card.
+
 Part of this project is a workflow implemented via Github Actions that builds the current master 
 state of this repo and pushes the result to a separate repo, from where the app is then published 
 via Github Pages.  
 See: https://procon-ip.labonte.cloud/
 
 As soon as the project reaches a usable state, this documentation will be updated as well.
+
+Feel free to fork, fix or extend this project and contribute your changes in form of a pull 
+requests.
 
 _This project was generated with [Angular CLI](https://github.com/angular/angular-cli)_  
 _and visualized with [Angular Material](https://material.angular.io/)._
