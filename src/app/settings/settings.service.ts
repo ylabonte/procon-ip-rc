@@ -3,6 +3,7 @@ import { StorageMap } from '@ngx-pwa/local-storage';
 import { IGetStateServiceConfig } from 'procon-ip/lib/get-state.service';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
+import { Location } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +11,10 @@ import { Observable } from 'rxjs';
 export class SettingsService {
 
   private _apiServicesConfig: IGetStateServiceConfig = {
-    controllerUrl: '',
-    username: 'admin',
-    password: 'admin',
-    basicAuth: true,
+    controllerUrl: null,
+    username: '',
+    password: '',
+    basicAuth: false,
     updateInterval: 3000,
     timeout: 3000,
     errorTolerance: 3,
@@ -26,6 +27,7 @@ export class SettingsService {
     private _mediaMatcher: MediaMatcher,
     private _storage: StorageMap,
   ) {
+    this._apiServicesConfig.controllerUrl = `${location.protocol}//${location.host}/assets`;
     const self = this;
     this._darkModeMediaQuery = this._mediaMatcher.matchMedia('all and (prefers-color-scheme: dark)');
     this._darkMode = this._darkModeMediaQuery.matches;
