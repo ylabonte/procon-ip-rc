@@ -1,16 +1,11 @@
-import { Component, ElementRef, EventEmitter, OnInit, ViewChild } from '@angular/core';
-import { GetStateService } from '../get-state.service';
-import { RelayService } from '../relay.service';
+import { Component, ElementRef, OnInit } from '@angular/core';
+import { RelayService } from './relay.service';
 import { Relay } from './relay';
-import { Observable, of } from 'rxjs';
-import { MatList, MatListItem } from '@angular/material/list';
+import { MatListItem } from '@angular/material/list';
 import {
-  CdkDrag,
   CdkDragDrop,
   CdkDragMove,
   CdkDragRelease,
-  CdkDragStart,
-  moveItemInArray,
 } from '@angular/cdk/drag-drop';
 import { StorageMap } from '@ngx-pwa/local-storage';
 

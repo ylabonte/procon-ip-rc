@@ -1,4 +1,4 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { IGetStateServiceConfig } from 'procon-ip/lib/get-state.service';
 import { MediaMatcher } from '@angular/cdk/layout';

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
 import { RelayDataInterpreter } from 'procon-ip/lib/relay-data-interpreter';
-import { RelayService } from '../../relay.service';
+import { RelayService } from '../relay.service';
 import { Relay } from '../relay';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 

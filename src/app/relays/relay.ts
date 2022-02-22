@@ -1,7 +1,6 @@
 import { RelayDataObject } from 'procon-ip/lib/relay-data-object';
 import { GetStateCategory } from 'procon-ip/lib/get-state-data';
 import { RelayDataInterpreter } from 'procon-ip/lib/relay-data-interpreter';
-import { flatMap } from 'rxjs';
 
 export interface IRelay {
   _interpreter: RelayDataInterpreter;

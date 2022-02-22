@@ -1,8 +1,7 @@
 # ProCon.IP Remote Control
 
 ![GitHub](https://img.shields.io/github/license/ylabonte/procon-ip-rc)
-![GitHub issues](https://img.shields.io/github/issues-raw/ylabonte/procon-ip-rc)  
-[![Dependency Status](https://img.shields.io/david/ylabonte/procon-ip-rc.svg)](https://david-dm.org/ylabonte/procon-ip-rc)
+![GitHub issues](https://img.shields.io/github/issues-raw/ylabonte/procon-ip-rc)
 [![Known Vulnerabilities](https://snyk.io/test/github/ylabonte/procon-ip-rc/badge.svg)](https://snyk.io/test/github/ylabonte/procon-ip-rc)  
 [![CodeQL](https://github.com/ylabonte/procon-ip-rc/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/ylabonte/procon-ip-rc/actions/workflows/codeql-analysis.yml)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/ylabonte/procon-ip-rc.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/ylabonte/procon-ip-rc/alerts/)

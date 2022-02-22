@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { animate, state, style, transition, trigger } from '@angular/animations';
