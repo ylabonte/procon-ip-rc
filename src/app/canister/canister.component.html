@@ -1,0 +1,16 @@
+<ng-template #displayMode>
+  <mat-card *ngFor="let canister of canisters">
+    <mat-card-header>
+      <h3>{{canister.getDataObject().label}}</h3>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{canister.getDataObject().displayValue}}</p>
+    </mat-card-content>
+  </mat-card>
+</ng-template>
+
+<ng-template #editMode>
+  <p>hello edit mode!</p>
+</ng-template>
+
+<ng-container *ngTemplateOutlet="edit ? editMode : displayMode"> </ng-container>

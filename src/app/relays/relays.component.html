@@ -1,1 +1,87 @@
-<p>relays works!</p>
+<div class="main-container" fxLayout="row wrap" fxLayoutAlign="start start">
+  <div fxFlex="100" fxFlex.gt-md="66.66" fxFlex.gt-lg="33.33">
+    <mat-card>
+      <mat-card-header fxLayout="row wrap">
+        <h2 fxFlex class="mat-card-title">Relay Switches</h2>
+        <div>
+          <button mat-icon-button [fxHide]="editMode" (click)="editMode = true;">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button [fxShow]="editMode" (click)="editMode = false;">
+            <mat-icon>list</mat-icon>
+          </button>
+        </div>
+      </mat-card-header>
+      <mat-card-content #cardContent>
+        <mat-list cdkDropList role="list" (cdkDropListDropped)="listItemDrop($event)">
+          <mat-list-item cdkDrag [cdkDragData]="relay" *ngFor="let relay of relayService.getRelays(); let idx = index"
+                         #listItem id="relay{{relay.getObjectId()}}" role="listitem" class="mat-elevation-z2"
+                         (mouseover)="listItemHover(listItem)"
+                         (mouseup)="listItemHover(listItem)"
+                         (mouseout)="listItemReset(listItem)"
+                         (cdkDragMoved)="listItemMoved($event)"
+                         (cdkDragReleased)="dragRelease($event)">
+            <div *cdkDragPlaceholder id="relayPlaceholder{{relay.getObjectId()}}"
+                 class="drag-placeholder mat-list-item mat-elevation-z2">
+              <div class="mat-list-item-content" fxLayout="row wrap" fxLayoutAlign="start center"></div>
+            </div>
+            <div *cdkDragPreview id="relayPreview{{relay.getObjectId()}}" class="drag-preview mat-list-base"
+                 [ngStyle]="{width: cardContent.offsetWidth+'px'}">
+              <div class="mat-list-item mat-card mat-elevation-z6">
+                <div class="mat-list-item-content" fxLayout="row wrap" fxLayoutAlign="start center">
+                  <mat-icon>
+                    drag_indicator
+                  </mat-icon>
+                  <div fxFlex>
+                    <div mat-line><strong>{{relay.getLabel()}}</strong></div>
+                    <div mat-line>
+                      <small>
+                        {{relay.getLongId()}} <em fxHide.lt-sm>({{relay.getStatusLabel()}})</em>
+                      </small>
+                    </div>
+                  </div>
+                  <button mat-icon-button [fxHide]="relay.isHidden() || !editMode" (click)="relay.hide()" matTooltip="Disable relay">
+                    <mat-icon>visibility_off</mat-icon>
+                  </button>
+                  <button mat-icon-button [fxShow]="relay.isHidden() && editMode" (click)="relay.show()" matTooltip="Enable relay">
+                    <mat-icon>visibility_on</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="relay-item" fxLayout="row wrap" fxLayoutAlign="start center"
+                 [ngStyle]="{opacity: relay.isHidden()?'50%':'100%'}">
+              <mat-icon cdkDragHandle class="drag-handle" [fxShow]="editMode">
+                drag_indicator
+              </mat-icon>
+              <mat-icon class="relay-status-indicator" [fxHide]="editMode"
+                        [ngClass]="{on: relay.isOn(), off: relay.isOff(), switched: relay.isSwitched()}"
+                        matTooltip="{{relay.getStatusLabel()}}">
+                {{relay.isAuto()?"hdr_auto":"circle"}}
+              </mat-icon>
+              <div fxFlex>
+                <div mat-line><strong>{{relay.getLabel()}}</strong></div>
+                <div mat-line>
+                  <small>
+                    {{relay.getLongId()}} <em fxHide.lt-sm>({{relay.getStatusLabel()}})</em>
+                  </small>
+                </div>
+              </div>
+              <button mat-icon-button [fxHide]="relay.isHidden() || !editMode" (click)="relay.hide()" matTooltip="Disable relay">
+                <mat-icon>visibility_off</mat-icon>
+              </button>
+              <button mat-icon-button [fxShow]="relay.isHidden() && editMode" (click)="relay.show()" matTooltip="Enable relay">
+                <mat-icon>visibility_on</mat-icon>
+              </button>
+              <app-switch [relay]="relay" [fxHide]="editMode" disabled="true"></app-switch>
+            </div>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button disabled>Show all</button>
+        <button mat-button disabled>Hide disabled</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

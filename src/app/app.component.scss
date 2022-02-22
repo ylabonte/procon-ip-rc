@@ -20,6 +20,11 @@ mat-sidenav-container, mat-sidenav-content, mat-sidenav {
   }
 }
 
+mat-sidenav {
+  max-width: 320px;
+  min-width: 240px;
+}
+
 .nav-menu-toggle {
   width: 64px;
   height: 100%;

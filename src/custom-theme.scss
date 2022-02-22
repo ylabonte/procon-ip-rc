@@ -38,9 +38,13 @@ $app-dark-theme: mat.define-dark-theme((
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include mat.all-component-themes($app-light-theme);
-body { background-color: white; }
+body {
+  background-color: mat.get-color-from-palette($app-light-theme, 500);
+}
 
 .dark-mode {
   @include mat.all-component-themes($app-dark-theme);
-  body { background-color: #303030 }
+  body {
+    background-color: mat.get-color-from-palette($app-dark-theme, 500);
+  }
 }

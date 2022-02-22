@@ -55,6 +55,13 @@ export class AppComponent implements OnInit {
     });
 
     this.darkMode = this.settingsService.watchDarkMode();
+    this.darkMode.subscribe((isDark: boolean) => {
+      if (isDark && !document.body.classList.contains('dark-mode')) {
+        document.body.classList.add('dark-mode');
+      } else if (!isDark && document.body.classList.contains('dark-mode')) {
+        document.body.classList.remove('dark-mode');
+      }
+    });
 
     if (this.swUpdate.isEnabled) {
       this.swUpdate.available.subscribe((e) => {

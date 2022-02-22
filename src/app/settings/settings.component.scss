@@ -8,6 +8,15 @@ mat-divider {
   margin: 24px 8px;
 }
 
+mat-icon.on {
+  color: #2E7D32;
+}
+
+mat-icon.off {
+  color: #C62828;
+}
+
+
 .category-icon {
   text-align: right;
   font-size: xxx-large;

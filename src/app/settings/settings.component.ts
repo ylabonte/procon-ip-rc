@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
       state('active', style({})),
       state('inactive', style({
         opacity: 0.2,
-      })),
+        })),
       transition('* => *', [
         animate('0.3s'),
       ]),

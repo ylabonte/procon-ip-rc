@@ -1,43 +1,52 @@
-<div class="home-container" fxLayout="row wrap" fxLayoutAlign="start start">
+<div class="main-container" fxLayout="row wrap" fxLayoutAlign="start start">
 
   <div fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-md="33.33">
     <mat-card>
-      <mat-card-header>
-        <h1 class="mat-card-title">Hello, world!</h1>
+      <mat-card-header fxLayout="row wrap" fxLayoutAlign="space-between start">
+        <h1 class="mat-card-title" fxFlex>Canister filling level</h1>
+        <mat-icon color="accent">format_color_fill</mat-icon>
       </mat-card-header>
       <mat-card-content>
-        <p>Welcome to your new single-page application, built with:</p>
-        <ul>
-          <li><a href='https://angular.io/'>Angular</a> and <a href='http://www.typescriptlang.org/'>TypeScript</a> for client-side code</li>
-        </ul>
-        <p>To help you get started, we've also set up:</p>
-        <ul>
-          <li><strong>Angular CLI integration</strong>. In development mode, there's no need to run <code>ng serve</code>. It runs in the background automatically, so your client-side resources are dynamically built on demand and the page refreshes when you modify any file.</li>
-        </ul>
+        <app-canister [edit]="false"></app-canister>
       </mat-card-content>
     </mat-card>
   </div>
 
   <div fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-md="33.33">
     <mat-card>
-      <mat-card-header>
-        <h1 class="mat-card-title"></h1>
+      <mat-card-header fxLayout="row wrap" fxLayoutAlign="space-between start">
+        <h1 class="mat-card-title" fxFlex>Measures</h1>
+        <mat-icon color="accent">speed</mat-icon>
       </mat-card-header>
       <mat-card-content>
-        <p>Welcome to your new single-page application</p>
+        <p>tbd</p>
       </mat-card-content>
     </mat-card>
   </div>
 
   <div fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-md="33.33">
     <mat-card>
-      <mat-card-header>
-        <h1 class="mat-card-title">Hello, world!</h1>
+      <mat-card-header fxLayout="row wrap" fxLayoutAlign="space-between start">
+        <h1 class="mat-card-title" fxFlex>Relays</h1>
+        <mat-icon color="accent">toggle_off</mat-icon>
       </mat-card-header>
       <mat-card-content>
-        <div *ngFor="let d of (data | async)?.objects">
-          {{ d.label }}: {{ d.displayValue }}
-        </div>
+        <mat-list role="list">
+          <mat-list-item role="listitem" #relayItem class="mat-elevation-z1"
+                         *ngFor="let relay of relayService.getRelays()"
+                         [fxHide]="relay.isHidden()">
+            <mat-icon [ngClass]="{on: relay.isOn(), off: relay.isOff(), switched: relay.isSwitched()}"
+                      class="relay-status-indicator"
+                      matTooltip="{{relay.getStatusLabel()}}">
+              {{relay.isAuto()?"hdr_auto":"circle"}}
+            </mat-icon>
+            <div fxFlex>
+              <div mat-line><strong>{{relay.getLabel()}}</strong></div>
+<!--              <div mat-line><small><em>({{relay.getStatusLabel()}})</em></small></div>-->
+            </div>
+            <app-switch [relay]="relay"></app-switch>
+          </mat-list-item>
+        </mat-list>
       </mat-card-content>
     </mat-card>
   </div>

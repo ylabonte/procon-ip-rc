@@ -3,7 +3,6 @@ import { StorageMap } from '@ngx-pwa/local-storage';
 import { IGetStateServiceConfig } from 'procon-ip/lib/get-state.service';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
-import { Location } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'

@@ -1,1 +1,24 @@
-<p>switch works!</p>
+<!--<ng-container class="relay-switch">-->
+<!--  <mat-button-toggle-group [(ngModel)]="switchValue" (change)="switchRelay()">-->
+<!--    <mat-button-toggle value="auto">-->
+<!--      <mat-icon class="auto">hdr_auto</mat-icon>-->
+<!--    </mat-button-toggle>-->
+<!--    <mat-button-toggle value="on">-->
+<!--      <mat-icon class="on">power_settings_new</mat-icon>-->
+<!--    </mat-button-toggle>-->
+<!--    <mat-button-toggle value="off">-->
+<!--      <mat-icon class="off">power_settings_new</mat-icon>-->
+<!--    </mat-button-toggle>-->
+<!--  </mat-button-toggle-group>-->
+<!--</ng-container>-->
+<ng-template [ngIf]="true">
+  <button mat-icon-button (click)="switchRelay('auto')" [disabled]="isDisabled">
+    <mat-icon [ngClass]="{auto: !isDisabled}">hdr_auto</mat-icon>
+  </button>
+  <button mat-icon-button (click)="switchRelay('on')" [disabled]="isDisabled" [fxHide]="disabledManualOn">
+    <mat-icon [ngClass]="{on: !isDisabled}">power_settings_new</mat-icon>
+  </button>
+  <button mat-icon-button (click)="switchRelay('off')" [disabled]="isDisabled">
+    <mat-icon [ngClass]="{off: !isDisabled}">power_settings_new</mat-icon>
+  </button>
+</ng-template>

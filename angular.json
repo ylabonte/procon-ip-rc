@@ -36,6 +36,11 @@
             "ngswConfigPath": "ngsw-config.json"
           },
           "configurations": {
+            "development": {
+              "optimization": false,
+              "sourceMap": true,
+              "buildOptimizer": false
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -67,10 +72,14 @@
             "browserTarget": "procon-ip-rc:build"
           },
           "configurations": {
+            "development": {
+              "browserTarget": "procon-ip-rc:build:development"
+            },
             "production": {
               "browserTarget": "procon-ip-rc:build:production"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",

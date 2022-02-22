@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { GetStateService } from '../get-state.service';
 import { GetStateData } from 'procon-ip/lib/get-state-data';
-import { Observable } from 'rxjs';
+import { RelayService } from '../relay.service';
+import { Relay } from '../relays/relay';
 
 @Component({
   selector: 'app-home',
@@ -9,13 +10,19 @@ import { Observable } from 'rxjs';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  data: Observable<GetStateData>;
+  data: GetStateData;
+  // relays: Relay[];
 
   constructor(
-    private getStateService: GetStateService,
-  ) {}
+    private _getStateService: GetStateService,
+    public relayService: RelayService,
+  ) {
+  }
 
   ngOnInit() {
-    this.data = this.getStateService.getData();
+    // this.relays = this._relayService.getRelays();
+    // this._getStateService.registerCallback(data => {
+    //   this.data = data;
+    // });
   }
 }
