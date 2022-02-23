@@ -28,9 +28,9 @@ export class GetStateService {
     settingsService.watchApiServiceConfig().subscribe(config => {
       if (config !== undefined) {
         this.deinit();
-        if (!config.requestHeaders)
-          config.requestHeaders = {};
-        config.requestHeaders['Sec-Fetch-Site'] = 'cross-site';
+        // if (!config.requestHeaders)
+        //   config.requestHeaders = {};
+        // config.requestHeaders['Sec-Fetch-Site'] = 'cross-site';
         this.init(config);
       }
     });
