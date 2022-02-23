@@ -3,29 +3,39 @@ import { GetStateDataSysInfo } from 'procon-ip/lib/get-state-data-sys-info';
 
 export interface ICanister {
   _sysInfo: GetStateDataSysInfo;
-  _dataObject: GetStateDataObject;
+  _canisterData: GetStateDataObject;
+  _consumptionData: GetStateDataObject;
   _hidden: boolean;
 }
 
 export class Canister {
   private _sysInfo: GetStateDataSysInfo;
-  private _dataObject: GetStateDataObject;
+  private _canisterData: GetStateDataObject;
+  private _consumptionData: GetStateDataObject;
   private _hidden: boolean;
 
   constructor(
     sysInfo: GetStateDataSysInfo,
-    dataObject: GetStateDataObject,
+    canisterData: GetStateDataObject,
+    consumptionData: GetStateDataObject,
+    isHidden: boolean = false,
   ) {
     this._sysInfo = sysInfo;
-    this._dataObject = dataObject;
+    this._canisterData = canisterData;
+    this._consumptionData = consumptionData;
+    this._hidden = isHidden;
   }
 
   static fromObject(object: ICanister) {
-    return new Canister(object._sysInfo, object._dataObject);
+    return new Canister(object._sysInfo, object._canisterData, object._consumptionData, object._hidden);
   }
 
-  getDataObject(): GetStateDataObject {
-    return this._dataObject;
+  get filling(): GetStateDataObject {
+    return this._canisterData;
+  }
+
+  get consumption(): GetStateDataObject {
+    return this._consumptionData;
   }
 
   isHidden(): boolean {

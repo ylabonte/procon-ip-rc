@@ -66,12 +66,23 @@ export class SettingsComponent implements OnInit {
   loadApiServiceConfig(configSettings: Observable<IGetStateServiceConfig>) {
     configSettings.subscribe(config => {
       this.controllerUrl.setValue(config.controllerUrl);
+      this.useBasicAuth.registerOnChange(useBasicAuth => this.toggleBasicAuth());
+      this.useBasicAuth.setValue(config.basicAuth);
       this.username.setValue(config.username);
       this.password.setValue(config.password);
-      this.useBasicAuth.setValue(config.basicAuth);
       this.updateInterval.setValue(config.updateInterval)
       this.requestTimeout.setValue(config.timeout);
       this.requestErrorTolerance.setValue(config.errorTolerance);
     });
+  }
+
+  toggleBasicAuth() {
+    if (this.useBasicAuth.value) {
+      this.username.enable();
+      this.password.enable();
+    } else {
+      this.username.disable();
+      this.password.disable();
+    }
   }
 }

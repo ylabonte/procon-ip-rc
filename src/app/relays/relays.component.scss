@@ -1,3 +1,13 @@
+@import '../../variables';
+
+mat-card-header {
+  opacity: 50%;
+
+  mat-icon {
+    color: $color-accent;
+  }
+}
+
 mat-list-item {
   .relay-item {
     width: 100%;
@@ -16,15 +26,15 @@ mat-list-item {
     }
 
     .on {
-      color: #2e7d32;
+      color: $color-green;
     }
 
     .off {
-      color: #c62828;
+      color: $color-red;
     }
 
     .switched {
-      color: #ff8d00;
+      color: $color-orange;
     }
   }
 }

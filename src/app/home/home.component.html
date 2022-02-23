@@ -3,20 +3,8 @@
   <div fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-md="33.33">
     <mat-card>
       <mat-card-header fxLayout="row wrap" fxLayoutAlign="space-between start">
-        <h1 class="mat-card-title" fxFlex>Canister filling level</h1>
-        <mat-icon color="accent">format_color_fill</mat-icon>
-      </mat-card-header>
-      <mat-card-content>
-        <app-canister [edit]="false"></app-canister>
-      </mat-card-content>
-    </mat-card>
-  </div>
-
-  <div fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-md="33.33">
-    <mat-card>
-      <mat-card-header fxLayout="row wrap" fxLayoutAlign="space-between start">
         <h1 class="mat-card-title" fxFlex>Measures</h1>
-        <mat-icon color="accent">speed</mat-icon>
+        <mat-icon>speed</mat-icon>
       </mat-card-header>
       <mat-card-content>
         <p>tbd</p>
@@ -28,7 +16,7 @@
     <mat-card>
       <mat-card-header fxLayout="row wrap" fxLayoutAlign="space-between start">
         <h1 class="mat-card-title" fxFlex>Relays</h1>
-        <mat-icon color="accent">toggle_off</mat-icon>
+        <mat-icon>toggle_off</mat-icon>
       </mat-card-header>
       <mat-card-content>
         <mat-list role="list">
@@ -47,6 +35,18 @@
             <app-switch [relay]="relay"></app-switch>
           </mat-list-item>
         </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-md="33.33">
+    <mat-card>
+      <mat-card-header fxLayout="row wrap" fxLayoutAlign="space-between start">
+        <h1 class="mat-card-title" fxFlex>Canister filling level</h1>
+        <mat-icon>format_color_fill</mat-icon>
+      </mat-card-header>
+      <mat-card-content>
+        <app-canister [edit]="false"></app-canister>
       </mat-card-content>
     </mat-card>
   </div>

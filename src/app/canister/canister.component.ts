@@ -31,18 +31,40 @@ export class CanisterComponent implements OnInit, OnDestroy {
 
   prepareData(data: GetStateData) {
     const canisters = data.getDataObjectsByCategory(GetStateCategory.CANISTER);
-    // const consumption = data.getDataObjectsByCategory(GetStateCategory.CANISTER_CONSUMPTION);
+    const consumptions = data.getDataObjectsByCategory(GetStateCategory.CANISTER_CONSUMPTION);
     canisters.forEach(canister => {
+      const consumption = consumptions[canister.categoryId];
       if (this.canisters[canister.categoryId]) {
         canister.forFields(field => {
-          const existingData = this.canisters[canister.categoryId].getDataObject();
+          const existingData = this.canisters[canister.categoryId].filling;
           if (canister[field] !== existingData[field]) {
-            this.canisters[canister.categoryId] = new Canister(data.sysInfo, canister);
+            this.canisters[canister.categoryId] = new Canister(
+              data.sysInfo,
+              canister,
+              consumption,
+              this.canisters[canister.categoryId].isHidden(),
+            );
+            return;
+          }
+        });
+        consumption.forFields(field => {
+          const existingData = this.canisters[canister.categoryId].consumption;
+          if (consumption[field] !== existingData[field]) {
+            this.canisters[canister.categoryId] = new Canister(
+              data.sysInfo,
+              canister,
+              consumption,
+              this.canisters[canister.categoryId].isHidden(),
+            );
             return;
           }
         });
       } else {
-        this.canisters[canister.categoryId] = new Canister(data.sysInfo, canister);
+        this.canisters[canister.categoryId] = new Canister(
+          data.sysInfo,
+          canister,
+          consumption,
+        );
       }
     });
   }

@@ -1,16 +1,14 @@
 <div class="main-container" fxLayout="row wrap" fxLayoutAlign="start start">
   <div fxFlex="100" fxFlex.gt-md="66.66" fxFlex.gt-lg="33.33">
     <mat-card>
-      <mat-card-header fxLayout="row wrap">
+      <mat-card-header fxLayout="row wrap" fxLayoutAlign="space-between start">
         <h2 fxFlex class="mat-card-title">Relay Switches</h2>
-        <div>
-          <button mat-icon-button [fxHide]="editMode" (click)="editMode = true;">
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button mat-icon-button [fxShow]="editMode" (click)="editMode = false;">
-            <mat-icon>list</mat-icon>
-          </button>
-        </div>
+        <button mat-icon-button [fxHide]="editMode" (click)="editMode = true;">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button [fxShow]="editMode" (click)="editMode = false;">
+          <mat-icon>list</mat-icon>
+        </button>
       </mat-card-header>
       <mat-card-content #cardContent>
         <mat-list cdkDropList role="list" (cdkDropListDropped)="listItemDrop($event)">

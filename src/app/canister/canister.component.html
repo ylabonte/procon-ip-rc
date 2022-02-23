@@ -1,12 +1,10 @@
 <ng-template #displayMode>
-  <mat-card *ngFor="let canister of canisters">
-    <mat-card-header>
-      <h3>{{canister.getDataObject().label}}</h3>
-    </mat-card-header>
-    <mat-card-content>
-      <p>{{canister.getDataObject().displayValue}}</p>
-    </mat-card-content>
-  </mat-card>
+  <mat-list>
+    <mat-list-item *ngFor="let canister of canisters" fxLayout="row wrap" fxLayoutAlign="space-between">
+      <h3 mat-line>{{canister.filling.label}}: {{canister.filling.displayValue}}</h3>
+      <p mat-line>({{canister.consumption.label}}: {{canister.consumption.displayValue}})</p>
+    </mat-list-item>
+  </mat-list>
 </ng-template>
 
 <ng-template #editMode>

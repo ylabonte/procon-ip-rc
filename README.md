@@ -24,8 +24,8 @@ See: https://procon-ip.labonte.cloud/
 
 As soon as the project reaches a usable state, this documentation will be updated as well.
 
-Feel free to fork, fix or extend this project and contribute your changes in form of a pull 
-requests.
+Feel free to fork, fix or extend this project at your will. Contributions in form of pull 
+requests are also very welcome.
 
 _This project was generated with [Angular CLI](https://github.com/angular/angular-cli)_  
 _and visualized with [Angular Material](https://material.angular.io/)._
@@ -36,7 +36,7 @@ Run `npm run start:pwa` for a pwa compatible test server. Navigate to `http://lo
 
 ## Development server
 
-~~Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.~~
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 The development server does not really work for progressive web apps.
 
 ## Code scaffolding

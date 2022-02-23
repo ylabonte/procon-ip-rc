@@ -1,14 +1,19 @@
+@import '../../variables';
+
 .home-container {
   margin: 8px;
+}
 
-  mat-card {
-    margin: 8px;
+mat-card {
+  margin: 8px;
+
+  mat-card-header {
+    opacity: 50%;
   }
 }
 
 .relay-status-indicator {
   margin-right: 8px;
-
 }
 
 .auto {
@@ -16,13 +21,13 @@
 }
 
 .on {
-  color: #2E7D32;
+  color: $color-green;
 }
 
 .off {
-  color: #C62828;
+  color: $color-red;
 }
 
 .switched {
-  color: #ff8d00;
+  color: $color-orange;
 }
