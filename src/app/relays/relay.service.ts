@@ -58,9 +58,6 @@ export class RelayService {
     });
 
     this._settings.getApiServiceConfig().subscribe(config => {
-      // if (!config.requestHeaders)
-      //   config.requestHeaders = {};
-      // config.requestHeaders['Sec-Fetch-Site'] = 'cross-site';
       this._internal = new UsrcfgCgiService(
         config,
         this._log.getLogger(),
