@@ -19,7 +19,7 @@ jobs:
         run: yarn
       - name: Build
         run: yarn run build
-      - name: Run linter
-        run: yarn run lint
+#      - name: Run linter
+#        run: yarn run lint
       - name: Run tests
         run: yarn run test
