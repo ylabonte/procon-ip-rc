@@ -44,9 +44,9 @@ jobs:
 #            - run: |
 #                sed -i.orig "s/\(\"name\": \"\)\(procon-ip\"\)/\1@ylabonte\/\2/" package.json
       - name: Install dependencies
-        run: npm ci
+        run: yarn
       - name: Build for release
-        run: npm run build:prod
+        run: yarn run build:prod
       - name: Init git repo for publishing
         run: |
           cd ./dist/procon-ip-rc
