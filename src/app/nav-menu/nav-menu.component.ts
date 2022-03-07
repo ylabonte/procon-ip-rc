@@ -43,9 +43,6 @@ export class NavMenuComponent {
   @Input() appmenu: MatDrawer;
   @ViewChild('disableCloseToggle') disableCloseToggle: MatButton;
 
-  ngOnInit() {
-  }
-
   isPinnable() {
     return this.appmenu.mode === 'side';
   }
