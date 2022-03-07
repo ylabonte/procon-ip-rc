@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { LogService } from './log.service';
 import { expect } from '@angular/flex-layout/_private-utils/testing';
-import { Logger } from 'procon-ip/lib/logger';
+import { Logger, LogLevel } from 'procon-ip/lib/logger';
 
 describe('LogService', () => {
   let service: LogService;
@@ -25,6 +25,6 @@ describe('LogService', () => {
   });
 
   it ('should give different instance when called with new()', () => {
-    expect(service.getLogger()).not.toEqual(service.new());
+    expect(service.getLogger()).not.toBe(service.new(LogLevel.WARN));
   });
 });
