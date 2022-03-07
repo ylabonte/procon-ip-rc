@@ -12,8 +12,12 @@ mat-list-item {
   .relay-item {
     width: 100%;
 
-    & > *:not(:first-child):not(:last-child) {
+    & > *:not(:last-child) {
       margin: 8px;
+    }
+
+    & > .first-of-row {
+      margin: 8px 0;
     }
 
     .drag-handle {

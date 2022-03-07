@@ -58,12 +58,16 @@ export class RelayService {
     });
 
     this._settings.getApiServiceConfig().subscribe(config => {
-      this._internal = new UsrcfgCgiService(
-        config,
-        this._log.getLogger(),
-        this._getState.getInternalService(),
-        this._interpreter,
-      );
+      this._getState.getInternalService().getData().then(() => {
+        if (this._internal)
+          delete this._internal;
+        this._internal = new UsrcfgCgiService(
+          config,
+          this._log.getLogger(),
+          this._getState.getInternalService(),
+          this._interpreter,
+        );
+      });
     });
   }
 
