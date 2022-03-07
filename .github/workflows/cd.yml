@@ -1,33 +1,33 @@
-name: "CI/CD Workflow"
+name: "CD Workflow"
 on:
   push:
-    branches: [ master ]
-#  release:
-#    types: [created]
+    branches: [master]
 jobs:
-#  test:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v2
-#        with:
-#          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
-#          fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
-#      - name: Setup nodejs 16
-#        uses: actions/setup-node@v1
-#        with:
-#          node-version: '16.x'
-#          registry-url: 'https://registry.npmjs.org'
-##        # Rewrite package.json to have the package name scoped for publishing to the github repo.
-##        - run: |
-##            sed -i.orig "s/\(\"name\": \"\)\(procon-ip\"\)/\1@ylabonte\/\2/" package.json
-#      - name: Install dependencies
-#        run: npm ci
-#      - name: Build
-#        run: npm run build
-#      - name: Run tests
-#        run: npm run test
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version:
+          - '14.x'
+          - '16.x'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup nodejs 16
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: 'https://registry.npmjs.org'
+      - name: Install dependencies
+        run: yarn
+      - name: Build
+        run: yarn run build
+      - name: Run linter
+        run: yarn run lint
+      - name: Run tests
+        run: yarn run test
   deploy:
+    needs: [test]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -36,13 +36,10 @@ jobs:
           persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
           fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
       - name: Setup nodejs 16
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
-#            # Rewrite package.json to have the package name scoped for publishing to the github repo.
-#            - run: |
-#                sed -i.orig "s/\(\"name\": \"\)\(procon-ip\"\)/\1@ylabonte\/\2/" package.json
       - name: Install dependencies
         run: yarn
       - name: Build for release
