@@ -15,6 +15,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FlexLayoutModule, FlexModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
+import { AppShellComponent } from './app-shell/app-shell.component';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
@@ -25,13 +26,16 @@ import { SwitchComponent } from './relays/switch/switch.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { environment } from '../environments/environment';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatSliderModule } from '@angular/material/slider';
 import { CanisterComponent } from './canister/canister.component';
+import { environment } from '../environments/environment';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
+    AppShellComponent,
     AppComponent,
     NavMenuComponent,
     HomeComponent,
@@ -70,6 +74,8 @@ import { CanisterComponent } from './canister/canister.component';
     MatTooltipModule,
     DragDropModule,
     MatSliderModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

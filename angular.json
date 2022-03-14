@@ -15,6 +15,11 @@
       },
       "architect": {
         "build": {
+          "option":{
+            "allowedCommonJsDependencies": [
+              "procon-ip"
+            ]
+          },
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/procon-ip-rc",

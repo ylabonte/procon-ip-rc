@@ -44,6 +44,7 @@ export class Relay {
       }
     });
 
+    this.setUpdated();
     return isUpdate;
   }
 

@@ -16,7 +16,8 @@ mat-list-item {
       margin: 8px;
     }
 
-    & > .first-of-row {
+    & > .first-of-row,
+    & > .last-of-row {
       margin: 8px 0;
     }
 
@@ -65,4 +66,9 @@ mat-list-item {
 .drag-preview {
   opacity: 100%;
   padding: 0;
+
+  .first-of-row,
+  .last-of-row {
+    margin: 8px 0;
+  }
 }

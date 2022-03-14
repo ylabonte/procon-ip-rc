@@ -7,7 +7,12 @@
         <mat-icon>speed</mat-icon>
       </mat-card-header>
       <mat-card-content>
-        <p>tbd</p>
+<!--        <table mat-table>-->
+<!--          <tr *ngFor="let row of sysInfoTableData?.toArrayOfObjects()">-->
+<!--            <td>{{row.key}}</td>-->
+<!--            <td>{{row.value}}</td>-->
+<!--          </tr>-->
+<!--        </table>-->
       </mat-card-content>
     </mat-card>
   </div>
@@ -23,11 +28,15 @@
           <mat-list-item role="listitem" #relayItem class="mat-elevation-z1"
                          *ngFor="let relay of relayService.getRelays()"
                          [fxHide]="relay.isHidden()">
-            <mat-icon [ngClass]="{on: relay.isOn(), off: relay.isOff(), switched: relay.isSwitched()}"
+            <mat-icon [ngClass]="{on: relay.isOn(), off: relay.isOff()}"
+                      [fxHide]="relay.isSwitched()"
                       class="relay-status-indicator"
                       matTooltip="{{relay.getStatusLabel()}}">
               {{relay.isAuto()?"hdr_auto":"circle"}}
             </mat-icon>
+            <mat-progress-spinner [fxShow]="relay.isSwitched()" style="margin-right: 8px;"
+                                  mode="indeterminate" diameter="24" color="accent">
+            </mat-progress-spinner>
             <div fxFlex>
               <div mat-line><strong>{{relay.getLabel()}}</strong></div>
 <!--              <div mat-line><small><em>({{relay.getStatusLabel()}})</em></small></div>-->

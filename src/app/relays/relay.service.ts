@@ -35,8 +35,10 @@ export class RelayService {
       }
 
       this._callbackIdx = this._getState.registerCallback(data => {
+        // data.sysInfo.isExtRelaysEnabled()
         this._getState.getRelayDataObjects(data).forEach(relay => {
           const existingRelay = this._relays.filter(r => r.getObjectId() === relay.id).shift();
+
           if (existingRelay) {
             if (existingRelay.update(relay)) {
               const index = this._relays.indexOf(existingRelay);
