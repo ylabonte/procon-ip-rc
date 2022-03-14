@@ -38,9 +38,9 @@ export class CanisterComponent implements OnInit, OnDestroy {
           const existingData = this.canisters[canister.categoryId].filling;
           if (canister[field] !== existingData[field]) {
             this.canisters[canister.categoryId] = new Canister(
-              data.sysInfo,
               canister,
               consumption,
+              data.sysInfo,
               this.canisters[canister.categoryId].isHidden(),
             );
             return;
@@ -50,9 +50,9 @@ export class CanisterComponent implements OnInit, OnDestroy {
           const existingData = this.canisters[canister.categoryId].consumption;
           if (consumption[field] !== existingData[field]) {
             this.canisters[canister.categoryId] = new Canister(
-              data.sysInfo,
               canister,
               consumption,
+              data.sysInfo,
               this.canisters[canister.categoryId].isHidden(),
             );
             return;
@@ -60,9 +60,9 @@ export class CanisterComponent implements OnInit, OnDestroy {
         });
       } else {
         this.canisters[canister.categoryId] = new Canister(
-          data.sysInfo,
           canister,
           consumption,
+          data.sysInfo,
         );
       }
     });

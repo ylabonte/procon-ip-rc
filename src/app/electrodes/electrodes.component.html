@@ -1,0 +1,25 @@
+<ng-template #displayMode>
+<!--  <table mat-table [dataSource]="electrodes">-->
+<!--    <ng-container matColumnDef="label">-->
+<!--      <th mat-header-cell *matHeaderCellDef>Electrode</th>-->
+<!--      <td mat-cell *matCellDef="let element">{{element.data.label}}</td>-->
+<!--    </ng-container>-->
+<!--    <ng-container matColumnDef="displayValue">-->
+<!--      <th mat-header-cell *matHeaderCellDef></th>-->
+<!--      <td mat-cell *matCellDef="let element">{{element.data.displayValue}}</td>-->
+<!--    </ng-container>-->
+<!--    <tr mat-header-row *matHeaderRowDef="['label', 'displayValue']"></tr>-->
+<!--    <tr mat-row *matRowDef="let row; columns: ['label', 'displayValue']"></tr>-->
+<!--  </table>-->
+  <mat-list>
+    <mat-list-item *ngFor="let electrode of electrodes" fxLayout="row wrap" fxLayoutAlign="space-between">
+      <h3 mat-line>{{electrode.data.label}}: {{electrode.data.displayValue}}</h3>
+    </mat-list-item>
+  </mat-list>
+</ng-template>
+
+<ng-template #editMode>
+  <p>hello edit mode!</p>
+</ng-template>
+
+<ng-container *ngTemplateOutlet="edit ? editMode : displayMode"> </ng-container>

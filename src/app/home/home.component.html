@@ -3,23 +3,6 @@
   <div fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-md="33.33">
     <mat-card>
       <mat-card-header fxLayout="row wrap" fxLayoutAlign="space-between start">
-        <h1 class="mat-card-title" fxFlex>Measures</h1>
-        <mat-icon>speed</mat-icon>
-      </mat-card-header>
-      <mat-card-content>
-<!--        <table mat-table>-->
-<!--          <tr *ngFor="let row of sysInfoTableData?.toArrayOfObjects()">-->
-<!--            <td>{{row.key}}</td>-->
-<!--            <td>{{row.value}}</td>-->
-<!--          </tr>-->
-<!--        </table>-->
-      </mat-card-content>
-    </mat-card>
-  </div>
-
-  <div fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-md="33.33">
-    <mat-card>
-      <mat-card-header fxLayout="row wrap" fxLayoutAlign="space-between start">
         <h1 class="mat-card-title" fxFlex>Relays</h1>
         <mat-icon>toggle_off</mat-icon>
       </mat-card-header>
@@ -39,7 +22,7 @@
             </mat-progress-spinner>
             <div fxFlex>
               <div mat-line><strong>{{relay.getLabel()}}</strong></div>
-<!--              <div mat-line><small><em>({{relay.getStatusLabel()}})</em></small></div>-->
+              <!--              <div mat-line><small><em>({{relay.getStatusLabel()}})</em></small></div>-->
             </div>
             <app-switch [relay]="relay"></app-switch>
           </mat-list-item>
@@ -47,6 +30,47 @@
       </mat-card-content>
     </mat-card>
   </div>
+
+  <div fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-md="33.33">
+    <mat-card>
+      <mat-card-header fxLayout="row wrap" fxLayoutAlign="space-between start">
+        <h1 class="mat-card-title" fxFlex>Measures</h1>
+        <mat-icon>speed</mat-icon>
+      </mat-card-header>
+      <mat-card-content>
+        <app-electrodes></app-electrodes>
+        <table mat-table [dataSource]="temperatures">
+          <ng-container matColumnDef="label">
+            <th mat-header-cell *matHeaderCellDef>Thermometer</th>
+            <td mat-cell *matCellDef="let element">{{element.label}}</td>
+          </ng-container>
+          <ng-container matColumnDef="displayValue">
+            <th mat-header-cell *matHeaderCellDef>Temperature</th>
+            <td mat-cell *matCellDef="let element">{{element.displayValue}}</td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="['label', 'displayValue']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['label', 'displayValue']"></tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+<!--  <div fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-md="33.33">-->
+<!--    <mat-card>-->
+<!--      <mat-card-header fxLayout="row wrap" fxLayoutAlign="space-between start">-->
+<!--        <h1 class="mat-card-title" fxFlex>SysInfo</h1>-->
+<!--        <mat-icon>speed</mat-icon>-->
+<!--      </mat-card-header>-->
+<!--      <mat-card-content>-->
+<!--        <table mat-table>-->
+<!--          <tr *ngFor="let row of sysInfoTableData?.toArrayOfObjects()">-->
+<!--            <td>{{row.key}}</td>-->
+<!--            <td>{{row.value}}</td>-->
+<!--          </tr>-->
+<!--        </table>-->
+<!--      </mat-card-content>-->
+<!--    </mat-card>-->
+<!--  </div>-->
 
   <div fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-md="33.33">
     <mat-card>
