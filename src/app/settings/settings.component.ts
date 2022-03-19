@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { SettingsService } from './settings.service';
-import { IGetStateServiceConfig } from 'procon-ip/lib/get-state.service';
+import { IGetStateServiceConfig } from 'procon-ip';
 import { Observable } from 'rxjs';
 
 @Component({

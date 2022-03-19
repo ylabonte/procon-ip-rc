@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { StorageMap } from '@ngx-pwa/local-storage';
-import { IGetStateServiceConfig } from 'procon-ip/lib/get-state.service';
+import { IGetStateServiceConfig } from 'procon-ip';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 

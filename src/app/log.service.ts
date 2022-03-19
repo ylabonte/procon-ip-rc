@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Logger, LogLevel } from 'procon-ip/lib/logger';
+import { Logger, LogLevel } from 'procon-ip';
 
 @Injectable({
   providedIn: 'root'

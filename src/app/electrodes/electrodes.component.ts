@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { GetStateService } from '../get-state.service';
-import { GetStateCategory, GetStateData } from 'procon-ip/lib/get-state-data';
+import { GetStateCategory, GetStateData } from 'procon-ip';
 import { Electrode } from './Electrode';
 
 @Component({

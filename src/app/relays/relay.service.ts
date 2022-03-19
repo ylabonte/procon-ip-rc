@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { LogService } from '../log.service';
-import { UsrcfgCgiService } from 'procon-ip/lib/usrcfg-cgi.service';
+import { UsrcfgCgiService, RelayDataInterpreter, RelayDataObject } from 'procon-ip';
 import { SettingsService } from '../settings/settings.service';
 import { GetStateService } from '../get-state.service';
-import { RelayDataInterpreter } from 'procon-ip/lib/relay-data-interpreter';
-import { RelayDataObject } from 'procon-ip/lib/relay-data-object';
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { Relay, IRelay } from './relay';
 import { moveItemInArray } from '@angular/cdk/drag-drop';

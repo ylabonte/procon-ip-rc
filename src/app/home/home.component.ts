@@ -1,9 +1,7 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { GetStateService } from '../get-state.service';
-import { GetStateCategory, GetStateData } from 'procon-ip/lib/get-state-data';
+import { GetStateData, GetStateCategory, GetStateDataObject, GetStateDataSysInfo } from 'procon-ip';
 import { RelayService } from '../relays/relay.service';
-import { GetStateDataSysInfo } from 'procon-ip/lib/get-state-data-sys-info';
-import { GetStateDataObject } from 'procon-ip/lib/get-state-data-object';
 import { Observable, of } from 'rxjs';
 
 @Component({

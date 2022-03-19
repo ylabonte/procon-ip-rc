@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
-import { GetStateService as InternalService, IGetStateServiceConfig } from 'procon-ip/lib/get-state.service';
 import { SettingsService } from './settings/settings.service';
-import { GetStateCategory, GetStateData } from 'procon-ip/lib/get-state-data';
-import { Logger } from 'procon-ip/lib/logger';
 import { Observable, of } from 'rxjs';
-import { RelayDataObject } from 'procon-ip/lib/relay-data-object';
-import { GetStateDataObject } from 'procon-ip/lib/get-state-data-object';
 import { LogService } from './log.service';
+import {
+  GetStateCategory,
+  GetStateData,
+  GetStateDataObject,
+  GetStateService as InternalService,
+  IGetStateServiceConfig,
+  Logger,
+  RelayDataObject,
+} from 'procon-ip';
 
 @Injectable({
   providedIn: 'root'

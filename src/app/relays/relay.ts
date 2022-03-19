@@ -1,6 +1,4 @@
-import { RelayDataObject } from 'procon-ip/lib/relay-data-object';
-import { GetStateCategory } from 'procon-ip/lib/get-state-data';
-import { RelayDataInterpreter } from 'procon-ip/lib/relay-data-interpreter';
+import { GetStateCategory, RelayDataInterpreter, RelayDataObject } from 'procon-ip';
 
 export interface IRelay {
   _interpreter: RelayDataInterpreter;
@@ -10,8 +8,8 @@ export interface IRelay {
 }
 
 export class Relay {
-  private _interpreter: RelayDataInterpreter;
-  private _dataObject: RelayDataObject;
+  private readonly _dataObject: RelayDataObject;
+  private readonly _interpreter: RelayDataInterpreter;
   private _hidden: boolean;
   private _disabledManualOff: boolean;
   private _switched = false;

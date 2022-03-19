@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { LogService } from './log.service';
 import { expect } from '@angular/flex-layout/_private-utils/testing';
-import { Logger, LogLevel } from 'procon-ip/lib/logger';
+import { Logger, LogLevel } from 'procon-ip';
 
 describe('LogService', () => {
   let service: LogService;

@@ -1,5 +1,4 @@
-import { GetStateDataObject } from 'procon-ip/lib/get-state-data-object';
-import { GetStateDataSysInfo } from 'procon-ip/lib/get-state-data-sys-info';
+import { GetStateDataObject, GetStateDataSysInfo } from 'procon-ip';
 
 export interface ICanister {
   _sysInfo: GetStateDataSysInfo;
