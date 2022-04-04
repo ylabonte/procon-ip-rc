@@ -4,13 +4,13 @@ import { UsrcfgCgiService, RelayDataInterpreter, RelayDataObject } from 'procon-
 import { SettingsService } from '../settings/settings.service';
 import { GetStateService } from '../get-state.service';
 import { StorageMap } from '@ngx-pwa/local-storage';
-import { Relay, IRelay } from './relay';
+import { Relay, IRelayObject } from './relay/relay';
 import { moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RelayService {
+export class RelaysService {
   private static readonly STORAGE_KEY = 'relays';
   private readonly _interpreter: RelayDataInterpreter;
   private _internal: UsrcfgCgiService;
@@ -25,39 +25,32 @@ export class RelayService {
   ) {
     this._relays = [];
     this._interpreter = new RelayDataInterpreter(this._log.getLogger());
-    this._storage.get(RelayService.STORAGE_KEY).subscribe(relays => {
+    this._storage.get(RelaysService.STORAGE_KEY).subscribe((relays: IRelayObject[]) => {
       if (relays === undefined) {
         this.save();
       } else {
-        this.restoreFromJSON(relays as string);
+        this.load(relays);
       }
 
       this._callbackIdx = this._getState.registerCallback(data => {
-        // data.sysInfo.isExtRelaysEnabled()
-        this._getState.getRelayDataObjects(data).forEach(relay => {
-          const existingRelay = this._relays.filter(r => r.getObjectId() === relay.id).shift();
-
+        this._getState.getRelayDataObjects(data).forEach(relayDataObject => {
+          const existingRelay = this._relays.filter(r => r.dataObject.id === relayDataObject.id).shift();
           if (existingRelay) {
-            if (existingRelay.update(relay)) {
+            if (existingRelay.update(relayDataObject)) {
               const index = this._relays.indexOf(existingRelay);
-              this._relays[index] = new Relay(
-                this._interpreter,
-                existingRelay.getDataObject(),
-                existingRelay.isHidden(),
-              );
-              this.save();
-            } else {
-              // nothing changed due to the update
+              this._relays[index] = existingRelay.clone();
             }
           } else {
-            this._relays.push(new Relay(this._interpreter, relay));
-            this.save();
+            const relay = new Relay();
+            relay.init(this._interpreter, relayDataObject, relayDataObject.label === 'n.a.');
+            this._relays.push(relay);
           }
         });
+        this.save();
       });
     });
 
-    this._settings.getApiServiceConfig().subscribe(config => {
+    this._settings.onApiServiceConfigChange(config => {
       this._getState.getInternalService().getData().then(() => {
         if (this._internal)
           delete this._internal;
@@ -70,15 +63,6 @@ export class RelayService {
       });
     });
   }
-
-  // createOrUpdateRelay(relayData: RelayDataObject) {
-  //   const existingRelay = this._relays.filter(r => r.getObjectId() === relayData.id).shift();
-  //   if (existingRelay) {
-  //     existingRelay.update(relayData);
-  //   } else {
-  //     this._relays.push(new Relay(this._interpreter, relayData));
-  //   }
-  // }
 
   getRelays(): Relay[] {
     return this._relays;
@@ -108,14 +92,15 @@ export class RelayService {
   }
 
   private save() {
-    this._storage.set(RelayService.STORAGE_KEY, JSON.stringify(this._relays)).subscribe(() => {});
+    this._storage.set(RelaysService.STORAGE_KEY, this._relays.map(r => r.asObject())).subscribe(() => {});
   }
 
-  private restoreFromJSON(jsonRelays: string) {
-    const relays: IRelay[] = JSON.parse(jsonRelays);
+  private load(relays: IRelayObject[]) {
     this._relays = [];
-    relays.forEach(relay => {
-      this._relays.push(new Relay(this._interpreter, relay._dataObject, relay._hidden, relay._disabledManualOff));
+    relays.forEach(relayObject => {
+      const relay = new Relay();
+      relay.init(this._interpreter, relayObject);
+      this._relays.push(relay);
     });
   }
 }

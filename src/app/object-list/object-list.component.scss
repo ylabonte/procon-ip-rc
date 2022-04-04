@@ -8,8 +8,14 @@ mat-card-header {
   }
 }
 
+.mat-list-base .mat-list-item, .mat-list-base .mat-list-option {
+  height: auto;
+}
+
+
 mat-list-item {
-  .relay-item {
+
+  .list-object {
     width: 100%;
 
     & > *:not(:last-child) {
@@ -26,7 +32,7 @@ mat-list-item {
       cursor: move;
     }
 
-    .relay-status-indicator {
+    .status-indicator {
       //cursor: help;
     }
 
@@ -44,9 +50,8 @@ mat-list-item {
   }
 }
 
-.drag-placeholder, .drag-preview > .mat-list-item {
+.drag-placeholder > .mat-list-item {
   width: 100%;
-  height: 72px;
 
   .mat-list-item-content > * {
     margin: 8px;
@@ -71,4 +76,9 @@ mat-list-item {
   .last-of-row {
     margin: 8px 0;
   }
+}
+
+.icon-placeholder {
+  width: 40px;
+  height: 40px;
 }

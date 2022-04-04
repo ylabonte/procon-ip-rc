@@ -3,14 +3,27 @@ import { StorageMap } from '@ngx-pwa/local-storage';
 import { IGetStateServiceConfig } from 'procon-ip';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { PleaseSetUpComponent } from './please-set-up/please-set-up.component';
+
+export interface IAppSettings {
+  apiServiceConfig: IGetStateServiceConfig;
+  darkMode: boolean;
+  useSystemPreferredColorScheme: boolean;
+}
 
 @Injectable({
   providedIn: 'root'
 })
-export class SettingsService {
+export class SettingsService implements IAppSettings {
+  private readonly _storageKey = 'settings';
+  public readonly _onChangeCallbacks: {
+    apiServiceConfig: ((apiServiceConfig: IGetStateServiceConfig) => any)[],
+    darkMode: ((darkMode: boolean) => any)[],
+  } = {apiServiceConfig: [], darkMode: []};
 
-  private _apiServicesConfig: IGetStateServiceConfig = {
-    controllerUrl: null,
+  private _apiServiceConfig: IGetStateServiceConfig = {
+    controllerUrl: `${location.protocol}//${location.host}/assets`,
     username: '',
     password: '',
     basicAuth: false,
@@ -18,95 +31,91 @@ export class SettingsService {
     timeout: 3000,
     errorTolerance: 3,
   };
-
   private _darkMode: boolean;
+  private _useSystemPreferredColorScheme: boolean;
   private _darkModeMediaQuery: MediaQueryList;
 
   constructor(
     private _mediaMatcher: MediaMatcher,
+    private _snackBar: MatSnackBar,
     private _storage: StorageMap,
   ) {
-    this._apiServicesConfig.controllerUrl = `${location.protocol}//${location.host}/assets`;
-    const self = this;
     this._darkModeMediaQuery = this._mediaMatcher.matchMedia('all and (prefers-color-scheme: dark)');
-    this._darkMode = this._darkModeMediaQuery.matches;
-
-    this._storage.get('darkMode').subscribe(darkMode => {
-      if (darkMode === undefined) this.setDarkModeBySystemPreference();
-      else this.setDarkMode(darkMode as boolean);
-    });
-
-    this._darkModeMediaQuery.addEventListener('change', ev => {
-      if (confirm('Your system color scheme has changed. Shall we adapt?')) {
-        self.setDarkModeBySystemPreference();
+    this._storage.get(this._storageKey).subscribe((settings: IAppSettings) => {
+      if (settings) {
+        Object.keys(settings).forEach(key => this['_'+key] = settings[key]);
+      } else {
+        this._darkMode = this._darkModeMediaQuery.matches;
+        this._useSystemPreferredColorScheme = true;
+        this._snackBar.openFromComponent(PleaseSetUpComponent);
       }
+      if (this.apiServiceConfig)
+        this.propagateApiServiceConfigChange();
+      this.propagateDarkModeChange();
     });
   }
 
-  private setDarkModeBySystemPreference() {
-    this._storage.set('darkMode', this._darkModeMediaQuery.matches).subscribe(() => {});
+  get apiServiceConfig(): IGetStateServiceConfig {
+    return this._apiServiceConfig;
   }
 
-  setDarkMode(on: boolean) {
-    this._storage.set('darkMode', on).subscribe(() => {});
-  }
-
-  getDarkMode(): Observable<boolean> {
-    return this._storage.get('darkMode') as Observable<boolean>;
-  }
-
-  watchDarkMode(): Observable<boolean> {
-    return this._storage.watch('darkMode') as Observable<boolean>;
-  }
-
-  getCachedDarkMode(): boolean {
+  get darkMode(): boolean {
     return this._darkMode;
   }
 
-  private saveApiServiceConfig() {
-    this._storage.set('apiServiceConfig', this._apiServicesConfig).subscribe(() => {});
+  get useSystemPreferredColorScheme(): boolean {
+    return this._useSystemPreferredColorScheme;
   }
 
-  getApiServiceConfig(): Observable<IGetStateServiceConfig> {
-    return this._storage.get('apiServiceConfig') as Observable<IGetStateServiceConfig>;
+  set apiServiceConfig(serviceConfig: IGetStateServiceConfig) {
+    this._apiServiceConfig = serviceConfig;
+    this.propagateApiServiceConfigChange();
+    this.save();
   }
 
-  watchApiServiceConfig(): Observable<IGetStateServiceConfig> {
-    return this._storage.watch('apiServiceConfig') as Observable<IGetStateServiceConfig>;
+  set darkMode(on: boolean) {
+    this._darkMode = on;
+    this.propagateDarkModeChange();
+    this.save();
   }
 
-  setControllerUrl(controllerUrl: URL) {
-    this._apiServicesConfig.controllerUrl = controllerUrl.toString();
-    this.saveApiServiceConfig();
+  set useSystemPreferredColorScheme(on: boolean) {
+    this._useSystemPreferredColorScheme = on;
+    if (on) {
+      this.darkMode = this._darkModeMediaQuery.matches;
+    } else {
+      this.save();
+    }
   }
 
-  setUsername(username: string) {
-    this._apiServicesConfig.username = username;
-    this.saveApiServiceConfig();
+  save($event?: Event) {
+    const settings: IAppSettings = {
+      apiServiceConfig: this._apiServiceConfig,
+      darkMode: this._darkMode,
+      useSystemPreferredColorScheme: this._useSystemPreferredColorScheme,
+    };
+    this._storage.set(this._storageKey, settings).subscribe(() => {
+      this._snackBar.open("Settings saved.", null, {duration: 2000});
+    });
   }
 
-  setPassword(password: string) {
-    this._apiServicesConfig.password = password;
-    this.saveApiServiceConfig();
+  get updates(): Observable<IAppSettings> {
+    return this._storage.watch(this._storageKey) as Observable<IAppSettings>;
   }
 
-  setBasicAuth(useAuthentication: boolean) {
-    this._apiServicesConfig.basicAuth = useAuthentication;
-    this.saveApiServiceConfig();
+  onApiServiceConfigChange(callback: (apiServiceConfig: IGetStateServiceConfig) => any) {
+    this._onChangeCallbacks.apiServiceConfig.push(callback);
   }
 
-  setUpdateInterval(interval: number) {
-    this._apiServicesConfig.updateInterval = interval;
-    this.saveApiServiceConfig();
+  onDarkModeChange(callback: (darkMode: boolean) => any) {
+    this._onChangeCallbacks.darkMode.push(callback);
   }
 
-  setTimeout(timeout: number) {
-    this._apiServicesConfig.timeout = timeout;
-    this.saveApiServiceConfig();
+  private propagateApiServiceConfigChange() {
+    this._onChangeCallbacks.apiServiceConfig.forEach(c => c(this._apiServiceConfig));
   }
 
-  setErrorTolerance(maxErrors: number) {
-    this._apiServicesConfig.errorTolerance = maxErrors;
-    this.saveApiServiceConfig();
+  private propagateDarkModeChange() {
+    this._onChangeCallbacks.darkMode.forEach(c => c(this._darkMode));
   }
 }

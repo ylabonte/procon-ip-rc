@@ -1,0 +1,7 @@
+<p>Please set up first.</p>
+<button mat-button routerLink="/settings"
+        (click)="snackBarRef.dismiss()"
+        [routerLinkActive]="['link-active']"
+        [routerLinkActiveOptions]="{ exact: true }">
+  Open Settings
+</button>

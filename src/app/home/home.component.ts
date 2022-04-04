@@ -1,8 +1,7 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GetStateService } from '../get-state.service';
-import { GetStateData, GetStateCategory, GetStateDataObject, GetStateDataSysInfo } from 'procon-ip';
-import { RelayService } from '../relays/relay.service';
-import { Observable, of } from 'rxjs';
+import { GetStateData, GetStateCategory, GetStateDataSysInfo } from 'procon-ip';
+import { RelaysService } from '../relays/relays.service';
 
 @Component({
   selector: 'app-home',
@@ -12,11 +11,10 @@ import { Observable, of } from 'rxjs';
 export class HomeComponent implements OnInit {
   data: GetStateData;
   sysInfoTableData: GetStateDataSysInfo;
-  temperatures: Observable<GetStateDataObject[]>;
 
   constructor(
     private _getStateService: GetStateService,
-    public relayService: RelayService,
+    public relayService: RelaysService,
   ) {
   }
 
@@ -25,7 +23,6 @@ export class HomeComponent implements OnInit {
       this.data = data;
       if (this.data) {
         this.sysInfoTableData = this.data.sysInfo;
-        this.temperatures = of(this.data.getDataObjectsByCategory(GetStateCategory.TEMPERATURES));
       }
     });
   }

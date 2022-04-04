@@ -3,7 +3,7 @@ import { BreakpointObserver, Breakpoints, MediaMatcher } from '@angular/cdk/layo
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { SwUpdate } from '@angular/service-worker';
 import { SettingsService } from './settings/settings.service';
-import { Observable } from 'rxjs';
+import { GetStateService } from './get-state.service';
 
 @Component({
   selector: 'app-root',
@@ -34,28 +34,25 @@ import { Observable } from 'rxjs';
       ]),
     ]),
   ],
-  providers: [SettingsService],
 })
 export class AppComponent implements OnInit {
   title = 'ProCon.IP RC';
   appMenuMode: 'side'|'over' = 'over';
-  darkMode: Observable<boolean>;
 
   constructor(
-    private breakpointObserver: BreakpointObserver,
-    private mediaMatcher: MediaMatcher,
-    private swUpdate: SwUpdate,
-    public settingsService: SettingsService,
+    private _breakpointObserver: BreakpointObserver,
+    private _mediaMatcher: MediaMatcher,
+    private _remoteService: GetStateService,
+    private _swUpdate: SwUpdate,
+    public settings: SettingsService,
   ) {}
 
   ngOnInit() {
-    const self = this;
-    this.breakpointObserver.observe([Breakpoints.WebLandscape]).subscribe(result => {
-      self.appMenuMode = result.matches ? 'side' : 'over';
+    this._breakpointObserver.observe([Breakpoints.WebLandscape]).subscribe(result => {
+      this.appMenuMode = result.matches ? 'side' : 'over';
     });
 
-    this.darkMode = this.settingsService.watchDarkMode();
-    this.darkMode.subscribe((isDark: boolean) => {
+    this.settings.onDarkModeChange((isDark: boolean) => {
       if (isDark && !document.body.classList.contains('dark-mode')) {
         document.body.classList.add('dark-mode');
       } else if (!isDark && document.body.classList.contains('dark-mode')) {
@@ -63,15 +60,17 @@ export class AppComponent implements OnInit {
       }
     });
 
-    if (this.swUpdate.isEnabled) {
-      this.swUpdate.available.subscribe((e) => {
-        const doUpdate = window.confirm(
-          `Update available (${e.current.appData['version']} => ${e.available.appData['version']})`
-        );
-        if (doUpdate) {
-          window.location.reload();
+    if (this._swUpdate.isEnabled) {
+      this._swUpdate.versionUpdates.subscribe($event => {
+        if ($event.type === 'VERSION_READY') {
+          const doUpdate = window.confirm(
+            `Update available (${$event.currentVersion.appData['version']} => ${$event.latestVersion.appData['version']})`
+          );
+          if (doUpdate) {
+            window.location.reload();
+          }
         }
-      })
+      });
     }
   }
 }

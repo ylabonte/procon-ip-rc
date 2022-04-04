@@ -7,19 +7,19 @@
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/ylabonte/procon-ip-rc.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/ylabonte/procon-ip-rc/alerts/)
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/ylabonte/procon-ip-rc.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/ylabonte/procon-ip-rc/context:javascript)
 
-An easy-to-use Mobile First app for the ProCon.IP pool controller, for controlling the relays 
+An easy-to-use mobile first app for the ProCon.IP pool controller, for controlling the relays 
 and view all relevant information at a glance.
 
 This app is designed as PWA (Progressive Web App), which means you can install it from your 
-favorite browser on desktop or mobile as local app including an auto-updates mechanism. As 
+favorite browser on desktop or mobile as local app including an auto-update mechanism. As 
 part of the PWA design, network access of such an app is restricted to HTTPS traffic. Hence
 you cannot use this app with your ProCon.IP without using a properly configured reverse proxy 
 for ssl/tls offloading. Later on, the app will be available for download so that it can easily
 be installed/copied to the ProCon.IP microSD card.
 
-Part of this project is a workflow implemented via Github Actions that builds the current master 
+Part of this project is a workflow implemented via GitHub Actions that builds the current master 
 state of this repo and pushes the result to a separate repo, from where the app is then published 
-via Github Pages.  
+via GitHub Pages.  
 See: https://procon-ip.labonte.cloud/
 
 As soon as the project reaches a usable state, this documentation will be updated as well.

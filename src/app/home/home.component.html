@@ -7,26 +7,18 @@
         <mat-icon>toggle_off</mat-icon>
       </mat-card-header>
       <mat-card-content>
-        <mat-list role="list">
-          <mat-list-item role="listitem" #relayItem class="mat-elevation-z1"
-                         *ngFor="let relay of relayService.getRelays()"
-                         [fxHide]="relay.isHidden()">
-            <mat-icon [ngClass]="{on: relay.isOn(), off: relay.isOff()}"
-                      [fxHide]="relay.isSwitched()"
-                      class="relay-status-indicator"
-                      matTooltip="{{relay.getStatusLabel()}}">
-              {{relay.isAuto()?"hdr_auto":"circle"}}
-            </mat-icon>
-            <mat-progress-spinner [fxShow]="relay.isSwitched()" style="margin-right: 8px;"
-                                  mode="indeterminate" diameter="24" color="accent">
-            </mat-progress-spinner>
-            <div fxFlex>
-              <div mat-line><strong>{{relay.getLabel()}}</strong></div>
-              <!--              <div mat-line><small><em>({{relay.getStatusLabel()}})</em></small></div>-->
-            </div>
-            <app-switch [relay]="relay"></app-switch>
-          </mat-list-item>
-        </mat-list>
+        <app-relays></app-relays>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-md="33.33">
+    <mat-card>
+      <mat-card-header fxLayout="row wrap" fxLayoutAlign="space-between start">
+        <h2 fxFlex class="mat-card-title">Temperature Sensors</h2>
+      </mat-card-header>
+      <mat-card-content>
+        <app-object-list category="temperatures" listObjectIcon="thermostat"></app-object-list>
       </mat-card-content>
     </mat-card>
   </div>
@@ -39,18 +31,6 @@
       </mat-card-header>
       <mat-card-content>
         <app-electrodes></app-electrodes>
-        <table mat-table [dataSource]="temperatures">
-          <ng-container matColumnDef="label">
-            <th mat-header-cell *matHeaderCellDef>Thermometer</th>
-            <td mat-cell *matCellDef="let element">{{element.label}}</td>
-          </ng-container>
-          <ng-container matColumnDef="displayValue">
-            <th mat-header-cell *matHeaderCellDef>Temperature</th>
-            <td mat-cell *matCellDef="let element">{{element.displayValue}}</td>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="['label', 'displayValue']"></tr>
-          <tr mat-row *matRowDef="let row; columns: ['label', 'displayValue']"></tr>
-        </table>
       </mat-card-content>
     </mat-card>
   </div>
