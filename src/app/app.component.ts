@@ -3,7 +3,7 @@ import { BreakpointObserver, Breakpoints, MediaMatcher } from '@angular/cdk/layo
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { SwUpdate } from '@angular/service-worker';
 import { SettingsService } from './settings/settings.service';
-import { Observable, of } from 'rxjs';
+import { GetStateService } from './get-state.service';
 
 @Component({
   selector: 'app-root',
@@ -40,16 +40,16 @@ export class AppComponent implements OnInit {
   appMenuMode: 'side'|'over' = 'over';
 
   constructor(
-    private breakpointObserver: BreakpointObserver,
-    private mediaMatcher: MediaMatcher,
-    private swUpdate: SwUpdate,
+    private _breakpointObserver: BreakpointObserver,
+    private _mediaMatcher: MediaMatcher,
+    private _remoteService: GetStateService,
+    private _swUpdate: SwUpdate,
     public settings: SettingsService,
   ) {}
 
   ngOnInit() {
-    const self = this;
-    this.breakpointObserver.observe([Breakpoints.WebLandscape]).subscribe(result => {
-      self.appMenuMode = result.matches ? 'side' : 'over';
+    this._breakpointObserver.observe([Breakpoints.WebLandscape]).subscribe(result => {
+      this.appMenuMode = result.matches ? 'side' : 'over';
     });
 
     this.settings.onDarkModeChange((isDark: boolean) => {
@@ -60,8 +60,8 @@ export class AppComponent implements OnInit {
       }
     });
 
-    if (this.swUpdate.isEnabled) {
-      this.swUpdate.versionUpdates.subscribe($event => {
+    if (this._swUpdate.isEnabled) {
+      this._swUpdate.versionUpdates.subscribe($event => {
         if ($event.type === 'VERSION_READY') {
           const doUpdate = window.confirm(
             `Update available (${$event.currentVersion.appData['version']} => ${$event.latestVersion.appData['version']})`

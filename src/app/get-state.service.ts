@@ -12,6 +12,7 @@ import {
   RelayDataObject,
 } from 'procon-ip';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,7 @@ export class GetStateService {
 
   constructor(
     private _log: LogService,
+    private _router: Router,
     private _settings: SettingsService,
     private _snackBar: MatSnackBar,
   ) {
@@ -41,7 +43,11 @@ export class GetStateService {
 
   private init(config: IGetStateServiceConfig) {
     this._service = new InternalService(config, this._logger);
-    this._service.start(data => this.processData(data), error => this.connectionError(error));
+    this._service.start(
+      data => this.processData(data),
+      error => this.connectionError(error),
+      true,
+    );
   }
 
   private deinit() {
@@ -99,6 +105,14 @@ export class GetStateService {
   }
 
   private connectionError(error: Error) {
-    this._snackBar.open(`Failed to connect (${error.message}). Please check your settings.`);
+    const snack = this._snackBar.open(
+      `Connection Error: ${error.message}`,
+      'Open Settings'
+    );
+    snack.onAction().subscribe(() => {
+      this._router.navigate(['/settings']).finally(() => {
+        this.connectionError(error);
+      });
+    });
   }
 }
