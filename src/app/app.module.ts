@@ -40,10 +40,6 @@ import { TemperaturesComponent } from './temperatures/temperatures.component';
 import { SensorComponent } from './temperatures/sensor/sensor.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { PleaseSetUpComponent } from './settings/please-set-up/please-set-up.component';
-import { GetStateService } from './get-state.service';
-import { RelaysService } from './relays/relays.service';
-import { ObjectListService } from './object-list/object-list.service';
-import { SettingsService } from './settings/settings.service';
 import { RelayComponent } from './relays/relay/relay.component';
 
 @NgModule({
