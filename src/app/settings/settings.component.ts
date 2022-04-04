@@ -52,6 +52,7 @@ export class SettingsComponent implements OnInit, IAppSettings {
   }
 
   save($event: Event);
+  save($event: MouseEvent);
   save($event: PointerEvent);
   save($event: MatSlideToggleChange);
   save($event?: any) {
@@ -60,8 +61,7 @@ export class SettingsComponent implements OnInit, IAppSettings {
         this._settings.useSystemPreferredColorScheme = this.useSystemPreferredColorScheme;
       else if ($event.source.name === 'darkMode')
         this._settings.darkMode = this.darkMode;
-    }
-    if ($event instanceof PointerEvent) {
+    } else {
       this._settings.apiServiceConfig = this.apiServiceConfig;
     }
   }

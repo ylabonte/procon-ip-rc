@@ -48,7 +48,6 @@ export class SwitchComponent implements OnInit, ControlValueAccessor {
 
   setDisabledState(isDisabled: boolean) {
     this.isDisabled = isDisabled;
-    console.log('changed disabled', this.isDisabled);
   }
 
   registerOnChange(fn: any) {
