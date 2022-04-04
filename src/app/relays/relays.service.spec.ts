@@ -1,13 +1,13 @@
 // import { TestBed } from '@angular/core/testing';
 //
-// import { GetStateService } from './get-state.service';
+// import { RelaysService } from './relays.service';
 //
-// describe('GetStateService', () => {
-//   let service: GetStateService;
+// describe('RelayService', () => {
+//   let service: RelaysService;
 //
 //   beforeEach(() => {
 //     TestBed.configureTestingModule({});
-//     service = TestBed.inject(GetStateService);
+//     service = TestBed.inject(RelaysService);
 //   });
 //
 //   it('should be created', () => {

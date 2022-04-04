@@ -1,12 +1,15 @@
-form {
-  margin: 16px;
+.settings-container {
+  mat-card {
+    margin: 8px;
+  }
 }
+
 //mat-form-field {
 //  margin: 8px;
 //}
-mat-divider {
-  margin: 24px 8px;
-}
+//mat-divider {
+//  margin: 24px 8px;
+//}
 
 mat-icon.on {
   color: #2E7D32;

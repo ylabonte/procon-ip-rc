@@ -34,6 +34,13 @@ import { environment } from '../environments/environment';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
+import { ObjectListComponent } from './object-list/object-list.component';
+import { ListObjectComponent, ListObjectDirective } from './object-list/list-object.directive';
+import { TemperaturesComponent } from './temperatures/temperatures.component';
+import { SensorComponent } from './temperatures/sensor/sensor.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { PleaseSetUpComponent } from './settings/please-set-up/please-set-up.component';
+import { RelayComponent } from './relays/relay/relay.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +53,13 @@ import { MatTableModule } from '@angular/material/table';
     SwitchComponent,
     CanisterComponent,
     ElectrodesComponent,
+    ObjectListComponent,
+    TemperaturesComponent,
+    SensorComponent,
+    ListObjectDirective,
+    ListObjectComponent,
+    PleaseSetUpComponent,
+    RelayComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,6 +91,7 @@ import { MatTableModule } from '@angular/material/table';
     MatTooltipModule,
     DragDropModule,
     MatSliderModule,
+    MatSnackBarModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatTableModule,

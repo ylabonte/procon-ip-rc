@@ -3,10 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { RelaysComponent } from './relays/relays.component';
 import { SettingsComponent } from './settings/settings.component';
+import { TemperaturesComponent } from './temperatures/temperatures.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: HomeComponent },
   { path: 'relays', component: RelaysComponent },
+  { path: 'temperatures', component: TemperaturesComponent },
   { path: 'settings', component: SettingsComponent },
 ];
 

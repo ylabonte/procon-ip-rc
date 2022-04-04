@@ -1,0 +1,75 @@
+<div #objectListContainer>
+  <button mat-icon-button [fxHide]="editMode" (click)="editMode = true;">
+    <mat-icon>edit</mat-icon>
+  </button>
+  <button mat-icon-button [fxShow]="editMode" (click)="editMode = false;">
+    <mat-icon>list</mat-icon>
+  </button>
+  <mat-list cdkDropList role="list" (cdkDropListDropped)="listItemDrop($event)">
+    <ng-container *ngFor="let obj of getObjects()">
+      <mat-list-item *ngIf="showHiddenItems || editMode || !obj.isHidden"
+                     cdkDrag [cdkDragData]="obj"
+                     #listItem id="relay{{obj.dataObject.id}}" role="listitem" class="mat-elevation-z2 mat-"
+                     (mouseover)="listItemHover(listItem)"
+                     (mouseup)="listItemHover(listItem)"
+                     (mouseout)="listItemReset(listItem)"
+                     (cdkDragMoved)="listItemMoved($event)"
+                     (cdkDragReleased)="dragRelease($event)">
+        <div *cdkDragPlaceholder id="listObjectPlaceholder{{obj.dataObject.id}}"
+             class="drag-placeholder mat-list-item mat-elevation-z2">
+          <div class="mat-list-item-content" fxLayout="row wrap" fxLayoutAlign="start center">
+            <button [fxHide]="obj.isHidden" mat-icon-button class="first-of-row">
+              <mat-icon>visibility_on</mat-icon>
+            </button>
+            <button [fxShow]="obj.isHidden" mat-icon-button class="first-of-row">
+              <mat-icon>visibility_off</mat-icon>
+            </button>
+            <div [ngStyle]="{opacity: obj.isHidden?'50%':'100%'}" fxFlex>
+              <ng-template appListObject [listItem]="obj" [state]="{editMode: editMode}"></ng-template>
+            </div>
+            <mat-icon class="drag-handle last-of-row">
+              drag_indicator
+            </mat-icon>
+          </div>
+        </div>
+        <div *cdkDragPreview id="listObjectPreview{{obj.dataObject.id}}" class="drag-preview mat-list-base"
+             [ngStyle]="{width: objectListContainer.offsetWidth+'px'}">
+          <div class="mat-list-item mat-card mat-elevation-z6">
+            <div class="mat-list-item-content relay-item" fxLayout="row wrap" fxLayoutAlign="start center">
+              <button [fxHide]="obj.isHidden" mat-icon-button class="first-of-row">
+                <mat-icon>visibility_on</mat-icon>
+              </button>
+              <button [fxShow]="obj.isHidden" mat-icon-button class="first-of-row">
+                <mat-icon>visibility_off</mat-icon>
+              </button>
+              <div [ngStyle]="{opacity: obj.isHidden?'50%':'100%'}" fxFlex>
+                <ng-template appListObject [listItem]="obj" [state]="{editMode: editMode}"></ng-template>
+              </div>
+              <mat-icon class="drag-handle last-of-row">
+                drag_indicator
+              </mat-icon>
+            </div>
+          </div>
+        </div>
+        <div class="list-object" fxLayout="row wrap" fxLayoutAlign="start center">
+          <button [fxShow]="editMode && !obj.isHidden" mat-icon-button class="first-of-row"
+                  (click)="obj.hide()" matTooltip="Disable">
+            <mat-icon>visibility_on</mat-icon>
+          </button>
+          <button [fxShow]="editMode && obj.isHidden" mat-icon-button class="first-of-row"
+                  (click)="obj.show()" matTooltip="Enable">
+            <mat-icon>visibility_off</mat-icon>
+          </button>
+          <mat-icon *ngIf="listObjectIcon" [fxHide]="editMode">{{listObjectIcon}}</mat-icon>
+          <div [ngStyle]="{opacity: obj.isHidden?'50%':'100%'}" fxFlex>
+            <ng-template appListObject [listItem]="obj" [state]="{editMode: editMode}"></ng-template>
+          </div>
+          <mat-icon [fxShow]="editMode" cdkDragHandle class="drag-handle last-of-row">
+            drag_indicator
+          </mat-icon>
+          <div [fxHide]="editMode" class="icon-placeholder"></div>
+        </div>
+      </mat-list-item>
+    </ng-container>
+  </mat-list>
+</div>

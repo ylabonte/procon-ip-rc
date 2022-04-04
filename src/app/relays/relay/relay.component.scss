@@ -1,0 +1,28 @@
+@import '../../../variables';
+
+.relay-item {
+  & > mat-icon:first-of-type,
+  & > mat-progress-spinner:first-of-type {
+    margin-right: 8px;
+  }
+
+  .relay-text {
+    &, * {
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    h3, p {
+      margin: 0;
+    }
+  }
+
+  .on {
+    color: $color-green;
+  }
+
+  .off {
+    color: $color-red;
+  }
+}
