@@ -33,6 +33,10 @@ export class NavMenuComponent {
     link: '/relays',
     icon: 'toggle_on',
   }, {
+    displayName: 'Temperatures',
+    link: '/temperatures',
+    icon: 'thermostat',
+  }, {
     displayName: 'Settings',
     link: '/settings',
     icon: 'settings',

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
 import { RelayDataInterpreter } from 'procon-ip';
-import { RelayService } from '../relay.service';
-import { Relay } from '../relay';
+import { RelaysService } from '../relays.service';
+import { Relay } from '../relay/relay';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -31,7 +31,7 @@ export class SwitchComponent implements OnInit, ControlValueAccessor {
   onTouch: any = () => {}
 
   constructor(
-    private service: RelayService,
+    private service: RelaysService,
   ) {
     this.interpreter = service.getInterpreter();
   }
@@ -42,7 +42,7 @@ export class SwitchComponent implements OnInit, ControlValueAccessor {
   }
 
   switchRelay(desiredState: string): void {
-    this.service.set(this.relay.getDataObject(), desiredState).then(() => {});
+    this.service.set(this.relay.dataObject, desiredState).then(() => {});
     this.relay.setSwitched();
   }
 

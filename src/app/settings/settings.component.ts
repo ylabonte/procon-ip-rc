@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { SettingsService } from './settings.service';
+import { IAppSettings, SettingsService } from './settings.service';
 import { IGetStateServiceConfig } from 'procon-ip';
-import { Observable } from 'rxjs';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-settings',
@@ -21,68 +20,49 @@ import { Observable } from 'rxjs';
       ]),
     ]),
   ],
-  providers: [SettingsService]
 })
-export class SettingsComponent implements OnInit {
-
-  controllerUrl = new FormControl('');
-  username = new FormControl('admin');
-  password = new FormControl('admin');
+export class SettingsComponent implements OnInit, IAppSettings {
+  apiServiceConfig: IGetStateServiceConfig = {
+    controllerUrl: `${location.protocol}//${location.host}/assets`,
+    username: '',
+    password: '',
+    basicAuth: false,
+    updateInterval: 3000,
+    timeout: 3000,
+    errorTolerance: 3,
+  };
+  darkMode: boolean;
+  useSystemPreferredColorScheme = true;
   hidePassword = true;
-  useBasicAuth = new FormControl(true)
-  updateInterval = new FormControl('3');
-  requestTimeout = new FormControl('2');
-  requestErrorTolerance = new FormControl('2')
-  darkMode = new FormControl(true);
 
   constructor(
-    private mediaMatcher: MediaMatcher,
-    private settingsService: SettingsService,
+    private _media: MediaMatcher,
+    private _settings: SettingsService,
   ) {}
 
   ngOnInit(): void {
-    this.loadApiServiceConfig(this.settingsService.getApiServiceConfig());
-    this.settingsService.getDarkMode().subscribe(v => {
-      if (v !== undefined) this.darkMode.setValue(v as boolean);
+    this.apiServiceConfig = this._settings.apiServiceConfig;
+    this.useSystemPreferredColorScheme = this._settings.useSystemPreferredColorScheme;
+    this.darkMode = this._settings.darkMode;
+    this._settings.onDarkModeChange(darkMode => {
+      this.darkMode = darkMode;
+      this.useSystemPreferredColorScheme = this._settings.useSystemPreferredColorScheme;
     });
-    // this.settingsService.watchDarkMode().subscribe(v => {
-    //   console.log('Got value for darkMode from service: ' + (v?'true':'false'));
-    //   if (this.darkMode.value !== v) {
-    //   }
-    // });
-
-    this.controllerUrl.valueChanges.subscribe(v => { this.settingsService.setControllerUrl(v); });
-    this.username.valueChanges.subscribe(v => { this.settingsService.setUsername(v); });
-    this.password.valueChanges.subscribe(v => { this.settingsService.setPassword(v); });
-    this.useBasicAuth.valueChanges.subscribe(v => { this.settingsService.setBasicAuth(v); });
-    this.updateInterval.valueChanges.subscribe(v => { this.settingsService.setUpdateInterval(v); });
-    this.requestTimeout.valueChanges.subscribe(v => { this.settingsService.setTimeout(v); });
-    this.requestErrorTolerance.valueChanges.subscribe(v => { this.settingsService.setErrorTolerance(v); });
-    this.darkMode.valueChanges.subscribe(v => {
-      this.settingsService.setDarkMode(v);
-    });
+    this._settings.onApiServiceConfigChange(apiServiceConfig => this.apiServiceConfig = apiServiceConfig);
   }
 
-  loadApiServiceConfig(configSettings: Observable<IGetStateServiceConfig>) {
-    configSettings.subscribe(config => {
-      this.controllerUrl.setValue(config.controllerUrl);
-      this.useBasicAuth.registerOnChange(useBasicAuth => this.toggleBasicAuth());
-      this.useBasicAuth.setValue(config.basicAuth);
-      this.username.setValue(config.username);
-      this.password.setValue(config.password);
-      this.updateInterval.setValue(config.updateInterval)
-      this.requestTimeout.setValue(config.timeout);
-      this.requestErrorTolerance.setValue(config.errorTolerance);
-    });
-  }
-
-  toggleBasicAuth() {
-    if (this.useBasicAuth.value) {
-      this.username.enable();
-      this.password.enable();
-    } else {
-      this.username.disable();
-      this.password.disable();
+  save($event: Event);
+  save($event: PointerEvent);
+  save($event: MatSlideToggleChange);
+  save($event?: any) {
+    if ($event instanceof MatSlideToggleChange) {
+      if ($event.source.name === 'useSystemPreferredColorScheme')
+        this._settings.useSystemPreferredColorScheme = this.useSystemPreferredColorScheme;
+      else if ($event.source.name === 'darkMode')
+        this._settings.darkMode = this.darkMode;
+    }
+    if ($event instanceof PointerEvent) {
+      this._settings.apiServiceConfig = this.apiServiceConfig;
     }
   }
 }

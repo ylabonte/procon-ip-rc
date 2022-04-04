@@ -3,7 +3,7 @@ import { BreakpointObserver, Breakpoints, MediaMatcher } from '@angular/cdk/layo
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { SwUpdate } from '@angular/service-worker';
 import { SettingsService } from './settings/settings.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -34,18 +34,16 @@ import { Observable } from 'rxjs';
       ]),
     ]),
   ],
-  providers: [SettingsService],
 })
 export class AppComponent implements OnInit {
   title = 'ProCon.IP RC';
   appMenuMode: 'side'|'over' = 'over';
-  darkMode: Observable<boolean>;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
     private mediaMatcher: MediaMatcher,
     private swUpdate: SwUpdate,
-    public settingsService: SettingsService,
+    public settings: SettingsService,
   ) {}
 
   ngOnInit() {
@@ -54,8 +52,8 @@ export class AppComponent implements OnInit {
       self.appMenuMode = result.matches ? 'side' : 'over';
     });
 
-    this.darkMode = this.settingsService.watchDarkMode();
-    this.darkMode.subscribe((isDark: boolean) => {
+    this.settings.onDarkModeChange((isDark: boolean) => {
+      console.log('darkMode changed', isDark)
       if (isDark && !document.body.classList.contains('dark-mode')) {
         document.body.classList.add('dark-mode');
       } else if (!isDark && document.body.classList.contains('dark-mode')) {

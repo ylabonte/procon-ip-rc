@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { RelayService } from './relay.service';
+import { RelaysService } from './relays.service';
 
 describe('RelayService', () => {
-  let service: RelayService;
+  let service: RelaysService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(RelayService);
+    service = TestBed.inject(RelaysService);
   });
 
   it('should be created', () => {

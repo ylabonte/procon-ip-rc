@@ -11,6 +11,7 @@ import {
   Logger,
   RelayDataObject,
 } from 'procon-ip';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -22,14 +23,15 @@ export class GetStateService {
   private _callbacks: ((data: GetStateData) => void)[];
 
   constructor(
-    private settingsService: SettingsService,
-    private log: LogService,
+    private _log: LogService,
+    private _settings: SettingsService,
+    private _snackBar: MatSnackBar,
   ) {
-    this._logger = log.getLogger();
+    this._logger = _log.getLogger();
     this._callbacks = [
       data => { this._data = data; },
     ];
-    settingsService.watchApiServiceConfig().subscribe(config => {
+    _settings.onApiServiceConfigChange(config => {
       if (config !== undefined) {
         this.deinit();
         this.init(config);
@@ -39,9 +41,7 @@ export class GetStateService {
 
   private init(config: IGetStateServiceConfig) {
     this._service = new InternalService(config, this._logger);
-    this._service.start((data) => {
-      this.processData(data);
-    });
+    this._service.start(data => this.processData(data), error => this.connectionError(error));
   }
 
   private deinit() {
@@ -96,5 +96,9 @@ export class GetStateService {
 
   getInternalService(): InternalService {
     return this._service;
+  }
+
+  private connectionError(error: Error) {
+    this._snackBar.open(`Failed to connect (${error.message}). Please check your settings.`);
   }
 }

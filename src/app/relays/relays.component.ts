@@ -1,6 +1,6 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
-import { RelayService } from './relay.service';
-import { Relay } from './relay';
+import { Component, ElementRef, Input } from '@angular/core';
+import { RelaysService } from './relays.service';
+import { Relay } from './relay/relay';
 import { MatListItem } from '@angular/material/list';
 import {
   CdkDragDrop,
@@ -11,24 +11,22 @@ import { StorageMap } from '@ngx-pwa/local-storage';
 
 @Component({
   selector: 'app-relays',
-  templateUrl: './relays.component.html',
-  styleUrls: ['./relays.component.scss']
+  templateUrl: '../object-list/object-list.component.html',
+  styleUrls: ['../object-list/object-list.component.scss']
 })
-export class RelaysComponent implements OnInit {
-
-  relays: Relay[];
+export class RelaysComponent {
+  @Input() showHiddenItems: boolean;
   editMode = false;
 
   private _dragOffset: {x: number, y: number} = null;
 
   constructor(
     private _storage: StorageMap,
-    public relayService: RelayService,
-  ) {
-  }
+    public relayService: RelaysService,
+  ) { }
 
-  ngOnInit(): void {
-    this.relays = this.relayService.getRelays();
+  getObjects(): Relay[] {
+    return this.relayService.getRelays();
   }
 
   listItemHover(item: MatListItem) {
@@ -56,9 +54,9 @@ export class RelaysComponent implements OnInit {
 
   listItemMoved(event: CdkDragMove<Relay>) {
     const relay = event.source.data;
-    const preview = new ElementRef<HTMLElement>(document.getElementById(`relayPreview${relay.getObjectId()}`));
+    const preview = new ElementRef<HTMLElement>(document.getElementById(`relayPreview${relay.dataObject.id}`));
     if (this._dragOffset === null) {
-      const placeholder = new ElementRef<HTMLElement>(document.getElementById(`relayPlaceholder${relay.getObjectId()}`));
+      const placeholder = new ElementRef<HTMLElement>(document.getElementById(`relayPlaceholder${relay.dataObject.id}`));
       const container = placeholder.nativeElement.getBoundingClientRect();
 
       this._dragOffset = {
