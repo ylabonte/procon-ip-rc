@@ -62,14 +62,16 @@ export class AppComponent implements OnInit {
     });
 
     if (this.swUpdate.isEnabled) {
-      this.swUpdate.available.subscribe((e) => {
-        const doUpdate = window.confirm(
-          `Update available (${e.current.appData['version']} => ${e.available.appData['version']})`
-        );
-        if (doUpdate) {
-          window.location.reload();
+      this.swUpdate.versionUpdates.subscribe($event => {
+        if ($event.type === 'VERSION_READY') {
+          const doUpdate = window.confirm(
+            `Update available (${$event.currentVersion.appData['version']} => ${$event.latestVersion.appData['version']})`
+          );
+          if (doUpdate) {
+            window.location.reload();
+          }
         }
-      })
+      });
     }
   }
 }
