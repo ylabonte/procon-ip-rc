@@ -6414,10 +6414,10 @@ process-nextick-args@~2.0.0:
   resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
   integrity sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==
 
-procon-ip@^1.4.1:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/procon-ip/-/procon-ip-1.4.1.tgz#ee0aa2cefea7b2e9afcfcd2ee1fe05e4c30d9567"
-  integrity sha512-Bc9D7m/R/TF1hyzV4n7Cg0xR3NE9PZfHxs6RfomXRPz5ZNm9CqMML0crK7rk/EXLJuekQ7VHPgNKDFexiSy5xw==
+procon-ip@^1.4.2:
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/procon-ip/-/procon-ip-1.4.2.tgz#08ccc8738c667772cc8f34a1336d048b7a3976ac"
+  integrity sha512-Rqqu/NHisOykcz8JYgHV+tQ4s6P2zHaLlHewBhPjvAE9JNXDuXVDSzBo5hCSFXQUTH6DD0s6QHx8Yz6neBD2Ew==
   dependencies:
     axios "^0.26.1"
 

@@ -104,15 +104,19 @@ export class GetStateService {
     return this._service;
   }
 
-  private connectionError(error: Error) {
-    const snack = this._snackBar.open(
-      `Connection Error: ${error.message}`,
-      'Open Settings'
-    );
-    snack.onAction().subscribe(() => {
-      this._router.navigate(['/settings']).finally(() => {
-        this.connectionError(error);
+  private connectionError(error: any) {
+    if (error.isAxiosError && error.response && error.response.status) {
+      const snack = this._snackBar.open(
+        `Connection Error: ${error.message}`,
+        'Open Settings'
+      );
+      snack.onAction().subscribe(() => {
+        this._router.navigate(['/settings']).finally(() => {
+          this.connectionError(error);
+        });
       });
-    });
+    } else {
+      this._snackBar.open(`Lost Connection: ${error.message}`, 'Dismiss');
+    }
   }
 }
