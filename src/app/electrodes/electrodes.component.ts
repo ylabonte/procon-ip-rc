@@ -35,7 +35,6 @@ export class ElectrodesComponent implements OnInit, OnDestroy {
         electrode.forFields(field => {
           const existingData = this.electrodes[electrode.categoryId].data;
           if (electrode[field] !== existingData[field]) {
-            console.log('updating electrode');
             this.electrodes[electrode.categoryId] = new Electrode(
               electrode,
               data.sysInfo,
@@ -45,7 +44,6 @@ export class ElectrodesComponent implements OnInit, OnDestroy {
           }
         });
       } else {
-        console.log('adding electrode');
         this.electrodes[electrode.categoryId] = new Electrode(electrode, data.sysInfo);
       }
     });

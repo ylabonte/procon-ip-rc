@@ -4,8 +4,11 @@ import { StorageMap } from '@ngx-pwa/local-storage';
 import { SettingsService } from '../settings/settings.service';
 import { GetStateService } from '../get-state.service';
 import { IListItem, IListObject, ListObject } from './list-object';
-import { GetStateCategory } from 'procon-ip';
+import { GetStateCategory, GetStateDataObject, GetStateDataSysInfo } from 'procon-ip';
 import { SensorComponent } from '../temperatures/sensor/sensor.component';
+import { CanisterComponent } from '../canisters/canister/canister.component';
+import { Canister } from '../canisters/canister/canister';
+import { ListObjectComponent } from './list-object.directive';
 
 @Injectable({
   providedIn: 'root'
@@ -14,14 +17,15 @@ export class ObjectListService {
   protected readonly STORAGE_KEY = "ListObjects";
   protected readonly categories: {
     id: GetStateCategory,
-    component: Type<any>,
+    component: Type<ListObjectComponent>,
+    entity?: Type<IListItem>,
   }[] = [
     { id: GetStateCategory.ANALOG, component: null },
-    { id: GetStateCategory.CANISTER, component: null },
-    { id: GetStateCategory.CANISTER_CONSUMPTION, component: null},
+    { id: GetStateCategory.CANISTER, component: CanisterComponent },
+    { id: GetStateCategory.CANISTER_CONSUMPTION, component: CanisterComponent },
     { id: GetStateCategory.DIGITAL_INPUT, component: null },
     { id: GetStateCategory.ELECTRODES, component: null },
-    { id: GetStateCategory.TEMPERATURES, component: SensorComponent },
+    { id: GetStateCategory.TEMPERATURES, component: SensorComponent, entity: Canister },
   ];
 
   protected _getStateService: GetStateService;
@@ -29,6 +33,7 @@ export class ObjectListService {
     [key: string]: IListItem[];
   }
   private _callbackIdx: number;
+  private _storageLoadCounter = 0;
 
   constructor(
     private _storage: StorageMap,
@@ -43,28 +48,66 @@ export class ObjectListService {
           this.load(category, listItems);
         else
           this.save(category);
+        this.onStorageLoadComplete();
       });
     });
+  }
 
-    this._callbackIdx = this._getState.registerCallback(data => {
+  private onStorageLoadComplete() {
+    if (++this._storageLoadCounter < this.categories.length)
+      return;
+    this._callbackIdx = this._getState.registerCallback((data) => {
       this.categories.forEach(category => {
         data.getDataObjectsByCategory(category.id).forEach(obj => {
           const existingObject = this._listItems[category.id].filter(r => r.dataObject.id === obj.id).shift();
-
           if (existingObject) {
-            if (existingObject.update(obj)) {
-              const index = this._listItems[category.id].indexOf(existingObject);
-              this._listItems[category.id][index] = existingObject.clone();
+            if (existingObject instanceof Canister) {
+              if (existingObject.update(obj, data.objects[obj.id+3])) {
+                const index = this._listItems[category.id].indexOf(existingObject);
+                this._listItems[category.id][index] = existingObject.clone();
+              }
+            } else {
+              if (existingObject.update(obj)) {
+                const index = this._listItems[category.id].indexOf(existingObject);
+                this._listItems[category.id][index] = existingObject.clone();
+              }
             }
           } else {
-            const listObject = new ListObject();
-            listObject.init(category.component, obj, obj.label === 'n.a.');
-            this._listItems[category.id].push(listObject);
+            if (category.id === GetStateCategory.CANISTER) {
+              const canister = new Canister();
+              canister.init(CanisterComponent, obj, this.isDefaultHidden(obj, data.sysInfo), data.objects[obj.id+3]);
+              this._listItems[category.id].push(canister);
+            } else {
+              const listObject = new ListObject();
+              listObject.init(category.component, obj, this.isDefaultHidden(obj, data.sysInfo));
+              this._listItems[category.id].push(listObject);
+            }
           }
         });
         this.save(category.id);
       });
     });
+  }
+
+  private isDefaultHidden(obj: GetStateDataObject, sysInfo: GetStateDataSysInfo) {
+    let hidden = obj.label === 'n.a.';
+
+    switch (obj.id) {
+      case 36: // 'Cl Rest':
+      case 39: // 'Cl consumption':
+        hidden = !sysInfo.isChlorineDosageEnabled();
+        break;
+      case 37: // 'pH- Rest':
+      case 40: // 'pH- consumption':
+        hidden = !sysInfo.isPhMinusDosageEnabled();
+        break;
+      case 38: // 'pH+ Rest':
+      case 41: // 'pH+ consumption':
+        hidden = !sysInfo.isPhPlusDosageEnabled();
+        break;
+    }
+
+    return hidden;
   }
 
   forCategories(func: (category: GetStateCategory) => any) {

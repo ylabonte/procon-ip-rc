@@ -138,14 +138,19 @@ export abstract class AbstractListObject implements IListItem {
 export class ListObject extends AbstractListObject {
   protected _component;
 
+  init(...args: any[]);
   init(component: Type<any>, listObject: ListObject, hidden?: boolean);
   init(component: Type<any>, listObject: IListObject|object, hidden?: boolean);
   init(component: Type<any>, dataObject: GetStateDataObject, hidden?: boolean);
-  init(
-    component: Type<any>,
-    obj: ListObject|IListObject|object|GetStateDataObject,
-    hidden?: boolean,
-  ) {
+  init(...args: any[]) {
+    if (args.length < 2)
+      throw new Error(`Too few arguments. Expected 2 or more, got ${args.length}`);
+    let component = args[0];
+    let obj = args[1];
+    let hidden = null;
+    if (args.length > 2)
+      hidden = args[2]
+
     this._component = component;
     if (obj instanceof ListObject) {
       this._dataObject = obj.dataObject;

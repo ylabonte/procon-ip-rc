@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Optional, Output, ViewChild } from '@angular/core';
 import { MatListItem } from '@angular/material/list';
 import {
   CdkDragDrop,
@@ -16,11 +16,12 @@ import { ListObjectDirective } from './list-object.directive';
   styleUrls: ['./object-list.component.scss']
 })
 export class ObjectListComponent implements OnInit {
-
-  @Input() category: GetStateCategory;
-  @Input() listObjects: IListItem[];
-  @Input() listObjectIcon: string;
-  @Input() showHiddenItems: boolean;
+  @Input() @Optional() category: GetStateCategory;
+  @Input() @Optional() afterUpdate: (categoryList: IListItem[], objectListService: ObjectListService) => IListItem[];
+  @Input() @Optional() listObjects: IListItem[];
+  @Input() @Optional() listObjectIcon: string;
+  @Input() @Optional() showHiddenItems = false;
+  @Input() @Optional() editable = false;
 
   @ViewChild(ListObjectDirective, {static: true}) listObject!: ListObjectDirective;
 
@@ -34,6 +35,8 @@ export class ObjectListComponent implements OnInit {
   ngOnInit() {
     if (this.listObjects)
       this.getObjects = () => this.listObjects;
+    else if (this.category && this.afterUpdate)
+      this.getObjects = () => this.afterUpdate(this.objectListService.getListObjects(this.category), this.objectListService);
     else if (this.category)
       this.getObjects = () => this.objectListService.getListObjects(this.category);
     else

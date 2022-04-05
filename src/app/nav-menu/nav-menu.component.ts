@@ -37,6 +37,10 @@ export class NavMenuComponent {
     link: '/temperatures',
     icon: 'thermostat',
   }, {
+    displayName: 'Canisters',
+    link: '/canisters',
+    icon: 'format_color_fill',
+  }, {
     displayName: 'Settings',
     link: '/settings',
     icon: 'settings',

@@ -20,7 +20,7 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
-import { RelaysComponent } from './relays/relays.component';
+import { RelayListComponent } from './relays/relay-list.component';
 import { SettingsComponent } from './settings/settings.component';
 import { SwitchComponent } from './relays/switch/switch.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -28,7 +28,6 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatSliderModule } from '@angular/material/slider';
-import { CanisterComponent } from './canister/canister.component';
 import { ElectrodesComponent } from './electrodes/electrodes.component';
 import { environment } from '../environments/environment';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -41,6 +40,9 @@ import { SensorComponent } from './temperatures/sensor/sensor.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { PleaseSetUpComponent } from './settings/please-set-up/please-set-up.component';
 import { RelayComponent } from './relays/relay/relay.component';
+import { CanistersComponent } from './canisters/canisters.component';
+import { CanisterComponent } from './canisters/canister/canister.component';
+import { RelaysComponent } from './relays/relays.component';
 
 @NgModule({
   declarations: [
@@ -48,10 +50,9 @@ import { RelayComponent } from './relays/relay/relay.component';
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    RelaysComponent,
+    RelayListComponent,
     SettingsComponent,
     SwitchComponent,
-    CanisterComponent,
     ElectrodesComponent,
     ObjectListComponent,
     TemperaturesComponent,
@@ -60,6 +61,9 @@ import { RelayComponent } from './relays/relay/relay.component';
     ListObjectComponent,
     PleaseSetUpComponent,
     RelayComponent,
+    CanistersComponent,
+    CanisterComponent,
+    RelaysComponent,
   ],
   imports: [
     BrowserModule,
