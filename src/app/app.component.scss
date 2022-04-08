@@ -1,9 +1,11 @@
 #appBody {
+  height: 115vh;
   margin-right: 8px;
 }
 
 .mat-app-background {
   height: 100%;
+  overflow: hidden;
 }
 
 mat-sidenav-container, mat-sidenav-content, mat-sidenav {

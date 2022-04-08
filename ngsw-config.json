@@ -11,23 +11,29 @@
       "installMode": "prefetch",
       "resources": {
         "files": [
+          "/assets/**",
           "/favicon.ico",
           "/index.html",
           "/manifest.webmanifest",
+          "/*.json",
           "/*.css",
-          "/*.js"
-        ]
-      }
-    },
-    {
-      "name": "assets",
-      "installMode": "lazy",
-      "updateMode": "prefetch",
-      "resources": {
-        "files": [
-          "/assets/**",
+          "/*.js",
           "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
         ]
+      }
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "procon-ip",
+      "urls": [
+        "/GetState.csv",
+        "**/GetState.csv"
+      ],
+      "cacheConfig": {
+        "maxSize": 0,
+        "maxAge": "0u",
+        "strategy": "freshness"
       }
     }
   ]

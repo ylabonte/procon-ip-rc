@@ -1,5 +1,5 @@
-import { Component, Input, ViewChild } from '@angular/core';
-import { MatDrawer } from '@angular/material/sidenav';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { MatDrawer, MatSidenav } from '@angular/material/sidenav';
 import { MatButton } from '@angular/material/button';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
@@ -7,21 +7,6 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   selector: 'app-nav-menu',
   templateUrl: './nav-menu.component.html',
   styleUrls: ['./nav-menu.component.scss'],
-  animations: [
-    trigger('toggleDisableClose', [
-      state('pin', style({})),
-      state('pin-icon', style({})),
-      state('unpin', style({
-        transform: 'rotate(45deg)',
-      })),
-      state('unpin-icon', style({
-        fontSize: '18px',
-      })),
-      transition('* => *', [
-        animate('0.3s'),
-      ]),
-    ]),
-  ],
 })
 export class NavMenuComponent {
   navigationItems = [{
@@ -44,23 +29,17 @@ export class NavMenuComponent {
     displayName: 'Settings',
     link: '/settings',
     icon: 'settings',
+  }, {
+    displayName: 'About',
+    link: '/about',
+    icon: 'help_outline'
   }];
 
-  isPinned = false;
+  @Input() closeOnClick: boolean;
+  @Input() sidenav: MatSidenav;
 
-  @Input() appmenu: MatDrawer;
-  @ViewChild('disableCloseToggle') disableCloseToggle: MatButton;
-
-  isPinnable() {
-    return this.appmenu.mode === 'side';
-  }
-
-  toggleDisableClose() {
-    this.isPinned = !this.isPinned;
-  }
-
-  navItemClick() {
-    if (!this.isPinned)
-      this.appmenu.close();
+  close() {
+    if (this.closeOnClick)
+      this.sidenav.close();
   }
 }

@@ -1,51 +1,21 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { GetStateService } from '../get-state.service';
-import { GetStateCategory, GetStateData } from 'procon-ip';
-import { Electrode } from './Electrode';
+import { Component, Input, Optional } from '@angular/core';
+import { Electrode } from './electrode/electrode';
+import { ElectrodeService } from './electrode.service';
 
 @Component({
   selector: 'app-electrodes',
   templateUrl: './electrodes.component.html',
   styleUrls: ['./electrodes.component.scss']
 })
-export class ElectrodesComponent implements OnInit, OnDestroy {
+export class ElectrodesComponent {
+  @Input() @Optional() showHiddenItems = false;
+  @Input() @Optional() editable = false;
 
-  @Input() edit: boolean;
-
-  electrodes: Electrode[] = [];
-
-  private _callbackIdx: number;
+  electrodes: Electrode[];
 
   constructor(
-    private _getStateService: GetStateService,
-  ) { }
-
-  ngOnInit(): void {
-    this._callbackIdx = this._getStateService.registerCallback(data => { this.prepareData(data); });
-  }
-
-  ngOnDestroy() {
-    this._getStateService.removeCallback(this._callbackIdx);
-  }
-
-  prepareData(data: GetStateData) {
-    const electrodes = data.getDataObjectsByCategory(GetStateCategory.ELECTRODES);
-    electrodes.forEach(electrode => {
-      if (this.electrodes[electrode.categoryId]) {
-        electrode.forFields(field => {
-          const existingData = this.electrodes[electrode.categoryId].data;
-          if (electrode[field] !== existingData[field]) {
-            this.electrodes[electrode.categoryId] = new Electrode(
-              electrode,
-              data.sysInfo,
-              this.electrodes[electrode.categoryId].isHidden(),
-            );
-            return;
-          }
-        });
-      } else {
-        this.electrodes[electrode.categoryId] = new Electrode(electrode, data.sysInfo);
-      }
-    });
+    public electrodeService: ElectrodeService,
+  ) {
+    this.electrodes = electrodeService.getListObjects()
   }
 }

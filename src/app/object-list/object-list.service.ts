@@ -10,21 +10,22 @@ import { CanisterComponent } from '../canisters/canister/canister.component';
 import { Canister } from '../canisters/canister/canister';
 import { ListObjectComponent } from './list-object.directive';
 
+export interface ICategoryComponentMap {
+  id: GetStateCategory,
+  component: Type<ListObjectComponent>,
+  entity?: Type<IListItem>,
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class ObjectListService {
   protected readonly STORAGE_KEY = "ListObjects";
-  protected readonly categories: {
-    id: GetStateCategory,
-    component: Type<ListObjectComponent>,
-    entity?: Type<IListItem>,
-  }[] = [
+  protected categories: ICategoryComponentMap[] = [
     { id: GetStateCategory.ANALOG, component: null },
     { id: GetStateCategory.CANISTER, component: CanisterComponent },
     { id: GetStateCategory.CANISTER_CONSUMPTION, component: CanisterComponent },
     { id: GetStateCategory.DIGITAL_INPUT, component: null },
-    { id: GetStateCategory.ELECTRODES, component: null },
     { id: GetStateCategory.TEMPERATURES, component: SensorComponent, entity: Canister },
   ];
 
@@ -32,14 +33,18 @@ export class ObjectListService {
   protected _listItems: {
     [key: string]: IListItem[];
   }
-  private _callbackIdx: number;
-  private _storageLoadCounter = 0;
+  protected _callbackIdx: number;
+  protected _storageLoadCounter = 0;
 
   constructor(
-    private _storage: StorageMap,
-    private _settings: SettingsService,
-    private _getState: GetStateService,
+    protected _storage: StorageMap,
+    protected _settings: SettingsService,
+    protected _getState: GetStateService,
   ) {
+    this.init();
+  }
+
+  protected init() {
     this._listItems = {};
     this.forCategories(category => {
       this._listItems[category] = [];
@@ -48,14 +53,13 @@ export class ObjectListService {
           this.load(category, listItems);
         else
           this.save(category);
-        this.onStorageLoadComplete();
+        if (++this._storageLoadCounter >= this.categories.length)
+          this.onStorageLoadComplete();
       });
     });
   }
 
-  private onStorageLoadComplete() {
-    if (++this._storageLoadCounter < this.categories.length)
-      return;
+  protected onStorageLoadComplete() {
     this._callbackIdx = this._getState.registerCallback((data) => {
       this.categories.forEach(category => {
         data.getDataObjectsByCategory(category.id).forEach(obj => {
@@ -89,7 +93,7 @@ export class ObjectListService {
     });
   }
 
-  private isDefaultHidden(obj: GetStateDataObject, sysInfo: GetStateDataSysInfo) {
+  protected isDefaultHidden(obj: GetStateDataObject, sysInfo: GetStateDataSysInfo) {
     let hidden = obj.label === 'n.a.';
 
     switch (obj.id) {
@@ -121,7 +125,7 @@ export class ObjectListService {
   getComponent(category: GetStateCategory): Type<any> {
     const categoryHelper = this.categories.filter(c => c.id === category).pop();
     if (!categoryHelper)
-      return null;
+      return ListObjectComponent;
     return categoryHelper.component;
   }
 
@@ -134,7 +138,7 @@ export class ObjectListService {
     this.save(category);
   }
 
-  private save(category?: GetStateCategory) {
+  protected save(category?: GetStateCategory) {
     if (category)
       this._storage.set(category + this.STORAGE_KEY, this._listItems[category].map(l => l.asObject())).subscribe(() => {});
     else
@@ -143,7 +147,7 @@ export class ObjectListService {
       });
   }
 
-  private load(category: GetStateCategory, listItems: IListObject[]) {
+  protected load(category: GetStateCategory, listItems: IListObject[]) {
     this._listItems[category] = [];
     listItems.forEach(obj => {
       const listItem = new ListObject();

@@ -43,6 +43,9 @@ import { RelayComponent } from './relays/relay/relay.component';
 import { CanistersComponent } from './canisters/canisters.component';
 import { CanisterComponent } from './canisters/canister/canister.component';
 import { RelaysComponent } from './relays/relays.component';
+import { AboutComponent } from './about/about.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { ElectrodeComponent } from './electrodes/electrode/electrode.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +67,8 @@ import { RelaysComponent } from './relays/relays.component';
     CanistersComponent,
     CanisterComponent,
     RelaysComponent,
+    AboutComponent,
+    ElectrodeComponent,
   ],
   imports: [
     BrowserModule,
@@ -99,6 +104,7 @@ import { RelaysComponent } from './relays/relays.component';
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatTableModule,
+    MatTabsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

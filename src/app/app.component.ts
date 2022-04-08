@@ -4,6 +4,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { SwUpdate } from '@angular/service-worker';
 import { SettingsService } from './settings/settings.service';
 import { GetStateService } from './get-state.service';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-root',
@@ -33,11 +34,25 @@ import { GetStateService } from './get-state.service';
         animate('0.5s'),
       ]),
     ]),
+    trigger('toggleDisableClose', [
+      state('pin', style({})),
+      state('pin-icon', style({})),
+      state('unpin', style({
+        transform: 'rotate(45deg)',
+      })),
+      state('unpin-icon', style({
+        fontSize: '18px',
+      })),
+      transition('* => *', [
+        animate('0.3s'),
+      ]),
+    ]),
   ],
 })
 export class AppComponent implements OnInit {
   title = 'ProCon.IP RC';
   appMenuMode: 'side'|'over' = 'over';
+  isPinned = false;
 
   constructor(
     private _breakpointObserver: BreakpointObserver,
@@ -72,5 +87,13 @@ export class AppComponent implements OnInit {
         }
       });
     }
+  }
+
+  isPinnable(sidenav: MatSidenav) {
+    return sidenav.mode === 'side';
+  }
+
+  toggleDisableClose() {
+    this.isPinned = !this.isPinned;
   }
 }

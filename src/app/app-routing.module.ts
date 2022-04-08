@@ -5,13 +5,16 @@ import { RelaysComponent } from './relays/relays.component';
 import { SettingsComponent } from './settings/settings.component';
 import { TemperaturesComponent } from './temperatures/temperatures.component';
 import { CanistersComponent } from './canisters/canisters.component';
+import { AboutComponent } from './about/about.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: HomeComponent },
   { path: 'relays', component: RelaysComponent },
   { path: 'temperatures', component: TemperaturesComponent },
   { path: 'canisters', component: CanistersComponent },
   { path: 'settings', component: SettingsComponent },
+  { path: 'about', component: AboutComponent }
 ];
 
 @NgModule({
