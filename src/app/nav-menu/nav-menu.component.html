@@ -1,7 +1,7 @@
 <mat-nav-list fxLayout="column" fxLayoutAlign="start">
   <div mat-subheader>Navigation</div>
   <mat-list-item *ngFor="let navItem of navigationItems"
-                 (click)="close()"
+                 (click)="click()"
                  [routerLink]="[navItem.link]"
                  [routerLinkActive]="['link-active']"
                  [routerLinkActiveOptions]="{ exact: true }">

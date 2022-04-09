@@ -36,7 +36,7 @@ export class NavMenuComponent {
   @Input() closeOnClick: boolean;
   @Input() sidenav: MatSidenav;
 
-  close() {
+  click() {
     if (this.closeOnClick)
       this.sidenav.close();
   }

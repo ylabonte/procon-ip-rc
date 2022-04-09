@@ -46,7 +46,7 @@ export class ActionsService {
   private readonly _changesCallbacks: (($event: Actions) => any)[];
 
   constructor(
-    private _router: Router
+    private _router: Router,
   ) {
     this._actions = new Actions();
     this._changes = new EventEmitter<Actions>();
