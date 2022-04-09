@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 export interface IAction {
+  id?: string;
   active?: boolean;
   caption: string;
   click: ($event: Event) => any;
@@ -17,6 +18,13 @@ export class Actions extends Array<IAction> {
     const actionsArray: IAction[] = [];
     this.forEach(action => actionsArray.push(action));
     return actionsArray;
+  }
+
+  getFirst(matcher?: (action: IAction) => boolean): IAction {
+    for (let i = 0; i < this.length; i++)
+      if (matcher(this[i]))
+        return this[i];
+    return null;
   }
 
   getQuickActions(): IAction[] {

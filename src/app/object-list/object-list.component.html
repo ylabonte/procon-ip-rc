@@ -19,7 +19,7 @@
               <mat-icon>visibility_off</mat-icon>
             </button>
             <div [ngStyle]="{opacity: obj.isHidden?'50%':'100%'}" fxFlex>
-              <ng-template appListObject [listItem]="obj" [state]="{editMode: editMode}"></ng-template>
+              <ng-template appListObject [listItem]="obj"></ng-template>
             </div>
             <mat-icon class="drag-handle last-of-row">
               drag_indicator
@@ -37,7 +37,7 @@
                 <mat-icon>visibility_off</mat-icon>
               </button>
               <div [ngStyle]="{opacity: obj.isHidden?'50%':'100%'}" fxFlex>
-                <ng-template appListObject [listItem]="obj" [state]="{editMode: editMode}"></ng-template>
+                <ng-template appListObject [listItem]="obj"></ng-template>
               </div>
               <mat-icon class="drag-handle last-of-row">
                 drag_indicator
@@ -46,22 +46,18 @@
           </div>
         </div>
         <div class="list-object" fxLayout="row wrap" fxLayoutAlign="start center">
-          <button [fxShow]="editMode && !obj.isHidden" mat-icon-button class="first-of-row"
-                  (click)="obj.hide()" matTooltip="Disable">
-            <mat-icon>visibility_on</mat-icon>
-          </button>
-          <button [fxShow]="editMode && obj.isHidden" mat-icon-button class="first-of-row"
-                  (click)="obj.show()" matTooltip="Enable">
+          <button [fxShow]="editMode" mat-icon-button class="first-of-row"
+                  (click)="obj.isHidden ? obj.show() : obj.hide()"
+                  [color]="obj.isHidden ? 'accent' : 'primary'">
             <mat-icon>visibility_off</mat-icon>
           </button>
           <mat-icon *ngIf="listObjectIcon" [fxHide]="editMode">{{listObjectIcon}}</mat-icon>
           <div [ngStyle]="{opacity: obj.isHidden?'50%':'100%'}" fxFlex>
-            <ng-template appListObject [listItem]="obj" [state]="{editMode: editMode}"></ng-template>
+            <ng-template appListObject [listItem]="obj"></ng-template>
           </div>
           <mat-icon [fxShow]="editMode" cdkDragHandle class="drag-handle last-of-row">
             drag_indicator
           </mat-icon>
-          <div [fxHide]="editMode" class="icon-placeholder"></div>
         </div>
       </mat-list-item>
     </ng-container>

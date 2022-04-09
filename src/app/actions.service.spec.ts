@@ -24,6 +24,7 @@ describe('ActionsService', () => {
         click: () => {},
       },
       {
+        id: '3',
         caption: 'action3',
         iconSrc: '',
         click: () => {},
@@ -96,7 +97,7 @@ describe('ActionsService', () => {
     const actions = service.get();
     actions.quickActionsLimit = 2;
     expect(service.get().asArray().filter(action => action.icon || action.iconSrc).slice(0, 2)).toEqual(actions.getQuickActions());
-  })
+  });
 
   it('should return as "more actions" what is not returned as "quick actions"', () => {
     service.set(actionsArray);
@@ -104,5 +105,10 @@ describe('ActionsService', () => {
     actions.quickActionsLimit = 2;
     const quickActions = actions.getQuickActions();
     expect(actions.getMoreActions()).toEqual(actionsArray.filter(action => quickActions.indexOf(action) < 0));
-  })
+  });
+
+  it('should return the first occurrence of an action matching the matcher', () => {
+    service.set(actionsArray);
+    expect(service.get().getFirst(action => action.id === '3')).toEqual(actionsArray[2]);
+  });
 });

@@ -13,16 +13,20 @@ mat-sidenav {
   min-width: 240px;
 }
 
+
 .nav-menu-toggle {
-  width: 24px;
-  height: 24px;
   margin-right: 16px;
 
-  .icon-bar {
-    display: block;
+  .burger-wrapper {
     width: 24px;
-    height: 2px;
-    position: relative;
-    background-color: #ffffff;
+    height: 24px;
+
+    .icon-bar {
+      display: block;
+      width: 24px;
+      height: 2px;
+      position: relative;
+      background-color: #ffffff;
+    }
   }
 }

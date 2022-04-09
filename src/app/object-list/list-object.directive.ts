@@ -1,13 +1,8 @@
 import { Component, Directive, Input, OnInit, ViewContainerRef } from '@angular/core';
 import { IListItem } from './list-object';
 
-export interface IListObjectComponentState {
-  editMode: boolean;
-}
-
 export interface IListObjectComponent {
   listItem: IListItem;
-  // state: IListObjectComponentState;
 }
 
 @Component({
@@ -16,7 +11,6 @@ export interface IListObjectComponent {
 })
 export class ListObjectComponent implements IListObjectComponent {
   @Input() listItem: IListItem;
-  // @Input() state: IListObjectComponentState;
 }
 
 @Directive({
@@ -24,18 +18,12 @@ export class ListObjectComponent implements IListObjectComponent {
 })
 export class ListObjectDirective implements OnInit {
   @Input() listItem: IListItem;
-  @Input() state: IListObjectComponentState;
 
   constructor(public viewContainerRef: ViewContainerRef) { }
 
   ngOnInit() {
     this.viewContainerRef.clear();
     const component = this.viewContainerRef.createComponent<IListObjectComponent>(this.listItem.component);
-    Object.keys(this.state).forEach(key => {
-      if (component.instance[key] !== undefined)
-        component.instance[key] = this.state[key];
-    });
     component.instance.listItem = this.listItem;
-    // component.instance.state = this.state;
   }
 }

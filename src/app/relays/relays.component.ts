@@ -14,6 +14,7 @@ export class RelaysComponent implements OnInit {
 
   constructor(private _actionsService: ActionsService) {
     this._editMode = {
+      id: 'editMode',
       caption: 'Edit',
       click: () => this.toggleEditMode(),
       icon: 'edit',
@@ -22,7 +23,7 @@ export class RelaysComponent implements OnInit {
     this._showHiddenItems = {
       caption: 'Show hidden relays',
       click: () => this.toggleShowHiddenItems(),
-      icon: 'disabled_visible',
+      icon: 'visibility_on',
       active: true,
     };
   }

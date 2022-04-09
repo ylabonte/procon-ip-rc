@@ -27,7 +27,7 @@ export class TemperaturesComponent implements OnInit {
     this._showHiddenItems = {
       caption: 'Show hidden relays',
       click: () => this.toggleShowHiddenItems(),
-      icon: 'disabled_visible',
+      icon: 'visibility_on',
       active: true,
     };
   }

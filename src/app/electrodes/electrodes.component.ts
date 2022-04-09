@@ -29,7 +29,7 @@ export class ElectrodesComponent implements OnInit {
     this._showHiddenItems = {
       caption: 'Show hidden relays',
       click: () => this.toggleShowHiddenItems(),
-      icon: 'disabled_visible',
+      icon: 'visibility_on',
       active: true,
     };
     this.electrodes = electrodeService.getListObjects();
