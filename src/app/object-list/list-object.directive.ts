@@ -7,7 +7,7 @@ export interface IListObjectComponentState {
 
 export interface IListObjectComponent {
   listItem: IListItem;
-  state: IListObjectComponentState;
+  // state: IListObjectComponentState;
 }
 
 @Component({
@@ -16,7 +16,7 @@ export interface IListObjectComponent {
 })
 export class ListObjectComponent implements IListObjectComponent {
   @Input() listItem: IListItem;
-  @Input() state: IListObjectComponentState;
+  // @Input() state: IListObjectComponentState;
 }
 
 @Directive({
@@ -31,7 +31,11 @@ export class ListObjectDirective implements OnInit {
   ngOnInit() {
     this.viewContainerRef.clear();
     const component = this.viewContainerRef.createComponent<IListObjectComponent>(this.listItem.component);
+    Object.keys(this.state).forEach(key => {
+      if (component.instance[key] !== undefined)
+        component.instance[key] = this.state[key];
+    });
     component.instance.listItem = this.listItem;
-    component.instance.state = this.state;
+    // component.instance.state = this.state;
   }
 }

@@ -1,13 +1,3 @@
-<div class="main-container" fxLayout="row wrap" fxLayoutAlign="start start">
-  <div fxFlex="100" fxFlex.gt-md="66.66" fxFlex.gt-lg="33.33">
-    <mat-card>
-      <mat-card-header fxLayout="row wrap" fxLayoutAlign="space-between start">
-        <h2 fxFlex class="mat-card-title">Temperature Sensors</h2>
-      </mat-card-header>
-      <mat-card-content>
-        <app-relay-list [editable]="true" [showHiddenItems]="true"></app-relay-list>
-      </mat-card-content>
-    </mat-card>
-  </div>
-</div>
-
+<ng-container>
+  <app-relay-list [editMode]="editMode" [showHiddenItems]="showHiddenItems"></app-relay-list>
+</ng-container>

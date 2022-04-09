@@ -62,7 +62,7 @@ export class ElectrodeService extends ObjectListService {
   protected load(category: GetStateCategory, electrodes: IListObject[]) {
     electrodes.forEach(obj => {
       const electrode = new Electrode();
-      electrode.init(this._sysInfo, obj.dataObject, obj.isHidden);
+      electrode.init(this._sysInfo, obj);
       this._listItems[category].push(electrode);
     });
   }

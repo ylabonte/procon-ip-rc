@@ -11,13 +11,21 @@
       "installMode": "prefetch",
       "resources": {
         "files": [
-          "/assets/**",
-          "/favicon.ico",
           "/index.html",
           "/manifest.webmanifest",
           "/*.json",
           "/*.css",
-          "/*.js",
+          "/*.js"
+        ]
+      }
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "resources": {
+        "files": [
+          "/favicon.ico",
+          "/assets/**",
           "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
         ]
       }

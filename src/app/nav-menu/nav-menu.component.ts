@@ -1,7 +1,5 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { MatDrawer, MatSidenav } from '@angular/material/sidenav';
-import { MatButton } from '@angular/material/button';
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Component, Input } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-nav-menu',

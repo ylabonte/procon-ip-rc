@@ -1,4 +1,4 @@
-import { GetStateDataObject, GetStateDataSysInfo } from 'procon-ip';
+import { GetStateDataSysInfo } from 'procon-ip';
 import { ListObject } from '../../object-list/list-object';
 import { ElectrodeComponent } from './electrode.component';
 
@@ -18,7 +18,7 @@ export class Electrode extends ListObject {
 
   clone(): Electrode {
     const electrodeClone = new Electrode();
-    electrodeClone.init();
+    electrodeClone.init(this._sysInfo, this);
     return electrodeClone;
   }
 

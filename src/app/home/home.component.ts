@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GetStateService } from '../get-state.service';
-import { GetStateData, GetStateCategory, GetStateDataSysInfo } from 'procon-ip';
+import { GetStateData, GetStateDataSysInfo } from 'procon-ip';
 import { RelaysService } from '../relays/relays.service';
 
 @Component({

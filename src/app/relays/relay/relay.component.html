@@ -1,14 +1,14 @@
 <div fxLayout="row" fxLayoutAlign="start center" class="relay-item">
-  <mat-icon class="relay-status-indicator" [fxHide]="state.editMode || listItem.isSwitched()"
-            [ngClass]="{on: listItem.isOn(), off: listItem.isOff(), switched: listItem.isSwitched()}"
+  <mat-icon class="relay-status-indicator" [fxHide]="editMode || listItem.isSwitched()"
+            [ngClass]="{ on: listItem.isOn(), off: listItem.isOff() }"
             matTooltip="{{listItem.getStatusLabel()}}">
     {{listItem.isAuto()?"hdr_auto":"circle"}}
   </mat-icon>
-  <mat-progress-spinner [fxHide]="state.editMode || !listItem.isSwitched()" diameter="24" color="accent" mode="indeterminate"></mat-progress-spinner>
+  <mat-progress-spinner [fxHide]="editMode || !listItem.isSwitched()" diameter="24" color="accent" mode="indeterminate"></mat-progress-spinner>
   <div fxFlex class="relay-text"
        fxLayout="column">
     <h3 mat-line>{{listItem.getLabel()}}</h3>
     <p mat-line>{{listItem.getLongId()}}&nbsp;<em fxHide.lt-sm>({{listItem.getStatusLabel()}})</em></p>
   </div>
-  <app-switch [fxHide]="state.editMode" [relay]="listItem"></app-switch>
+  <app-switch [fxHide]="editMode" [relay]="listItem"></app-switch>
 </div>

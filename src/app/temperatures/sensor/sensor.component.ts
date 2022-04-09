@@ -1,10 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GetStateDataObject } from 'procon-ip';
 import {
-  IListObjectComponentState,
   ListObjectComponent,
 } from '../../object-list/list-object.directive';
-import { Sensor } from './sensor';
 
 @Component({
   selector: 'app-sensor',
@@ -12,8 +10,6 @@ import { Sensor } from './sensor';
   styleUrls: ['./sensor.component.scss']
 })
 export class SensorComponent extends ListObjectComponent implements OnInit {
-  // @Input() listItem: Sensor;
-  // @Input() state: IListObjectComponentState;
   data: GetStateDataObject;
 
   ngOnInit() {

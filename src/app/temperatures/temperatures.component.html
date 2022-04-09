@@ -5,7 +5,10 @@
         <h2 fxFlex class="mat-card-title">Temperature Sensors</h2>
       </mat-card-header>
       <mat-card-content>
-        <app-object-list [category]="category" listObjectIcon="thermostat" [editable]="true" [showHiddenItems]="true"></app-object-list>
+        <app-object-list [category]="category" listObjectIcon="thermostat"
+                         [editMode]="editMode"
+                         [showHiddenItems]="showHiddenItems">
+        </app-object-list>
       </mat-card-content>
     </mat-card>
   </div>

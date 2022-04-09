@@ -2,18 +2,7 @@
 @import "robo-font";
 @import "material-icons";
 
-html, body { height: 100%; }
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
-.spacer { flex-grow: 1; }
-
-.main-container {
-  margin: 8px;
-
-  mat-card {
-    margin: 8px;
-  }
 }

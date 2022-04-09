@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, Optional, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Optional, ViewChild } from '@angular/core';
 import { MatListItem } from '@angular/material/list';
 import {
   CdkDragDrop,
@@ -21,12 +21,11 @@ export class ObjectListComponent implements OnInit {
   @Input() @Optional() listObjects: IListItem[];
   @Input() @Optional() listObjectIcon: string;
   @Input() @Optional() showHiddenItems = false;
-  @Input() @Optional() editable = false;
+  @Input() @Optional() editMode = false;
 
   @ViewChild(ListObjectDirective, {static: true}) listObject!: ListObjectDirective;
 
   getObjects: () => IListItem[];
-  editMode = false;
 
   private _dragOffset: {x: number, y: number} = null;
 

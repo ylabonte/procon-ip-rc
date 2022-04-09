@@ -1,8 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { GetStateDataObject } from 'procon-ip';
+import { Component, Input, Optional } from '@angular/core';
 import { Relay } from './relay';
-import { IListObjectComponent, ListObjectComponent } from '../../object-list/list-object.directive';
-import { Observable } from 'rxjs';
+import { ListObjectComponent } from '../../object-list/list-object.directive';
 
 @Component({
   selector: 'app-relay',
@@ -11,4 +9,5 @@ import { Observable } from 'rxjs';
 })
 export class RelayComponent extends ListObjectComponent {
   @Input() listItem: Relay;
+  @Input() @Optional() editMode: boolean;
 }

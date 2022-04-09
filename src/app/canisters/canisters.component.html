@@ -5,7 +5,10 @@
         <h2 fxFlex class="mat-card-title">Canisters</h2>
       </mat-card-header>
       <mat-card-content>
-        <app-object-list category="canister" [editable]="true" [showHiddenItems]="true"></app-object-list>
+        <app-object-list category="canister"
+                         [editMode]="editMode"
+                         [showHiddenItems]="showHiddenItems">
+        </app-object-list>
       </mat-card-content>
     </mat-card>
   </div>

@@ -1,12 +1,4 @@
 <div #objectListContainer>
-  <ng-container *ngIf="editable">
-    <button mat-icon-button [fxHide]="editMode" (click)="editMode = true;">
-      <mat-icon>edit</mat-icon>
-    </button>
-    <button mat-icon-button [fxShow]="editMode" (click)="editMode = false;">
-      <mat-icon>list</mat-icon>
-    </button>
-  </ng-container>
   <mat-list cdkDropList role="list" (cdkDropListDropped)="listItemDrop($event)">
     <ng-container *ngFor="let obj of getObjects()">
       <mat-list-item *ngIf="showHiddenItems || editMode || !obj.isHidden"

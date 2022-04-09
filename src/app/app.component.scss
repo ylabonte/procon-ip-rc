@@ -1,28 +1,10 @@
-#appBody {
-  height: 115vh;
-  margin-right: 8px;
-}
-
-.mat-app-background {
-  height: 100%;
-  overflow: hidden;
-}
-
-mat-sidenav-container, mat-sidenav-content, mat-sidenav {
-  height: 100%;
-
+mat-sidenav-container,
+mat-sidenav-content,
+mat-sidenav {
   footer {
     position: fixed;
     bottom: 0;
     right: 0;
-
-    .darkModeToggleContainer {
-      font-size: large;
-
-      mat-slide-toggle, mat-icon {
-        margin: 4px;
-      }
-    }
   }
 }
 
@@ -32,13 +14,14 @@ mat-sidenav {
 }
 
 .nav-menu-toggle {
-  width: 64px;
-  height: 100%;
+  width: 24px;
+  height: 24px;
+  margin-right: 16px;
 
   .icon-bar {
-    width: 22px;
+    display: block;
+    width: 24px;
     height: 2px;
-    margin: 4px auto;
     position: relative;
     background-color: #ffffff;
   }

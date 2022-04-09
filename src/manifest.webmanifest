@@ -1,5 +1,5 @@
 {
-  "short_name": "ProCon.IP RC",
+  "short_name": "ProCon.IP",
   "name": "ProCon.IP Remote Control",
   "description": "An easy-to-use Mobile First app for the ProCon.IP pool controller, for controlling the relays and view all relevant information at a glance.",
   "start_url": "/#/dashboard",

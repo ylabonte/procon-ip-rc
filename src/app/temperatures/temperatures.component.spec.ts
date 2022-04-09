@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TemperaturesComponent } from './temperatures.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('TemperaturesComponent', () => {
   let component: TemperaturesComponent;
@@ -8,7 +9,8 @@ describe('TemperaturesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TemperaturesComponent ]
+      imports: [ RouterTestingModule ],
+      declarations: [ TemperaturesComponent ],
     })
     .compileComponents();
   });

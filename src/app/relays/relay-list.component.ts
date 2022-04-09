@@ -16,8 +16,7 @@ import { StorageMap } from '@ngx-pwa/local-storage';
 })
 export class RelayListComponent {
   @Input() @Optional() showHiddenItems = false;
-  @Input() @Optional() editable = false;
-  editMode = false;
+  @Input() @Optional() editMode = false;
 
   private _dragOffset: {x: number, y: number} = null;
 

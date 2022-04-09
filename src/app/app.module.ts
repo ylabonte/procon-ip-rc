@@ -46,6 +46,7 @@ import { RelaysComponent } from './relays/relays.component';
 import { AboutComponent } from './about/about.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ElectrodeComponent } from './electrodes/electrode/electrode.component';
+import { FitHeightDirective } from './fit-height.directive';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { ElectrodeComponent } from './electrodes/electrode/electrode.component';
     RelaysComponent,
     AboutComponent,
     ElectrodeComponent,
+    FitHeightDirective,
   ],
   imports: [
     BrowserModule,
