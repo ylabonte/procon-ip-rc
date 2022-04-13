@@ -40,60 +40,81 @@ export class Actions extends Array<IAction> {
 @Injectable({
   providedIn: 'root'
 })
-export class ActionsService {
+export class ToolbarService {
   private readonly _actions: Actions;
-  private readonly _changes: EventEmitter<Actions>;
-  private readonly _changesCallbacks: (($event: Actions) => any)[];
+  private readonly _actionsChange: EventEmitter<Actions>;
+  private readonly _actionsChangeCallbacks: (($event: Actions) => any)[];
+  private readonly _titleChange: EventEmitter<string>;
+  private _title: {
+    default: string,
+    custom?: string,
+  };
 
   constructor(
     private _router: Router,
   ) {
     this._actions = new Actions();
-    this._changes = new EventEmitter<Actions>();
-    this._changesCallbacks = [];
+    this._actionsChange = new EventEmitter<Actions>();
+    this._actionsChangeCallbacks = [];
+    this._titleChange = new EventEmitter<string>();
+    this._title = { default: 'ProCon.IP RC' };
     this._router.events.subscribe(() => {
-      this.clear();
+      this.clearActions();
+      this.setTitle();
     });
   }
 
   private emitChanges() {
-    this._changes.emit(this._actions);
-    this._changesCallbacks.forEach(c => c(this._actions));
+    this._actionsChange.emit(this._actions);
+    this._actionsChangeCallbacks.forEach(c => c(this._actions));
   }
 
-  get changes(): Observable<Actions> {
-    return this._changes;
+  get actionsChange(): Observable<Actions> {
+    return this._actionsChange;
   }
 
-  onChanges(callback: ($event: Actions) => any) {
-    this._changesCallbacks.push(callback);
+  get titleChange(): Observable<string> {
+    return this._titleChange;
   }
 
-  get(): Actions {
+  onActionsChange(callback: ($event: Actions) => any) {
+    this._actionsChangeCallbacks.push(callback);
+  }
+
+  getActions(): Actions {
     return this._actions;
   }
 
-  set(actions: IAction[]) {
+  setActions(actions: IAction[]) {
     this._actions.splice(0);
     actions.forEach(action => this._actions.push(action));
     this.emitChanges();
   }
 
-  clear() {
+  clearActions() {
     this._actions.splice(0);
     this.emitChanges();
   }
 
-  add(action: IAction) {
+  addAction(action: IAction) {
     this._actions.push(action);
     this.emitChanges();
   }
 
-  remove(action: IAction) {
+  removeAction(action: IAction) {
     const index = this._actions.indexOf(action)
     if (index > -1) {
       this._actions.splice(index, 1);
       this.emitChanges();
     }
+  }
+
+  setTitle(title?: string) {
+    this._title.custom = title;
+    this._titleChange.emit(this.getTitle());
+  }
+
+  getTitle(): string {
+    return this._title.custom ?? this._title.default;
   }
 }

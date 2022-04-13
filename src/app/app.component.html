@@ -1,6 +1,6 @@
 <div class="mat-app-background" [ngClass]="{'dark-mode': settings.darkMode}">
   <div class="mat-elevation-z4">
-    <mat-toolbar color="primary" fxLayout="row wrap">
+    <mat-toolbar color="primary" fxLayout="row">
       <a mat-icon-button class="nav-menu-toggle" aria-label="toggle navigation"
          (click)="appMenu.toggle()" fxLayout="row" fxLayoutAlign="center center">
         <span class="burger-wrapper" fxLayout="column" fxLayoutAlign="space-around">
@@ -9,7 +9,7 @@
           <span class="icon-bar bg-white" [@appMenuToggle]="appMenu.opened ? 'lowerBar' : 'burgerBar'"></span>
         </span>
       </a>
-      <div id="appTitle">{{title}}</div>
+      <div id="appTitle">{{title | async}}</div>
       <div fxFlex></div>
       <div>
         <button *ngFor="let action of quickActions | async" mat-icon-button (click)="action.click($event)">
@@ -29,14 +29,9 @@
   </div>
   <mat-sidenav-container>
     <mat-sidenav #appMenu [mode]="appMenuMode" fixedInViewport="true" [fixedTopGap]="bodyOffsetTop">
-      <button mat-icon-button [fxHide]="!appMenu.opened || !isPinnable(appMenu)"
-              title="{{isPinned ? 'auto-close navigation' : 'keep navigation open'}}"
-              (click)="toggleDisableClose()" [@toggleDisableClose]="isPinned ? 'unpin' : 'pin'">
-        <mat-icon [@toggleDisableClose]="isPinned ? 'unpin-icon' : 'pin-icon'">push_pin</mat-icon>
-      </button>
-      <app-nav-menu [sidenav]="appMenu" [closeOnClick]="isPinned || appMenuMode === 'over'"></app-nav-menu>
+      <app-nav-menu [sidenav]="appMenu"></app-nav-menu>
     </mat-sidenav>
-    <mat-sidenav-content cdkScrollable appFitHeight (height)="setBodyOffsetTop($event)">
+    <mat-sidenav-content cdkScrollable (appFitHeight)="setBodyOffsetTop($event)">
       <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>

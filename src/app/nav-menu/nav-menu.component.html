@@ -1,10 +1,14 @@
 <mat-nav-list fxLayout="column" fxLayoutAlign="start">
-  <div mat-subheader>Navigation</div>
-  <mat-list-item *ngFor="let navItem of navigationItems"
-                 (click)="click()"
-                 [routerLink]="[navItem.link]"
-                 [routerLinkActive]="['link-active']"
-                 [routerLinkActiveOptions]="{ exact: true }">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <h2 mat-subheader fxFlex>Navigation</h2>
+    <button mat-icon-button [fxHide]="isSidenavModeOver()"
+            title="{{isPinned() ? 'auto-close navigation' : 'keep navigation open'}}"
+            (click)="toggleDisableClose()" [@toggleDisableClose]="isPinned() ? 'unpin' : 'pin'">
+      <mat-icon [@toggleDisableClose]="isPinned() ? 'unpin-icon' : 'pin-icon'">push_pin</mat-icon>
+    </button>
+  </div>
+  <mat-list-item *ngFor="let navItem of navigationItems" #listItem
+                 (click)="click()" routerLink="{{navItem.link}}" routerLinkActive="link-active">
     <mat-icon mat-list-icon>{{navItem.icon}}</mat-icon>
     <span mat-line>{{navItem.displayName}}</span>
   </mat-list-item>

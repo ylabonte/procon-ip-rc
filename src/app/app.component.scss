@@ -13,6 +13,11 @@ mat-sidenav {
   min-width: 240px;
 }
 
+#appTitle {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 
 .nav-menu-toggle {
   margin-right: 16px;

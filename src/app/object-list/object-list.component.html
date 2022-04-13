@@ -2,8 +2,8 @@
   <mat-list cdkDropList role="list" (cdkDropListDropped)="listItemDrop($event)">
     <ng-container *ngFor="let obj of getObjects()">
       <mat-list-item *ngIf="showHiddenItems || editMode || !obj.isHidden"
-                     cdkDrag [cdkDragData]="obj"
-                     #listItem id="relay{{obj.dataObject.id}}" role="listitem" class="mat-elevation-z2 mat-"
+                     cdkDrag [cdkDragBoundary]="objectListContainer" [cdkDragData]="obj"
+                     #listItem id="relay{{obj.dataObject.id}}" role="listitem" class="mat-elevation-z2 no-padding"
                      (mouseover)="listItemHover(listItem)"
                      (mouseup)="listItemHover(listItem)"
                      (mouseout)="listItemReset(listItem)"
@@ -12,10 +12,7 @@
         <div *cdkDragPlaceholder id="listObjectPlaceholder{{obj.dataObject.id}}"
              class="drag-placeholder mat-list-item mat-elevation-z2">
           <div class="mat-list-item-content" fxLayout="row wrap" fxLayoutAlign="start center">
-            <button [fxHide]="obj.isHidden" mat-icon-button class="first-of-row">
-              <mat-icon>visibility_on</mat-icon>
-            </button>
-            <button [fxShow]="obj.isHidden" mat-icon-button class="first-of-row">
+            <button mat-icon-button class="first-of-row" [color]="obj.isHidden ? 'accent' : 'primary'">
               <mat-icon>visibility_off</mat-icon>
             </button>
             <div [ngStyle]="{opacity: obj.isHidden?'50%':'100%'}" fxFlex>
@@ -30,13 +27,10 @@
              [ngStyle]="{width: objectListContainer.offsetWidth+'px'}">
           <div class="mat-list-item mat-card mat-elevation-z6">
             <div class="mat-list-item-content relay-item" fxLayout="row wrap" fxLayoutAlign="start center">
-              <button [fxHide]="obj.isHidden" mat-icon-button class="first-of-row">
-                <mat-icon>visibility_on</mat-icon>
-              </button>
-              <button [fxShow]="obj.isHidden" mat-icon-button class="first-of-row">
+              <button mat-icon-button class="first-of-row" [color]="obj.isHidden ? 'accent' : 'primary'">
                 <mat-icon>visibility_off</mat-icon>
               </button>
-              <div [ngStyle]="{opacity: obj.isHidden?'50%':'100%'}" fxFlex>
+              <div [ngStyle]="{opacity: obj.isHidden?'50%':'100%', margin: '8px 0'}" fxFlex>
                 <ng-template appListObject [listItem]="obj"></ng-template>
               </div>
               <mat-icon class="drag-handle last-of-row">

@@ -12,6 +12,9 @@ mat-card-header {
   height: auto;
 }
 
+.mat-list-base > .mat-list-item.no-padding > .mat-list-item-content {
+  padding: 0 8px;
+}
 
 mat-list-item {
 
@@ -19,7 +22,7 @@ mat-list-item {
     width: 100%;
 
     & > *:not(:last-child) {
-      margin: 8px;
+      margin: 8px 0;
     }
 
     & > .first-of-row,
@@ -64,7 +67,7 @@ mat-list-item {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 
   .mat-list-item-content {
-    padding: 8px 16px;
+    //padding: 8px 16px;
   }
 }
 

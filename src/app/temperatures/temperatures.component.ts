@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Optional } from '@angular/core';
 import { GetStateCategory } from 'procon-ip';
-import { ActionsService, IAction } from '../actions.service';
+import { ToolbarService, IAction } from '../toolbar.service';
 
 @Component({
   selector: 'app-temperatures',
@@ -16,7 +16,7 @@ export class TemperaturesComponent implements OnInit {
   private readonly _showHiddenItems: IAction;
 
   constructor(
-    private _actionsService: ActionsService,
+    private _toolbar: ToolbarService,
   ) {
     this._editMode = {
       caption: 'Edit',
@@ -33,8 +33,9 @@ export class TemperaturesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._actionsService.add(this._showHiddenItems);
-    this._actionsService.add(this._editMode);
+    this._toolbar.setTitle('Temperature Sensors');
+    this._toolbar.addAction(this._showHiddenItems);
+    this._toolbar.addAction(this._editMode);
   }
 
   toggleShowHiddenItems() {

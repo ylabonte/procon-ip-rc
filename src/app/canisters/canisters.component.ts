@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Optional } from '@angular/core';
-import { ActionsService, IAction } from '../actions.service';
+import { ToolbarService, IAction } from '../toolbar.service';
 
 @Component({
   selector: 'app-canisters',
@@ -13,7 +13,7 @@ export class CanistersComponent implements OnInit {
   private readonly _showHiddenItems: IAction;
 
   constructor(
-    private _actionsService: ActionsService,
+    private _toolbar: ToolbarService,
   ) {
     this._editMode = {
       caption: 'Edit',
@@ -30,8 +30,9 @@ export class CanistersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._actionsService.add(this._showHiddenItems);
-    this._actionsService.add(this._editMode);
+    this._toolbar.setTitle('Canisters');
+    this._toolbar.addAction(this._showHiddenItems);
+    this._toolbar.addAction(this._editMode);
   }
 
   toggleShowHiddenItems() {

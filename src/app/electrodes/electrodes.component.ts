@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Optional } from '@angular/core';
 import { Electrode } from './electrode/electrode';
 import { ElectrodeService } from './electrode.service';
-import { ActionsService, IAction } from '../actions.service';
+import { ToolbarService, IAction } from '../toolbar.service';
 
 @Component({
   selector: 'app-electrodes',

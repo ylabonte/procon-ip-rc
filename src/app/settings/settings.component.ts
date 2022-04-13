@@ -4,6 +4,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { IAppSettings, SettingsService } from './settings.service';
 import { IGetStateServiceConfig } from 'procon-ip';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { ToolbarService } from '../toolbar.service';
 
 @Component({
   selector: 'app-settings',
@@ -38,9 +39,11 @@ export class SettingsComponent implements OnInit, IAppSettings {
   constructor(
     private _media: MediaMatcher,
     private _settings: SettingsService,
+    private _toolbar: ToolbarService,
   ) {}
 
   ngOnInit(): void {
+    this._toolbar.setTitle('Settings');
     this.apiServiceConfig = this._settings.apiServiceConfig;
     this.useSystemPreferredColorScheme = this._settings.useSystemPreferredColorScheme;
     this.darkMode = this._settings.darkMode;

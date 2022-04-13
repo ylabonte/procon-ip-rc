@@ -1,20 +1,25 @@
 import { AfterViewInit, Directive, ElementRef, EventEmitter, Input, Output } from '@angular/core';
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { fromEvent } from 'rxjs';
 
 @Directive({
   selector: '[appFitHeight]'
 })
 export class FitHeightDirective implements AfterViewInit {
-  @Input('appFitHeight') topOffset: number;
+  @Output('appFitHeight') heightChange: EventEmitter<DOMRect>;
   @Input() minHeight: number;
-  @Output() height: EventEmitter<DOMRect>;
+  @Input() topOffset: number;
 
   private _domElement: HTMLElement;
 
-  constructor(private _elementRef: ElementRef) {
+  constructor(
+    private _elementRef: ElementRef,
+    private _breakpointObserver: BreakpointObserver,
+  ) {
     this._domElement = _elementRef.nativeElement;
-    this.height = new EventEmitter<DOMRect>(true);
+    this.heightChange = new EventEmitter<DOMRect>(true);
     fromEvent(window, 'resize').subscribe(() => this.setHeight());
+    fromEvent(window.screen.orientation, 'change').subscribe(() => this.setHeight());
   }
 
   ngAfterViewInit() {
@@ -41,6 +46,6 @@ export class FitHeightDirective implements AfterViewInit {
     if (this.minHeight && this.minHeight > height)
       height = this.minHeight;
     this._domElement.style.height = `${height}px`;
-    this.height.emit(this._domElement.getBoundingClientRect());
+    this.heightChange.emit(this._domElement.getBoundingClientRect());
   }
 }

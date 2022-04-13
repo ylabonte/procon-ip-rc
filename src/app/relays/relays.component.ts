@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Optional } from '@angular/core';
-import { ActionsService, IAction } from '../actions.service';
+import { ToolbarService, IAction } from '../toolbar.service';
 
 @Component({
   selector: 'app-relays',
@@ -12,7 +12,7 @@ export class RelaysComponent implements OnInit {
   private readonly _editMode: IAction;
   private readonly _showHiddenItems: IAction;
 
-  constructor(private _actionsService: ActionsService) {
+  constructor(private _toolbar: ToolbarService) {
     this._editMode = {
       id: 'editMode',
       caption: 'Edit',
@@ -29,8 +29,9 @@ export class RelaysComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._actionsService.add(this._showHiddenItems);
-    this._actionsService.add(this._editMode);
+    this._toolbar.setTitle('Relays');
+    this._toolbar.addAction(this._showHiddenItems);
+    this._toolbar.addAction(this._editMode);
   }
 
   toggleShowHiddenItems() {
