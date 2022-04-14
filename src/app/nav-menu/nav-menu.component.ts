@@ -4,6 +4,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { MatButton } from '@angular/material/button';
 import { Color } from '../color';
+import { BreakpointObserver, MediaMatcher } from '@angular/cdk/layout';
 
 interface INavState {
   isOpen: boolean;
@@ -64,7 +65,9 @@ export class NavMenuComponent implements OnInit {
 
   private _state: INavState;
 
-  constructor(private _storage: StorageMap) { }
+  constructor(
+    private _storage: StorageMap,
+  ) { }
 
   ngOnInit() {
     const initiallyOpen = this.sidenav.mode !== 'over';

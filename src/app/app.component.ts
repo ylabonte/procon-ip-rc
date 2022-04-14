@@ -51,7 +51,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._breakpointObserver.observe([Breakpoints.TabletLandscape]).subscribe(result => {
+    this._breakpointObserver.observe(['(min-width: 1024px)']).subscribe(result => {
       this.appMenuMode = result.matches ? 'side' : 'over';
     });
 

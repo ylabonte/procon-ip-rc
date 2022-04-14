@@ -6,11 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app-shell.component.scss']
 })
 export class AppShellComponent implements OnInit {
-
-  constructor() { }
-
   ngOnInit(): void {
     console.log('App Shell initialized');
   }
-
 }

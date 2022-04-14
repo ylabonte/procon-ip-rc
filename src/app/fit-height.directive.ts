@@ -1,5 +1,4 @@
 import { AfterViewInit, Directive, ElementRef, EventEmitter, Input, Output } from '@angular/core';
-import { BreakpointObserver } from '@angular/cdk/layout';
 import { fromEvent } from 'rxjs';
 
 @Directive({
@@ -14,12 +13,11 @@ export class FitHeightDirective implements AfterViewInit {
 
   constructor(
     private _elementRef: ElementRef,
-    private _breakpointObserver: BreakpointObserver,
   ) {
     this._domElement = _elementRef.nativeElement;
     this.heightChange = new EventEmitter<DOMRect>(true);
     fromEvent(window, 'resize').subscribe(() => this.setHeight());
-    fromEvent(window.screen.orientation, 'change').subscribe(() => this.setHeight());
+    fromEvent(document, 'orientationchange').subscribe(() => this.setHeight());
   }
 
   ngAfterViewInit() {
