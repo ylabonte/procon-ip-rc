@@ -40,7 +40,8 @@ export class FitHeightDirective implements AfterViewInit {
   }
 
   private setHeight() {
-    let height = window.innerHeight - this.getTopOffset();
+    let height = document.documentElement.clientHeight ?? window.innerHeight;
+    height -= this.getTopOffset();
     if (this.minHeight && this.minHeight > height)
       height = this.minHeight;
     this._domElement.style.height = `${height}px`;
