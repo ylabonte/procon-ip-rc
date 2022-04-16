@@ -2,7 +2,12 @@
   <mat-card-header>
     <mat-card-title>{{data.label}}</mat-card-title>
   </mat-card-header>
-  <mat-card-content>
-    <p>{{data.displayValue}}</p>
+  <mat-card-content [ngSwitch]="data.id">
+    <ng-container *ngSwitchCase="6">
+      <p *ngIf="sysInfo.isElectrolysis()">{{data.displayValue}}</p>
+      <app-chlorine *ngIf="!sysInfo.isElectrolysis()" [data]="electrode"></app-chlorine>
+    </ng-container>
+    <app-ph *ngSwitchCase="7" [data]="electrode"></app-ph>
+    <p *ngSwitchDefault>{{data.displayValue}}</p>
   </mat-card-content>
 </mat-card>

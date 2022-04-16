@@ -1,0 +1,42 @@
+@import '../../../../variables';
+
+.cl-value {
+  margin: 0 8px;
+}
+
+.cl-scale {
+  border: solid 1px white;
+  overflow: hidden;
+}
+
+.indicator {
+  position: relative;
+  z-index: 100;
+  height: 2px;
+  background-color: white;
+}
+
+.cl-range {
+  position: relative;
+  z-index: 10;
+  top: 0;
+
+  & > div {
+    height: 16px;
+  }
+
+  .cl-element {
+    &:first-of-type {
+      background: #ed1a26;
+    }
+    &.top {
+      background: linear-gradient(to bottom, #ed1a26, #34ab4a);
+    }
+    &.bottom {
+      background: linear-gradient(to top, #ed1a26, #34ab4a);
+    }
+    &:last-of-type {
+      background: #ed1a26;
+    }
+  }
+}

@@ -5,6 +5,11 @@ import { IListObject } from '../object-list/list-object';
 import { ElectrodeComponent } from './electrode/electrode.component';
 import { Electrode } from './electrode/electrode';
 
+interface IElectrodesState {
+  sysInfo: GetStateDataSysInfo;
+  electrodes: IListObject[];
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -20,9 +25,9 @@ export class ElectrodeService extends ObjectListService {
   };
 
   protected init() {
-    this._storage.get(this.getStorageKey(GetStateCategory.ELECTRODES)).subscribe((listItems: IListObject[]) => {
-      if (listItems)
-        this.load(GetStateCategory.ELECTRODES, listItems);
+    this._storage.get(this.getStorageKey(GetStateCategory.ELECTRODES)).subscribe((state: IElectrodesState) => {
+      if (state && state.electrodes && state.sysInfo)
+        this.loadState(state);
       else
         this.save();
       this.onStorageLoadComplete();
@@ -33,9 +38,16 @@ export class ElectrodeService extends ObjectListService {
     return this._listItems[category];
   }
 
+  getSysInfo(): GetStateDataSysInfo {
+    return this._sysInfo;
+  }
+
   protected onStorageLoadComplete() {
     this._callbackIdx = this._getState.registerCallback((data) => {
-      this._sysInfo = data.sysInfo;
+      if (this._sysInfo)
+        Object.keys(data.sysInfo).forEach(key => this._sysInfo[key] = data.sysInfo[key]);
+      else
+        this._sysInfo = data.sysInfo;
       this.categories.forEach(category => {
         data.getDataObjectsByCategory(category.id).forEach(obj => {
           const existingObject = this._listItems[category.id].filter(r => r.dataObject.id === obj.id).shift();
@@ -56,7 +68,17 @@ export class ElectrodeService extends ObjectListService {
   }
 
   protected save(category = GetStateCategory.ELECTRODES) {
-      this._storage.set(category + this.STORAGE_KEY, this._listItems[category].map(l => l.asObject())).subscribe(() => {});
+    const state: IElectrodesState = {
+      electrodes: this._listItems[category].map(l => l.asObject()),
+      sysInfo: this._sysInfo,
+    };
+    this._storage.set(category + this.STORAGE_KEY, state).subscribe(() => {});
+  }
+
+  protected loadState(state: IElectrodesState) {
+    this._sysInfo = new GetStateDataSysInfo();
+    Object.keys(state.sysInfo).forEach(key => this._sysInfo[key] = state.sysInfo[key]);
+    this.load(GetStateCategory.ELECTRODES, state.electrodes);
   }
 
   protected load(category: GetStateCategory, electrodes: IListObject[]) {

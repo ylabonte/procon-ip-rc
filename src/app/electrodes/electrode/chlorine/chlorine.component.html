@@ -1,0 +1,15 @@
+<div fxLayout="row wrap" fxLayoutAlign="start center">
+  <div class="cl-scale" fxFlex="25" [ngStyle]="{height: scaleHeight + 'px'}">
+    <div class="indicator" [ngStyle]="{top: scaleHeight / 2 + 'px'}"></div>
+    <div class="cl-range" fxLayout="column" [ngStyle]="{top: scaleOffsetTop}">
+      <div class="cl-element" [ngStyle]="{height: scaleHeight / 2 + 'px'}"></div>
+      <div class="cl-element top" [ngStyle]="{height: scaleElementHeight}"></div>
+      <div class="cl-element bottom" [ngStyle]="{height: scaleElementHeight}"></div>
+      <div class="cl-element" [ngStyle]="{height: scaleHeight / 2 + 'px'}"></div>
+    </div>
+  </div>
+  <p class="cl-value">
+    {{data.dataObject.displayValue}}
+  </p>
+</div>
+

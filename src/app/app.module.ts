@@ -47,6 +47,8 @@ import { AboutComponent } from './about/about.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ElectrodeComponent } from './electrodes/electrode/electrode.component';
 import { FitHeightDirective } from './fit-height.directive';
+import { PhComponent } from './electrodes/electrode/ph/ph.component';
+import { ChlorineComponent } from './electrodes/electrode/chlorine/chlorine.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +73,8 @@ import { FitHeightDirective } from './fit-height.directive';
     AboutComponent,
     ElectrodeComponent,
     FitHeightDirective,
+    PhComponent,
+    ChlorineComponent,
   ],
   imports: [
     BrowserModule,
