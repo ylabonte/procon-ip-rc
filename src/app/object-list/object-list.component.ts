@@ -9,6 +9,7 @@ import { IListItem } from './list-object';
 import { ObjectListService } from './object-list.service';
 import { GetStateCategory } from 'procon-ip';
 import { ListObjectDirective } from './list-object.directive';
+import { coerceNumberProperty } from '@angular/cdk/coercion';
 
 @Component({
   selector: 'app-object-list',
@@ -43,11 +44,11 @@ export class ObjectListComponent implements OnInit {
   }
 
   listItemHover(item: MatListItem) {
-    this.setElevationLevel(item, 4);
+    // this.setElevationLevel(item, 2);
   }
 
   listItemReset(item: MatListItem) {
-    this.setElevationLevel(item, 2);
+    // this.setElevationLevel(item, 0);
   }
 
   listItemDrop(event: CdkDragDrop<IListItem[]>) {
@@ -62,7 +63,8 @@ export class ObjectListComponent implements OnInit {
         classList.remove(className);
     });
 
-    classList.add(`mat-elevation-z${zLevel}`);
+    if (zLevel > 0)
+      classList.add(`mat-elevation-z${zLevel}`);
   }
 
   listItemMoved(event: CdkDragMove<IListItem>) {

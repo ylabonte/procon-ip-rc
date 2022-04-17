@@ -30,11 +30,11 @@ export class RelayListComponent {
   }
 
   listItemHover(item: MatListItem) {
-    this.setElevationLevel(item, 6);
+    // this.setElevationLevel(item, 2);
   }
 
   listItemReset(item: MatListItem) {
-    this.setElevationLevel(item, 2);
+    // this.setElevationLevel(item, 0);
   }
 
   listItemDrop(event: CdkDragDrop<Relay[]>) {

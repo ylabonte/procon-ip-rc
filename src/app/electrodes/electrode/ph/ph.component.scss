@@ -5,7 +5,7 @@
 }
 
 .ph-scale {
-  border: solid 1px white;
+  border: solid 1px $color-contrast;
   overflow: hidden;
 }
 
@@ -13,7 +13,7 @@
   position: relative;
   z-index: 100;
   height: 2px;
-  background-color: white;
+  background-color: $color-contrast;
 }
 
 .ph-range {

@@ -3,7 +3,7 @@
     <ng-container *ngFor="let obj of getObjects()">
       <mat-list-item *ngIf="showHiddenItems || editMode || !obj.isHidden"
                      cdkDrag [cdkDragBoundary]="objectListContainer" [cdkDragData]="obj"
-                     #listItem id="relay{{obj.dataObject.id}}" role="listitem" class="mat-elevation-z2 no-padding"
+                     #listItem id="relay{{obj.dataObject.id}}" role="listitem" class="no-padding"
                      (mouseover)="listItemHover(listItem)"
                      (mouseup)="listItemHover(listItem)"
                      (mouseout)="listItemReset(listItem)"

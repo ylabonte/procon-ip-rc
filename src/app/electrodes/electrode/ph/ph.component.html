@@ -1,8 +1,8 @@
 <div fxLayout="row wrap" fxLayoutAlign="start center">
-  <div class="ph-scale" fxFlex="25" [ngStyle]="{height: scaleHeight + 'px'}">
+  <div class="ph-scale" [ngStyle]="{height: scaleHeight + 'px', width: scaleWidth + 'px', borderRadius: scaleRadius + 'px'}">
     <div class="indicator" [ngStyle]="{top: scaleHeight / 2 + 'px'}"></div>
     <div class="ph-range" fxLayout="column" [ngStyle]="{top: scaleOffsetTop}">
-      <div class="ph-min" [ngStyle]="{height: scaleShiftElementHeight}"></div>
+      <div class="ph-min" [ngStyle]="{height: topShiftElementHeight}"></div>
       <div class="ph-0" [ngStyle]="{height: scaleElementHeight}"></div>
       <div class="ph-1" [ngStyle]="{height: scaleElementHeight}"></div>
       <div class="ph-2" [ngStyle]="{height: scaleElementHeight}"></div>
@@ -18,7 +18,7 @@
       <div class="ph-12" [ngStyle]="{height: scaleElementHeight}"></div>
       <div class="ph-13" [ngStyle]="{height: scaleElementHeight}"></div>
       <div class="ph-14" [ngStyle]="{height: scaleElementHeight}"></div>
-      <div class="ph-max" [ngStyle]="{height: scaleShiftElementHeight}"></div>
+      <div class="ph-max" [ngStyle]="{height: bottomShiftElementHeight}"></div>
     </div>
   </div>
   <p class="ph-value">

@@ -36,6 +36,7 @@ $color-primary: mat.get-color-from-palette($app-primary, 500);
 $color-accent: mat.get-color-from-palette($app-accent, A200) !default;
 $color-highlight: mat.get-color-from-palette(mat.$indigo-palette, A400) !default;
 $color-discreet: mat.get-color-from-palette(mat.$blue-gray-palette, 50) !default;
+$color-contrast: mat.get-color-from-palette(mat.$blue-gray-palette, 800) !default;
 $color-red: mat.get-color-from-palette(mat.$red-palette, 800);
 $color-orange: mat.get-color-from-palette(mat.$amber-palette, 700);
 $color-green: mat.get-color-from-palette(mat.$green-palette, 800);
@@ -44,4 +45,5 @@ $color-green: mat.get-color-from-palette(mat.$green-palette, 800);
   $color-accent: mat.get-color-from-palette($app-accent, A100) !global;
   $color-highlight: mat.get-color-from-palette(mat.$indigo-palette, A100) !global;
   $color-discreet: mat.get-color-from-palette(mat.$blue-gray-palette, 500) !global;
+  $color-contrast: mat.get-color-from-palette(mat.$blue-gray-palette, 50) !global;
 }

@@ -8,18 +8,20 @@ import { Electrode } from '../electrode';
 })
 export class ChlorineComponent implements OnInit {
   @Input() data: Electrode;
-  @Input() optimumValue: number;
   @Input() scaleMin: number;
   @Input() scaleMax: number;
   @Input() scaleHeight: number;
+  @Input() scaleWidth: number;
+  @Input() scaleRadius: number;
   @Input() scaleRangeHeight: number;
 
   ngOnInit(): void {
-    this.optimumValue = this.optimumValue ?? 780;
     this.scaleMin = this.scaleMin ?? 700;
-    this.scaleMax = this.scaleMax ?? 900;
-    this.scaleHeight = this.scaleHeight ?? 96;
-    this.scaleRangeHeight = this.scaleRangeHeight ?? 192;
+    this.scaleMax = this.scaleMax ?? 950;
+    this.scaleHeight = this.scaleHeight ?? 48;
+    this.scaleWidth = this.scaleWidth ?? 48;
+    this.scaleRadius = this.scaleRadius ?? 24;
+    this.scaleRangeHeight = this.scaleRangeHeight ?? 128;
   }
 
   getScaleValueOffset(): number {
@@ -36,18 +38,18 @@ export class ChlorineComponent implements OnInit {
   }
 
   getScaleElementHeight(): number {
-    return this.scaleRangeHeight / 2;
+    return (this.scaleRangeHeight - this.getShiftElementHeight() * 2) / 2;
   }
 
   get scaleElementHeight(): string {
     return `${this.getScaleElementHeight()}px`;
   }
 
-  get scaleShiftTopElementHeight(): string {
-    return "0";
+  getShiftElementHeight(): number {
+    return this.scaleHeight / 2;
   }
 
-  get scaleShiftBottomElementHeight(): string {
-    return "0";
+  get shiftElementHeight(): string {
+    return `${this.getShiftElementHeight()}px`;
   }
 }

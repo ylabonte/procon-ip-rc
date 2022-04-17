@@ -8,18 +8,20 @@ import { Electrode } from '../electrode';
 })
 export class PhComponent implements OnInit {
   @Input() data: Electrode;
-  @Input() optimumValue: number;
   @Input() scaleMin: number;
   @Input() scaleMax: number;
   @Input() scaleHeight: number;
+  @Input() scaleWidth: number;
+  @Input() scaleRadius: number;
   @Input() scaleRangeHeight: number;
 
   ngOnInit() {
-    this.optimumValue = this.optimumValue ?? 7.2;
     this.scaleMin = this.scaleMin ?? 6;
     this.scaleMax = this.scaleMax ?? 8.4;
-    this.scaleHeight = this.scaleHeight ?? 96;
-    this.scaleRangeHeight = this.scaleRangeHeight ?? 192;
+    this.scaleHeight = this.scaleHeight ?? 48;
+    this.scaleWidth = this.scaleWidth ?? 48;
+    this.scaleRadius = this.scaleRadius ?? 24;
+    this.scaleRangeHeight = this.scaleRangeHeight ?? 480;
   }
 
   getScaleValueOffset(): number {
@@ -32,18 +34,26 @@ export class PhComponent implements OnInit {
   }
 
   getScaleElementHeight(): number {
-    return (this.scaleRangeHeight - this.getScaleShiftElementHeight() * 2) / 14;
+    return (this.scaleRangeHeight - this.getTopShiftElementHeight() - this.getBottomShiftElementHeight()) / 14;
   }
 
   get scaleElementHeight(): string {
     return `${this.getScaleElementHeight()}px`;
   }
 
-  getScaleShiftElementHeight(): number {
-    return 48;
+  getTopShiftElementHeight(): number {
+    return (this.scaleRangeHeight / 14) * this.scaleMin;
   }
 
-  get scaleShiftElementHeight(): string {
-    return `${this.getScaleShiftElementHeight()}px`;
+  get topShiftElementHeight(): string {
+    return `${this.getTopShiftElementHeight()}px`;
+  }
+
+  getBottomShiftElementHeight(): number {
+    return (this.scaleRangeHeight / 14) * (14 - this.scaleMax);
+  }
+
+  get bottomShiftElementHeight(): string {
+    return `${this.getBottomShiftElementHeight()}px`;
   }
 }
