@@ -54,14 +54,8 @@ jobs:
         run: yarn run build:prod
       - name: Init git repo for publishing
         run: |
+          bash vfat-fixes
           cd ./dist/procon-ip-rc
-          mv polyfills.js polyfill.js
-          sed -i '' -e 's/polyfills\.js/polyfill.js/' index.html
-          mv ngsw-worker.js worker.js
-          sed -i '' -e 's/ngsw-worker\.js/worker.js/' main.js
-          mv safety-worker.js safety.js
-          mv worker-basic.min.js base.min.js
-          mv 3rdpartylicenses.txt licenses
           touch .nojekyll
           echo "procon-ip.labonte.cloud" > CNAME
           git config --global init.defaultBranch deployment

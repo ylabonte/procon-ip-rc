@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+cd dist/procon-ip-rc
+mv index.html index.htm
+mv polyfills.js polyfill.js
+sed -i '' -e 's/polyfills\.js/polyfill.js/' index.htm
+mv ngsw-worker.js worker.js
+sed -i '' -e 's/ngsw-worker\.js/worker.js/' main.js
+mv ngsw.json ngsw.js
+sed -i '' -e 's/ngsw\.json/ngsw.js/' worker.js
+mv safety-worker.js safety.js
+mv worker-basic.min.js base-min.js
+mv 3rdpartylicenses.txt licenses
+cd ../..
