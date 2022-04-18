@@ -9,27 +9,27 @@
   "theme_color": "#3f51b5",
   "icons": [
     {
-      "src": "/assets/icons/icon-512x512.png",
+      "src": "/assets/icons/icon512.png",
       "type": "image/png",
       "sizes": "512x512"
     },
     {
-      "src": "/assets/icons/icon-192x192.png",
+      "src": "/assets/icons/icon192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "/assets/icons/icon-144x144.png",
+      "src": "/assets/icons/icon144.png",
       "type": "image/png",
       "sizes": "144x144"
     },
     {
-      "src": "/assets/icons/iconc-96x96.png",
+      "src": "/assets/icons/ricon96.png",
       "type": "image/png",
       "sizes": "96x96"
     },
     {
-      "src": "/assets/icons/iconc-48x48.png",
+      "src": "/assets/icons/ricon48.png",
       "type": "image/png",
       "sizes": "48x48"
     }
@@ -40,21 +40,21 @@
       "short_name": "Dashboard",
       "description": "View actual states and measurements.",
       "url": "/#/dashboard",
-      "icons": [{ "src": "/assets/icons/dashboard-192x192.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/assets/icons/home.png", "sizes": "192x192" }]
     },
     {
       "name": "Relay Switches",
       "short_name": "Relays",
       "description": "Open relay switches.",
       "url": "/#/relays",
-      "icons": [{ "src": "/assets/icons/relays-192x192.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/assets/icons/relays.png", "sizes": "192x192" }]
     },
     {
       "name": "Settings",
       "short_name": "Settings",
       "description": "Open settings.",
       "url": "/#/settings",
-      "icons": [{ "src": "/assets/icons/settings-192x192.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/assets/icons/settings.png", "sizes": "192x192" }]
     }
   ]
 }

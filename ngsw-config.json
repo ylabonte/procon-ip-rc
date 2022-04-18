@@ -2,8 +2,8 @@
   "$schema": "./node_modules/@angular/service-worker/config/schema.json",
   "index": "/index.html",
   "appData": {
-    "version": "0.0.1",
-    "changelog": "development in progress..."
+    "version": "unstable",
+    "changelog": "generic update..."
   },
   "assetGroups": [
     {
@@ -12,7 +12,7 @@
       "resources": {
         "files": [
           "/index.html",
-          "/manifest.webmanifest",
+          "/manifest",
           "/*.json",
           "/*.css",
           "/*.js"
@@ -33,7 +33,7 @@
   ],
   "dataGroups": [
     {
-      "name": "procon-ip",
+      "name": "pool-controller",
       "urls": [
         "/GetState.csv",
         "**/GetState.csv"

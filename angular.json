@@ -15,22 +15,17 @@
       },
       "architect": {
         "build": {
-          "option":{
-            "allowedCommonJsDependencies": [
-              "procon-ip"
-            ]
-          },
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/procon-ip-rc",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": "src/polyfill.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
+              "src/assets/**",
               "src/favicon.ico",
-              "src/assets",
-              "src/manifest.webmanifest"
+              "src/manifest"
             ],
             "styles": [
               "src/custom-theme.scss",
@@ -96,7 +91,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": "src/polyfill.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
@@ -105,9 +100,9 @@
             ],
             "scripts": [],
             "assets": [
+              "src/assets/**",
               "src/favicon.ico",
-              "src/assets",
-              "src/manifest.webmanifest"
+              "src/manifest"
             ]
           }
         },
