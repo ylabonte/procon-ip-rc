@@ -27,10 +27,10 @@ export class ChlorineComponent implements OnInit {
   getScaleValueOffset(): number {
     const actualScaleRange = this.scaleMax - this.scaleMin;
     const value = this.data.dataObject.value as number;
-    let relativeValue = value - this.scaleMin;
-    if (relativeValue < 0)
-      relativeValue = 0;
-    return relativeValue * (this.scaleRangeHeight / actualScaleRange) + (this.scaleHeight / 2);
+    let relativeValue = 0;
+    if (value > this.scaleMin)
+      relativeValue = value - this.scaleMin;
+    return relativeValue * ((this.scaleRangeHeight - this.scaleHeight) / actualScaleRange) + (this.scaleHeight / 2);
   }
 
   get scaleOffsetTop(): string {

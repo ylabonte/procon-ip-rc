@@ -16,8 +16,8 @@ export class PhComponent implements OnInit {
   @Input() scaleRangeHeight: number;
 
   ngOnInit() {
-    this.scaleMin = this.scaleMin ?? 6;
-    this.scaleMax = this.scaleMax ?? 8.4;
+    this.scaleMin = this.scaleMin ?? 6.4;
+    this.scaleMax = this.scaleMax ?? 8.0;
     this.scaleHeight = this.scaleHeight ?? 48;
     this.scaleWidth = this.scaleWidth ?? 48;
     this.scaleRadius = this.scaleRadius ?? 24;

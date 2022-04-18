@@ -33,10 +33,10 @@
       background: linear-gradient(to bottom, #ff77ee, #77ddff);
     }
     &.bottom {
-      background: linear-gradient(to top, #ff77ee, #77ddff);
+      background: linear-gradient(to top, #ececec, #77ddff);
     }
     &:last-of-type {
-      background: #ff77ee;
+      background: #ececec;
     }
   }
 }
