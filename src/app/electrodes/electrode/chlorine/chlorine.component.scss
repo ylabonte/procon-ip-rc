@@ -1,7 +1,7 @@
 @import '../../../../variables';
 
 .cl-value {
-  margin: 0 8px;
+  margin: 4px 8px;
 }
 
 .cl-scale {
@@ -10,16 +10,23 @@
 }
 
 .indicator {
-  position: relative;
-  z-index: 100;
-  height: 2px;
   background-color: $color-contrast;
+  position: relative;
+  height: 2px;
+  z-index: 10;
+}
+
+.shadow-helper {
+  box-shadow: inset 0px 1px 5px rgba(0,0,0,0.4);
+  position: relative;
+  z-index: 10;
+  top: -2px;
 }
 
 .cl-range {
   position: relative;
-  z-index: 10;
-  top: 0;
+  z-index: 0;
+  top: -50px;
 
   & > div {
     height: 16px;

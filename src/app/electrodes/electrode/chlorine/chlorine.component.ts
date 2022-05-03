@@ -30,7 +30,8 @@ export class ChlorineComponent implements OnInit {
     let relativeValue = 0;
     if (value > this.scaleMin)
       relativeValue = value - this.scaleMin;
-    return relativeValue * ((this.scaleRangeHeight - this.scaleHeight) / actualScaleRange) + (this.scaleHeight / 2);
+    return relativeValue * ((this.scaleRangeHeight - this.scaleHeight) / actualScaleRange) + (this.scaleHeight / 2) +
+      this.scaleHeight + 2;
   }
 
   get scaleOffsetTop(): string {

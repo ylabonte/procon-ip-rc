@@ -26,7 +26,7 @@ export class PhComponent implements OnInit {
 
   getScaleValueOffset(): number {
     const value = this.data.dataObject.value as number;
-    return (value / 14) * this.scaleRangeHeight - this.scaleHeight / 2;
+    return ((value / 14) * this.scaleRangeHeight) - (this.scaleHeight / 2) + this.scaleHeight + 2;
   }
 
   get scaleOffsetTop(): string {

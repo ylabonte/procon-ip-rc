@@ -1,6 +1,7 @@
-<div fxLayout="row wrap" fxLayoutAlign="start center">
+<div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="center center">
   <div class="ph-scale" [ngStyle]="{height: scaleHeight + 'px', width: scaleWidth + 'px', borderRadius: scaleRadius + 'px'}">
-    <div class="indicator" [ngStyle]="{top: scaleHeight / 2 + 'px'}"></div>
+    <div class="indicator mat-elevation-z2" [ngStyle]="{top: scaleHeight / 2 - 1 + 'px'}"></div>
+    <div class="shadow-helper" [ngStyle]="{height: scaleHeight + 'px', width: scaleWidth + 'px', borderRadius: scaleRadius + 'px'}"></div>
     <div class="ph-range" fxLayout="column" [ngStyle]="{top: scaleOffsetTop}">
       <div class="ph-min" [ngStyle]="{height: topShiftElementHeight}"></div>
       <div class="ph-0" [ngStyle]="{height: scaleElementHeight}"></div>
@@ -25,4 +26,3 @@
     {{data.dataObject.displayValue}}
   </p>
 </div>
-

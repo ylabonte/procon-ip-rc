@@ -3,7 +3,7 @@ import { MatListItem } from '@angular/material/list';
 import {
   CdkDragDrop,
   CdkDragMove,
-  CdkDragRelease,
+  CdkDragRelease, CdkDragStart,
 } from '@angular/cdk/drag-drop';
 import { IListItem } from './list-object';
 import { ObjectListService } from './object-list.service';
@@ -49,6 +49,11 @@ export class ObjectListComponent implements OnInit {
 
   listItemReset(item: MatListItem) {
     // this.setElevationLevel(item, 0);
+  }
+
+  listItemDragStart(item: MatListItem, itemId: string) {
+    const preview = new ElementRef<HTMLElement>(document.getElementById(`listObjectPlaceholder${itemId}`));
+    preview.nativeElement.style.height = item._getHostElement().getBoundingClientRect().height + 'px';
   }
 
   listItemDrop(event: CdkDragDrop<IListItem[]>) {

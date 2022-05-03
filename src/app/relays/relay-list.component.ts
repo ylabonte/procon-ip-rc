@@ -37,6 +37,11 @@ export class RelayListComponent {
     // this.setElevationLevel(item, 0);
   }
 
+  listItemDragStart(item: MatListItem, itemId: string) {
+    const preview = new ElementRef<HTMLElement>(document.getElementById(`listObjectPlaceholder${itemId}`));
+    preview.nativeElement.style.height = item._getHostElement().getBoundingClientRect().height + 'px';
+  }
+
   listItemDrop(event: CdkDragDrop<Relay[]>) {
     this.relayService.moveItemInArray(event.previousIndex, event.currentIndex);
   }

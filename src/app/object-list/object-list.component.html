@@ -7,6 +7,7 @@
                      (mouseover)="listItemHover(listItem)"
                      (mouseup)="listItemHover(listItem)"
                      (mouseout)="listItemReset(listItem)"
+                     (cdkDragStarted)="listItemDragStart(listItem, obj.dataObject.id)"
                      (cdkDragMoved)="listItemMoved($event)"
                      (cdkDragReleased)="dragRelease($event)">
         <div *cdkDragPlaceholder id="listObjectPlaceholder{{obj.dataObject.id}}"

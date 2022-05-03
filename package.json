@@ -15,7 +15,9 @@
   "private": true,
   "main": "./dist/procon-ip-rc/index.html",
   "readmeFilename": "README.md",
-  "files": [ "dist/procon-ip-rc" ],
+  "files": [
+    "dist/procon-ip-rc"
+  ],
   "dependencies": {
     "@angular/animations": "^13.2.6",
     "@angular/cdk": "^13.2.6",
