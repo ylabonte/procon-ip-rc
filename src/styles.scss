@@ -6,3 +6,21 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.mat-drawer-container {
+  background: linear-gradient(-45deg, #626262, #fafafa);
+}
+
+.mat-card {
+  background-color: rgba(255, 255, 255, 75%);
+}
+
+.dark-mode {
+  .mat-drawer-container {
+    background: linear-gradient(-45deg, #6c6c6c, #303030);
+  }
+}
+
+.dark-mode .mat-card {
+    background-color: rgba(66, 66, 66, 75%);
+}
