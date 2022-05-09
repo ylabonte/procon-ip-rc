@@ -5,30 +5,29 @@
 }
 
 .ph-scale {
-  box-shadow: inset 0px 0px 8px rgba(0,0,0,0.9);
   border: solid 1px $color-contrast;
   overflow: hidden;
   z-index: 0;
 }
 
 .indicator {
-  position: relative;
-  z-index: 0;
-  height: 2px;
   background-color: $color-contrast;
+  position: relative;
+  height: 2px;
+  z-index: 0;
 }
 
 .shadow-helper {
-  box-shadow: inset 0px 1px 5px rgba(0,0,0,0.4);
+  box-shadow: inset 0px 1px 5px rgba(0,0,0,0.5);
   position: relative;
-  z-index: 10;
   top: -2px;
+  z-index: 10;
 }
 
 .ph-range {
   position: relative;
-  z-index: -10;
   top: 0;
+  z-index: -10;
 
   & > div {
     height: 16px;

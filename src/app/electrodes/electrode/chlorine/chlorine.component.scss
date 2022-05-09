@@ -7,26 +7,27 @@
 .cl-scale {
   border: solid 1px $color-contrast;
   overflow: hidden;
+  z-index: 0;
 }
 
 .indicator {
   background-color: $color-contrast;
   position: relative;
   height: 2px;
-  z-index: 10;
+  z-index: 0;
 }
 
 .shadow-helper {
-  box-shadow: inset 0px 1px 5px rgba(0,0,0,0.4);
+  box-shadow: inset 0px 1px 5px rgba(0,0,0,0.5);
   position: relative;
-  z-index: 10;
   top: -2px;
+  z-index: 10;
 }
 
 .cl-range {
   position: relative;
-  z-index: 0;
   top: -50px;
+  z-index: -10;
 
   & > div {
     height: 16px;
