@@ -1,2 +1,7 @@
-<div mat-line>{{data.label}}:</div>
-<div mat-line>{{data.displayValue}}</div>
+<div class="temperatur-sensor" fxLayout="row" fxLayoutAlign="start center">
+  <h3>{{data.label}}</h3>
+  <div fxFlex class="scale">
+  </div>
+  <div [fxHide]="editMode">{{data.displayValue}}</div>
+  <div [fxShow]="editMode" style="width: 24px; height: 24px;"></div>
+</div>

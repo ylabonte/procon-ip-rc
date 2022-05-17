@@ -46,7 +46,7 @@
                   [color]="obj.isHidden ? 'accent' : 'primary'">
             <mat-icon>visibility_off</mat-icon>
           </button>
-          <mat-icon *ngIf="listObjectIcon" [fxHide]="editMode">{{listObjectIcon}}</mat-icon>
+          <mat-icon *ngIf="listObjectIcon" [fxHide]="editMode" style="margin: 16px 8px;">{{listObjectIcon}}</mat-icon>
           <div [ngStyle]="{opacity: obj.isHidden?'50%':'100%'}" fxFlex>
             <ng-template appListObject [listItem]="obj"></ng-template>
           </div>

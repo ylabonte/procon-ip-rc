@@ -5,13 +5,14 @@
 }
 
 .cl-scale {
-  border: solid 1px $color-contrast;
+  border: solid 1px $color-discreet;
   overflow: hidden;
   z-index: 0;
 }
 
 .indicator {
-  background-color: $color-contrast;
+  //background-color: $color-contrast;
+  background-color: rgba(100, 0, 0, 0.5);
   position: relative;
   height: 2px;
   z-index: 0;

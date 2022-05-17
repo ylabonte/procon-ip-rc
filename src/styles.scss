@@ -8,7 +8,8 @@ body {
 }
 
 .mat-drawer-container {
-  background: linear-gradient(-45deg, #626262, #fafafa);
+  background: linear-gradient(-45deg, #ff6100, #0075ff);
+  mask-image: linear-gradient(to top, transparent 0px, black 48px);
 }
 
 .mat-card {
@@ -17,7 +18,9 @@ body {
 
 .dark-mode {
   .mat-drawer-container {
-    background: linear-gradient(-45deg, #6c6c6c, #303030);
+    //background: linear-gradient(-45deg, #6c6c6c, #303030);
+    background: linear-gradient(-45deg, rgba(86, 22, 83, 0.5), #000345);
+    mask-image: linear-gradient(to top, transparent 0px, black 48px);
   }
 }
 

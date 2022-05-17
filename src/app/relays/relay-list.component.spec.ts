@@ -1,20 +1,20 @@
 // import { ComponentFixture, TestBed } from '@angular/core/testing';
 //
-// import { RelayListComponent } from './relays.component';
+// import { TemperatureListComponent } from './relays.component';
 //
-// describe('RelayListComponent', () => {
-//   let component: RelayListComponent;
-//   let fixture: ComponentFixture<RelayListComponent>;
+// describe('TemperatureListComponent', () => {
+//   let component: TemperatureListComponent;
+//   let fixture: ComponentFixture<TemperatureListComponent>;
 //
 //   beforeEach(async () => {
 //     await TestBed.configureTestingModule({
-//       declarations: [ RelayListComponent ]
+//       declarations: [ TemperatureListComponent ]
 //     })
 //     .compileComponents();
 //   });
 //
 //   beforeEach(() => {
-//     fixture = TestBed.createComponent(RelayListComponent);
+//     fixture = TestBed.createComponent(TemperatureListComponent);
 //     component = fixture.componentInstance;
 //     fixture.detectChanges();
 //   });

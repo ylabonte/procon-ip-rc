@@ -9,6 +9,7 @@ import { SensorComponent } from '../temperatures/sensor/sensor.component';
 import { CanisterComponent } from '../canisters/canister/canister.component';
 import { Canister } from '../canisters/canister/canister';
 import { ListObjectComponent } from './list-object.directive';
+import { Sensor } from '../temperatures/sensor/sensor';
 
 export interface ICategoryComponentMap {
   id: GetStateCategory,
@@ -26,7 +27,7 @@ export class ObjectListService {
     { id: GetStateCategory.CANISTER, component: CanisterComponent },
     { id: GetStateCategory.CANISTER_CONSUMPTION, component: CanisterComponent },
     { id: GetStateCategory.DIGITAL_INPUT, component: null },
-    { id: GetStateCategory.TEMPERATURES, component: SensorComponent, entity: Canister },
+    { id: GetStateCategory.TEMPERATURES, component: SensorComponent, entity: Sensor },
   ];
 
   protected _getStateService: GetStateService;

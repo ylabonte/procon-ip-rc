@@ -98,7 +98,8 @@
               </mat-slide-toggle>
               <mat-icon inline [@iconToggle]="useSystemPreferredColorScheme ? 'active' : 'inactive'">phonelink_setup</mat-icon>
             </span>
-          <mat-label fxFlex="50">Use system preferred color scheme</mat-label>
+          <mat-label [fxShow]="useSystemPreferredColorScheme" fxFlex="50">Use system preferred color scheme</mat-label>
+          <mat-label [fxHide]="useSystemPreferredColorScheme" fxFlex="50">Override system preferred color scheme</mat-label>
         </div>
         <div fxLayout="row wrap" fxLayoutAlign="start center">
             <span class="iconToggleContainer" fxFlex="nogrow">
@@ -108,7 +109,8 @@
               </mat-slide-toggle>
               <mat-icon inline [@iconToggle]="darkMode ? 'active' : 'inactive'">dark_mode</mat-icon>
             </span>
-          <mat-label fxFlex="50">Theme Mode</mat-label>
+          <mat-label [fxShow]="darkMode" fxFlex="50">Dark Mode</mat-label>
+          <mat-label [fxHide]="darkMode" fxFlex="50">Light Mode</mat-label>
         </div>
       </mat-card-content>
     </mat-card>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Optional } from '@angular/core';
 import { GetStateDataObject } from 'procon-ip';
 import {
   ListObjectComponent,
@@ -11,6 +11,8 @@ import {
 })
 export class SensorComponent extends ListObjectComponent implements OnInit {
   data: GetStateDataObject;
+
+  @Input() @Optional() editMode: boolean;
 
   ngOnInit() {
     this.data = this.listItem.dataObject;
