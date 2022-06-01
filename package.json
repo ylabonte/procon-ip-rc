@@ -32,7 +32,7 @@
     "@angular/router": "^13.2.6",
     "@angular/service-worker": "^13.2.6",
     "@ngx-pwa/local-storage": "^13.0.2",
-    "core-js": "^3.21.1",
+    "core-js": "^3.22.5",
     "procon-ip": "^1.4.2",
     "rxjs": "^7.5.5",
     "tslib": "^2.3.1",
