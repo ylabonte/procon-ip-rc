@@ -14,8 +14,7 @@ This app is designed as PWA (Progressive Web App), which means you can install i
 favorite browser on desktop or mobile as local app including an auto-update mechanism. As 
 part of the PWA design, network access of such an app is restricted to HTTPS traffic. Hence
 you cannot use this app with your ProCon.IP without using a properly configured reverse proxy 
-for ssl/tls offloading. Later on, the app will be available for download so that it can easily
-be installed/copied to the ProCon.IP microSD card.
+for ssl/tls offloading.
 
 Part of this project is a workflow implemented via GitHub Actions that builds the current master 
 state of this repo and pushes the result to a separate repo, from where the app is then published 
