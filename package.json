@@ -31,7 +31,7 @@
     "@angular/platform-browser-dynamic": "^13.3.2",
     "@angular/router": "^13.3.2",
     "@angular/service-worker": "^13.3.2",
-    "@ngx-pwa/local-storage": "^13.0.2",
+    "@ngx-pwa/local-storage": "^13.0.5",
     "core-js": "^3.22.5",
     "procon-ip": "^1.4.2",
     "rxjs": "^7.5.5",
