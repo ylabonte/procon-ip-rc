@@ -33,7 +33,7 @@
     "@angular/service-worker": "^13.3.2",
     "@ngx-pwa/local-storage": "^13.0.5",
     "core-js": "^3.22.5",
-    "procon-ip": "^1.4.2",
+    "procon-ip": "^1.5.0",
     "rxjs": "^7.5.5",
     "tslib": "^2.3.1",
     "zone.js": "^0.11.6"
